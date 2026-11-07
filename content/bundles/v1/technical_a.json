@@ -1,0 +1,94 @@
+{
+  "bundleId": "bundle-v1-technical-a",
+  "version": 1,
+  "description": "Technical Track A: Interactive SDE Problem Solving & Graph Topologies",
+  "prompts": [
+    {
+      "id": "PROMPT-TECH-A-01",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F14"],
+      "difficulty": "medium",
+      "statement": "There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [a_i, b_i] indicates that you must take course b_i first if you want to take course a_i. Return true if you can finish all courses, or false otherwise.",
+      "constraints": [
+        "1 <= numCourses <= 10,000",
+        "0 <= prerequisites.length <= 50,000",
+        "prerequisites[i].length == 2",
+        "0 <= a_i, b_i < numCourses",
+        "All prerequisite pairs [a_i, b_i] are unique",
+        "Expected O(V + E) time and O(V + E) space"
+      ],
+      "examples": [
+        {
+          "input": "numCourses = 2, prerequisites = [[1, 0]]",
+          "expected": "true",
+          "explanation": "Take course 0, then course 1."
+        },
+        {
+          "input": "numCourses = 2, prerequisites = [[1, 0], [0, 1]]",
+          "expected": "false",
+          "explanation": "Direct cycle between 0 and 1; neither course can be completed."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-graph-density",
+          "question": "Are duplicate edges or self-loops possible in prerequisites?",
+          "answer": "All pairs are unique, but self-loops like [0, 0] may be present in input and immediately constitute a cycle."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-return-schedule-order",
+          "trigger": "correct_cycle_detection",
+          "question": "How would you modify your algorithm to return an actual topological ordering of the courses, rather than just a boolean?",
+          "criterion": "Appends nodes with zero indegree to an order list during BFS, returning the list if its length equals numCourses."
+        }
+      ],
+      "privateReference": {
+        "approach": "Model as a directed graph. A valid course schedule exists if and only if the graph is a Directed Acyclic Graph (DAG). Use Kahn's algorithm (BFS with in-degrees) or 3-state DFS (white/gray/black visited states) to detect cycles.",
+        "checks": [
+          "Detects direct cycles of length 2",
+          "Handles disconnected components",
+          "Handles graphs with no edges (returns true)"
+        ],
+        "expectedComplexity": "O(V + E) time, O(V + E) space"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "official",
+        "note": "Canonical Technical Round A Topological Sort benchmark",
+        "confidence": "confirmed"
+      }
+    }
+  ],
+  "packs": [
+    {
+      "id": "PACK-TECH-A-01",
+      "version": 1,
+      "stage": "technical_a",
+      "status": "validated",
+      "title": "Technical Round A: Dependency Ordering & TopoSort",
+      "instructions": "Simulated live technical interview. Articulate problem framing, propose state representations, and implement clean linear-time graph traversal.",
+      "durationMinutes": 45,
+      "debriefMinutes": 15,
+      "inputFormat": "function",
+      "resourcePolicy": {
+        "docs": false,
+        "ai": false,
+        "hints": false,
+        "notes": true
+      },
+      "promptIds": ["PROMPT-TECH-A-01"],
+      "rubricId": "rubric-technical-a-v1",
+      "rubricVersion": 1,
+      "prerequisites": ["PACK-OA-01"],
+      "source": {
+        "kind": "official",
+        "note": "Technical Track A standard pack",
+        "confidence": "confirmed"
+      }
+    }
+  ]
+}

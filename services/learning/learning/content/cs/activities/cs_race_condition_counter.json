@@ -1,0 +1,58 @@
+{
+  "id": "act_cs_race_condition_counter",
+  "title": "Concurrent Counter Interleaving & Data Corruption Scenario",
+  "track": "cs",
+  "micro_skill_id": "cs.os.scenario.intermittent_race_debugging",
+  "demands": {
+    "reasoning": 3,
+    "syntax": 2,
+    "implementation": 2,
+    "explanation": 3
+  },
+  "candidate": {
+    "statement": "Two worker threads each execute counter += 1 exactly 100,000 times on a shared global variable without synchronization. Explain why the final counter value is typically less than 200,000, detailing the assembly-level read-modify-write race condition.",
+    "constraints": [
+      "Shared memory variable",
+      "Preemptive thread scheduling"
+    ],
+    "examples": [
+      {
+        "runs": "100,000 iterations per thread",
+        "final_value": "e.g. 143,205 < 200,000"
+      }
+    ],
+    "starter_code": "# Explain the assembly interleaving leading to lost updates:\ndef explain_race_condition() -> str:\n    pass\n",
+    "hints": [
+      "Break counter += 1 into: load, increment, store."
+    ],
+    "short_diagnostics": [
+      "What specific sequence causes an increment operation to be lost?"
+    ]
+  },
+  "evaluator": {
+    "reference_solution": "counter += 1 is not atomic; it expands to: (1) load memory into register, (2) add 1 to register, (3) store register to memory. When Thread A and Thread B both load value N before either stores, both compute N+1 and write back N+1. One increment is completely lost. Preemptive context switches cause many updates to be lost, resulting in counter < 200,000.",
+    "rubric": "Identifies non-atomic load-increment-store and traces the interleaved lost-update execution.",
+    "test_cases": [
+      {
+        "input": "is_atomic",
+        "expected": false
+      }
+    ],
+    "known_pitfalls": [
+      "Believing single high-level statements like counter += 1 are atomic."
+    ],
+    "oracle_notes": "Direct scenario reasoning on shared mutable state."
+  },
+  "provenance": {
+    "source_problem_id": "cs_race_counter_01",
+    "version": "1.0",
+    "content_hash": "c5cb5f2645f9037ecd95e037b2f80e57c0bf6a839745a5672ca4ca7fec54a355",
+    "review_status": "verified_ready",
+    "author": "curator"
+  },
+  "planning_effort_minutes_range": [
+    15,
+    30
+  ],
+  "is_transfer_eligible": true
+}

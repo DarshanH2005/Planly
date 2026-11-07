@@ -1,0 +1,4665 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Planly Learning API",
+    "description": "Adaptive interview tutor, durable worker, and learning evaluation service",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Get Health",
+        "description": "Canonical system health endpoint.\nVerified by B01-AC2.",
+        "operationId": "get_health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Get Current User Profile",
+        "description": "Protected owner endpoint verifying token validity and private-owner authorization.\nVerified by B02-AC2 and B02-AC3.",
+        "operationId": "get_current_user_profile_api_auth_me_get",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OwnerResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{session_id}/artifact": {
+      "put": {
+        "tags": [
+          "Classroom"
+        ],
+        "summary": "Put Session Artifact",
+        "description": "Updates code artifact. Rejects stale writes when expected_revision != current_revision.",
+        "operationId": "put_session_artifact_api_sessions__session_id__artifact_put",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArtifactInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtifactRecord"
+                }
+              }
+            }
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Classroom"
+        ],
+        "summary": "Get Session Artifact Endpoint",
+        "description": "Retrieves the latest or specified artifact revision for a session.",
+        "operationId": "get_session_artifact_endpoint_api_sessions__session_id__artifact_get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "revision",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Revision"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ArtifactRecord"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Get Session Artifact Endpoint Api Sessions  Session Id  Artifact Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{session_id}/messages": {
+      "get": {
+        "tags": [
+          "Classroom"
+        ],
+        "summary": "Get Session Messages Endpoint",
+        "description": "Returns message history for a session to restore state on reload.",
+        "operationId": "get_session_messages_endpoint_api_sessions__session_id__messages_get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MessageRecord"
+                  },
+                  "title": "Response Get Session Messages Endpoint Api Sessions  Session Id  Messages Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Runs & Sessions"
+        ],
+        "summary": "Post Session Message",
+        "description": "Submits a learner message to the durable worker queue.\n- B04-AC1: Two competing tabs yield one accepted foreground run and one explicit revision/active conflict (409).\n- B04-AC2: Deduplicates requests with matching client_request_id.\n- Returns 202 Accepted with status and reconnectable events URLs.",
+        "operationId": "post_session_message_api_sessions__session_id__messages_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SessionMessageInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunReceipt"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/classrooms": {
+      "get": {
+        "tags": [
+          "Classrooms"
+        ],
+        "summary": "Get Classrooms",
+        "description": "Lists all classrooms for the authenticated owner.",
+        "operationId": "get_classrooms_api_classrooms_get",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClassroomRecord"
+                  },
+                  "title": "Response Get Classrooms Api Classrooms Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Classrooms"
+        ],
+        "summary": "Post Classroom",
+        "description": "Creates a new classroom.",
+        "operationId": "post_classroom_api_classrooms_post",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClassroomInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClassroomRecord"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/classrooms/{classroom_id}": {
+      "get": {
+        "tags": [
+          "Classrooms"
+        ],
+        "summary": "Get Single Classroom",
+        "description": "Retrieves a specific classroom.",
+        "operationId": "get_single_classroom_api_classrooms__classroom_id__get",
+        "parameters": [
+          {
+            "name": "classroom_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Classroom Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClassroomRecord"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/classrooms/{classroom_id}/sessions": {
+      "get": {
+        "tags": [
+          "Classrooms"
+        ],
+        "summary": "Get Classroom Sessions",
+        "description": "Lists all sessions belonging to a classroom.",
+        "operationId": "get_classroom_sessions_api_classrooms__classroom_id__sessions_get",
+        "parameters": [
+          {
+            "name": "classroom_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Classroom Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SessionRecord"
+                  },
+                  "title": "Response Get Classroom Sessions Api Classrooms  Classroom Id  Sessions Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Classrooms"
+        ],
+        "summary": "Post Classroom Session",
+        "description": "Creates a new session in a classroom.",
+        "operationId": "post_classroom_session_api_classrooms__classroom_id__sessions_post",
+        "parameters": [
+          {
+            "name": "classroom_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Classroom Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SessionCreateInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionRecord"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{session_id}": {
+      "get": {
+        "tags": [
+          "Classroom"
+        ],
+        "summary": "Get Single Session",
+        "description": "Retrieves a specific session.",
+        "operationId": "get_single_session_api_sessions__session_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionRecord"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{session_id}/attempts": {
+      "post": {
+        "tags": [
+          "Classroom"
+        ],
+        "summary": "Post Session Attempt",
+        "description": "Records an immutable attempt / frozen submission.",
+        "operationId": "post_session_attempt_api_sessions__session_id__attempts_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttemptInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptRecord"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Classroom"
+        ],
+        "summary": "Get Attempts",
+        "description": "Returns all attempts for a session.",
+        "operationId": "get_attempts_api_sessions__session_id__attempts_get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AttemptRecord"
+                  },
+                  "title": "Response Get Attempts Api Sessions  Session Id  Attempts Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{session_id}/observations": {
+      "post": {
+        "tags": [
+          "Evidence"
+        ],
+        "summary": "Post Learning Observation",
+        "description": "Records immutable learning observation. Enforces B03-AC2 invariant.",
+        "operationId": "post_learning_observation_api_sessions__session_id__observations_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObservationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearningObservation"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Evidence"
+        ],
+        "summary": "Get Observations",
+        "description": "Returns all learning observations for a session.",
+        "operationId": "get_observations_api_sessions__session_id__observations_get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LearningObservation"
+                  },
+                  "title": "Response Get Observations Api Sessions  Session Id  Observations Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{session_id}/context": {
+      "get": {
+        "tags": [
+          "Classroom"
+        ],
+        "summary": "Get Session Context",
+        "description": "Returns authoritative ContextPacket for teaching decisions using hybrid retrieval and explicit learning links.\nVerified by B07-AC1, B07-AC2, and B07-AC3.",
+        "operationId": "get_session_context_api_sessions__session_id__context_get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContextPacket"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/budget": {
+      "get": {
+        "tags": [
+          "Budget & Accounting"
+        ],
+        "summary": "Get Budget Status",
+        "description": "Returns real-time budget status across pools under the shared monthly ceiling.\nEnforces OPERATING_PROFILE.md limits.\nVerified by B06-AC4.",
+        "operationId": "get_budget_status_api_budget_get",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BudgetStatusReport"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{session_id}/decisions": {
+      "get": {
+        "tags": [
+          "Classroom"
+        ],
+        "summary": "Get Decisions",
+        "description": "Returns all teaching decisions formulated for this session.",
+        "operationId": "get_decisions_api_sessions__session_id__decisions_get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TeachingDecision"
+                  },
+                  "title": "Response Get Decisions Api Sessions  Session Id  Decisions Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{session_id}/micro-goals": {
+      "get": {
+        "tags": [
+          "Classroom"
+        ],
+        "summary": "Get Micro Goals",
+        "description": "Returns active and completed micro-goals for the session.",
+        "operationId": "get_micro_goals_api_sessions__session_id__micro_goals_get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LessonMicroGoal"
+                  },
+                  "title": "Response Get Micro Goals Api Sessions  Session Id  Micro Goals Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Classroom"
+        ],
+        "summary": "Post Micro Goal",
+        "description": "Creates an editable lesson micro-goal.",
+        "operationId": "post_micro_goal_api_sessions__session_id__micro_goals_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MicroGoalInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LessonMicroGoal"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{session_id}/micro-goals/{goal_id}": {
+      "put": {
+        "tags": [
+          "Classroom"
+        ],
+        "summary": "Put Micro Goal",
+        "description": "Updates an editable lesson micro-goal description or status.",
+        "operationId": "put_micro_goal_api_sessions__session_id__micro_goals__goal_id__put",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "goal_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Goal Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MicroGoalUpdateInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LessonMicroGoal"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/activities/{activity_id}": {
+      "get": {
+        "tags": [
+          "Curriculum"
+        ],
+        "summary": "Get Activity",
+        "description": "Returns candidate-facing activity definition, strictly stripping evaluator-only context (B08-AC3).",
+        "operationId": "get_activity_api_activities__activity_id__get",
+        "parameters": [
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Activity Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityDefinition"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{session_id}/lesson-turn": {
+      "post": {
+        "tags": [
+          "Classroom"
+        ],
+        "summary": "Post Lesson Turn",
+        "description": "Executes a complete adaptive lesson turn through the LangGraph StateGraph workflow.\nVerified by B08-AC1, B08-AC2, and B08-AC3.",
+        "operationId": "post_lesson_turn_api_sessions__session_id__lesson_turn_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LessonTurnInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LessonTurnResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{session_id}/execute": {
+      "post": {
+        "tags": [
+          "Execution"
+        ],
+        "summary": "Post Session Execute",
+        "description": "Executes learner Python code against test suite with strict bounds and out-of-band result extraction.\nVerified by B10-AC1, B10-AC2, and B10-AC3.",
+        "operationId": "post_session_execute_api_sessions__session_id__execute_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ExecutionRequestInput"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{session_id}/executions": {
+      "get": {
+        "tags": [
+          "Execution"
+        ],
+        "summary": "Get Session Executions Endpoint",
+        "description": "Returns all execution evidence records for a session.",
+        "operationId": "get_session_executions_endpoint_api_sessions__session_id__executions_get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExecutionRecord"
+                  },
+                  "title": "Response Get Session Executions Endpoint Api Sessions  Session Id  Executions Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{session_id}/executions/{execution_id}": {
+      "get": {
+        "tags": [
+          "Execution"
+        ],
+        "summary": "Get Single Execution Endpoint",
+        "description": "Retrieves a specific execution record.",
+        "operationId": "get_single_execution_endpoint_api_sessions__session_id__executions__execution_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "execution_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Execution Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionRecord"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/execute": {
+      "post": {
+        "tags": [
+          "Runs & Sessions"
+        ],
+        "summary": "Execute Run Endpoint",
+        "description": "Executes a queued turn run using the LangGraph lesson workflow.\nEmits THINKING, DECISION, CHUNK, and DONE events.",
+        "operationId": "execute_run_endpoint_api_runs__run_id__execute_post",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunStatusResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}": {
+      "get": {
+        "tags": [
+          "Runs & Sessions"
+        ],
+        "summary": "Get Run Status",
+        "description": "Retrieves current durable status and decision for a run.",
+        "operationId": "get_run_status_api_runs__run_id__get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunStatusResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/events": {
+      "get": {
+        "tags": [
+          "Runs & Sessions"
+        ],
+        "summary": "Get Run Events Stream",
+        "description": "B04-AC3: Resumes event streaming after sequence number `after_seq`.\nProvides reconnectable, ordered event delivery.",
+        "operationId": "get_run_events_stream_api_runs__run_id__events_get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "after_seq",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "After Seq"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunEventsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/cancel": {
+      "post": {
+        "tags": [
+          "Runs & Sessions"
+        ],
+        "summary": "Cancel Active Run",
+        "description": "B04-AC3: Cancels an active run. Preserves all previously accepted input,\npersisted sequence of events, and emits a CANCELLED event.",
+        "operationId": "cancel_active_run_api_runs__run_id__cancel_post",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunStatusResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/record": {
+      "get": {
+        "tags": [
+          "Runs & Sessions"
+        ],
+        "summary": "Get Turn Run Record",
+        "description": "Returns complete internal TurnRunRecord including fencing and leasing metadata.",
+        "operationId": "get_turn_run_record_api_runs__run_id__record_get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TurnRunRecord"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/external-receipts/{idempotency_key}": {
+      "get": {
+        "tags": [
+          "Runs & Sessions"
+        ],
+        "summary": "Get External Call Receipt Endpoint",
+        "description": "Returns external call billing/model receipt for verification.",
+        "operationId": "get_external_call_receipt_endpoint_api_runs__run_id__external_receipts__idempotency_key__get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "idempotency_key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalCallReceipt"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/process": {
+      "post": {
+        "tags": [
+          "Runs & Sessions"
+        ],
+        "summary": "Process Run Endpoint",
+        "description": "Processes the next turn job for this run using the lesson worker,\ngenerating chunk, thinking, and done events and updating run state.",
+        "operationId": "process_run_endpoint_api_runs__run_id__process_post",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunStatusResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/imports/chats": {
+      "post": {
+        "tags": [
+          "Sources & Ingestion"
+        ],
+        "summary": "Trigger Chat Import",
+        "description": "Triggers idempotent ingestion of historical chat exports from downloads directory.\nVerified by B05-AC1.",
+        "operationId": "trigger_chat_import_api_imports_chats_post",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ImportRequestInput"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pending-tasks": {
+      "get": {
+        "tags": [
+          "Sources & Ingestion"
+        ],
+        "summary": "List Pending Tasks",
+        "description": "Returns preserved pending tasks across tracks (Two Pointers, Prefix Sums, CS Follow-ups, ML Regression).\nVerified by B05-AC3.",
+        "operationId": "list_pending_tasks_api_pending_tasks_get",
+        "parameters": [
+          {
+            "name": "classroom_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Classroom Id"
+            }
+          },
+          {
+            "name": "task_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/PendingTaskType"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Task Type"
+            }
+          },
+          {
+            "name": "task_status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/PendingTaskStatus"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Task Status"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PendingTaskRecord"
+                  },
+                  "title": "Response List Pending Tasks Api Pending Tasks Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActivityDefinition": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "track": {
+            "type": "string",
+            "title": "Track"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "competency_key": {
+            "type": "string",
+            "title": "Competency Key"
+          },
+          "prerequisites": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Prerequisites"
+          },
+          "micro_goal": {
+            "type": "string",
+            "title": "Micro Goal"
+          },
+          "statement": {
+            "type": "string",
+            "title": "Statement"
+          },
+          "examples": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Examples"
+          },
+          "reference_checks": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Reference Checks"
+          },
+          "evaluator_context": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evaluator Context"
+          },
+          "visibility": {
+            "type": "string",
+            "title": "Visibility",
+            "default": "candidate_facing"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "track",
+          "title",
+          "competency_key",
+          "micro_goal",
+          "statement"
+        ],
+        "title": "ActivityDefinition"
+      },
+      "ArtifactInput": {
+        "properties": {
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          },
+          "language": {
+            "type": "string",
+            "title": "Language",
+            "default": "python"
+          }
+        },
+        "type": "object",
+        "required": [
+          "content",
+          "expected_revision"
+        ],
+        "title": "ArtifactInput"
+      },
+      "ArtifactRecord": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Revision"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "language": {
+            "type": "string",
+            "title": "Language",
+            "default": "python"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "owner_id",
+          "session_id",
+          "revision",
+          "content"
+        ],
+        "title": "ArtifactRecord"
+      },
+      "AssistanceLevel": {
+        "type": "string",
+        "enum": [
+          "independent",
+          "guided",
+          "tutor_supplied",
+          "unassessed",
+          "unknown"
+        ],
+        "title": "AssistanceLevel"
+      },
+      "AttemptInput": {
+        "properties": {
+          "source_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Source Revision"
+          },
+          "assistance_level": {
+            "$ref": "#/components/schemas/AssistanceLevel"
+          },
+          "artifact_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Artifact Id"
+          },
+          "frozen_code": {
+            "type": "string",
+            "title": "Frozen Code",
+            "default": ""
+          },
+          "frozen_language": {
+            "type": "string",
+            "title": "Frozen Language",
+            "default": "python"
+          },
+          "elapsed_seconds": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Elapsed Seconds"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/SessionMode",
+            "default": "practice"
+          },
+          "exposure_state": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Exposure State"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_revision",
+          "assistance_level"
+        ],
+        "title": "AttemptInput"
+      },
+      "AttemptRecord": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "artifact_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Artifact Id"
+          },
+          "frozen_code": {
+            "type": "string",
+            "title": "Frozen Code",
+            "default": ""
+          },
+          "frozen_language": {
+            "type": "string",
+            "title": "Frozen Language",
+            "default": "python"
+          },
+          "source_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Source Revision"
+          },
+          "elapsed_seconds": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Elapsed Seconds"
+          },
+          "assistance_level": {
+            "$ref": "#/components/schemas/AssistanceLevel"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/SessionMode",
+            "default": "practice"
+          },
+          "exposure_state": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Exposure State"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "owner_id",
+          "session_id",
+          "source_revision",
+          "assistance_level"
+        ],
+        "title": "AttemptRecord"
+      },
+      "BudgetStatusReport": {
+        "properties": {
+          "monthly_ceiling_usd": {
+            "type": "number",
+            "title": "Monthly Ceiling Usd"
+          },
+          "internal_dispatch_limit_usd": {
+            "type": "number",
+            "title": "Internal Dispatch Limit Usd"
+          },
+          "total_settled_usd": {
+            "type": "number",
+            "title": "Total Settled Usd"
+          },
+          "total_reserved_usd": {
+            "type": "number",
+            "title": "Total Reserved Usd"
+          },
+          "total_uncertain_usd": {
+            "type": "number",
+            "title": "Total Uncertain Usd"
+          },
+          "remaining_dispatch_usd": {
+            "type": "number",
+            "title": "Remaining Dispatch Usd"
+          },
+          "pools": {
+            "additionalProperties": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "object",
+            "title": "Pools"
+          }
+        },
+        "type": "object",
+        "required": [
+          "monthly_ceiling_usd",
+          "internal_dispatch_limit_usd",
+          "total_settled_usd",
+          "total_reserved_usd",
+          "total_uncertain_usd",
+          "remaining_dispatch_usd",
+          "pools"
+        ],
+        "title": "BudgetStatusReport"
+      },
+      "ClassroomInput": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "track": {
+            "type": "string",
+            "title": "Track",
+            "default": "dsa"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "default": "DSA: Inward Convergence (Two Sum)"
+          }
+        },
+        "type": "object",
+        "title": "ClassroomInput"
+      },
+      "ClassroomRecord": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "track": {
+            "type": "string",
+            "title": "Track"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "owner_id",
+          "track",
+          "title"
+        ],
+        "title": "ClassroomRecord"
+      },
+      "ContextPacket": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "active_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Active Revision"
+          },
+          "artifact_content": {
+            "type": "string",
+            "title": "Artifact Content"
+          },
+          "pending_question": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pending Question"
+          },
+          "permitted_references": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Permitted References"
+          },
+          "observed_competencies": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Observed Competencies"
+          },
+          "recent_messages": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Recent Messages"
+          },
+          "source_episodes": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Source Episodes"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/SessionMode",
+            "default": "practice"
+          },
+          "exposure_snapshot": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ExposureRecord"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_coverage": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Source Coverage"
+          },
+          "superseded_evidence": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Superseded Evidence"
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id",
+          "owner_id",
+          "active_revision",
+          "artifact_content"
+        ],
+        "title": "ContextPacket"
+      },
+      "ErrorEnvelope": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "field_errors": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field Errors"
+          },
+          "expected_revision": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Revision"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErrorEnvelope"
+      },
+      "EventType": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "thinking",
+          "decision",
+          "chunk",
+          "done",
+          "error",
+          "cancelled"
+        ],
+        "title": "EventType"
+      },
+      "ExecutionRecord": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "artifact_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Artifact Id"
+          },
+          "artifact_revision": {
+            "type": "integer",
+            "title": "Artifact Revision"
+          },
+          "artifact_hash": {
+            "type": "string",
+            "title": "Artifact Hash"
+          },
+          "test_suite_hash": {
+            "type": "string",
+            "title": "Test Suite Hash"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExecutionStatus"
+          },
+          "passed": {
+            "type": "boolean",
+            "title": "Passed"
+          },
+          "tests_total": {
+            "type": "integer",
+            "title": "Tests Total"
+          },
+          "tests_passed": {
+            "type": "integer",
+            "title": "Tests Passed"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/TestResult"
+            },
+            "type": "array",
+            "title": "Results"
+          },
+          "stdout": {
+            "type": "string",
+            "title": "Stdout",
+            "default": ""
+          },
+          "stderr": {
+            "type": "string",
+            "title": "Stderr",
+            "default": ""
+          },
+          "stdout_truncated": {
+            "type": "boolean",
+            "title": "Stdout Truncated",
+            "default": false
+          },
+          "duration_ms": {
+            "type": "number",
+            "title": "Duration Ms",
+            "default": 0.0
+          },
+          "sandbox_provider": {
+            "type": "string",
+            "title": "Sandbox Provider",
+            "default": "subprocess"
+          },
+          "is_stale": {
+            "type": "boolean",
+            "title": "Is Stale",
+            "default": false
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "session_id",
+          "owner_id",
+          "artifact_revision",
+          "artifact_hash",
+          "test_suite_hash",
+          "status",
+          "passed",
+          "tests_total",
+          "tests_passed",
+          "created_at"
+        ],
+        "title": "ExecutionRecord"
+      },
+      "ExecutionRequestInput": {
+        "properties": {
+          "session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Session Id"
+          },
+          "revision": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revision"
+          },
+          "test_suite_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Test Suite Id",
+            "default": "act_dsa_two_sum_sorted"
+          },
+          "code_override": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code Override"
+          }
+        },
+        "type": "object",
+        "title": "ExecutionRequestInput"
+      },
+      "ExecutionResponse": {
+        "properties": {
+          "execution": {
+            "$ref": "#/components/schemas/ExecutionRecord"
+          },
+          "is_stale": {
+            "type": "boolean",
+            "title": "Is Stale",
+            "default": false
+          },
+          "observation_recorded": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observation Recorded",
+            "default": false
+          },
+          "finite_test_pass": {
+            "type": "boolean",
+            "title": "Finite Test Pass",
+            "default": false
+          },
+          "independent_mastery": {
+            "type": "boolean",
+            "title": "Independent Mastery",
+            "default": false
+          },
+          "pedagogical_note": {
+            "type": "string",
+            "title": "Pedagogical Note",
+            "default": ""
+          },
+          "stale_warning": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stale Warning"
+          }
+        },
+        "type": "object",
+        "required": [
+          "execution"
+        ],
+        "title": "ExecutionResponse"
+      },
+      "ExecutionStatus": {
+        "type": "string",
+        "enum": [
+          "passed",
+          "failed",
+          "timed_out",
+          "error",
+          "static_review_only"
+        ],
+        "title": "ExecutionStatus"
+      },
+      "ExposureRecord": {
+        "properties": {
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "competency_key": {
+            "type": "string",
+            "title": "Competency Key"
+          },
+          "exposure_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exposure Count",
+            "default": 0
+          },
+          "independent_success_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Independent Success Count",
+            "default": 0
+          },
+          "guided_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Guided Count",
+            "default": 0
+          },
+          "tutor_supplied_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Tutor Supplied Count",
+            "default": 0
+          },
+          "last_exposed_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Exposed At"
+          },
+          "last_assistance_level": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AssistanceLevel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "owner_id",
+          "competency_key"
+        ],
+        "title": "ExposureRecord"
+      },
+      "ExternalCallReceipt": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "idempotency_key": {
+            "type": "string",
+            "title": "Idempotency Key"
+          },
+          "call_type": {
+            "type": "string",
+            "title": "Call Type"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExternalCallStatus"
+          },
+          "request_hash": {
+            "type": "string",
+            "title": "Request Hash"
+          },
+          "response_payload": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Response Payload"
+          },
+          "cost_cents": {
+            "type": "integer",
+            "title": "Cost Cents",
+            "default": 0
+          },
+          "run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run Id"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "owner_id",
+          "idempotency_key",
+          "call_type",
+          "status",
+          "request_hash"
+        ],
+        "title": "ExternalCallReceipt"
+      },
+      "ExternalCallStatus": {
+        "type": "string",
+        "enum": [
+          "started",
+          "succeeded",
+          "failed",
+          "uncertain"
+        ],
+        "title": "ExternalCallStatus"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "service": {
+            "type": "string",
+            "title": "Service"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "service",
+          "version"
+        ],
+        "title": "HealthResponse"
+      },
+      "ImportRequestInput": {
+        "properties": {
+          "downloads_dir": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Downloads Dir",
+            "default": "C:/Users/darsh/Downloads"
+          }
+        },
+        "type": "object",
+        "title": "ImportRequestInput"
+      },
+      "ImportSummaryResponse": {
+        "properties": {
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "tracks_imported": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tracks Imported"
+          },
+          "documents_ingested": {
+            "type": "integer",
+            "title": "Documents Ingested"
+          },
+          "turns_extracted": {
+            "type": "integer",
+            "title": "Turns Extracted"
+          },
+          "artifacts_created": {
+            "type": "integer",
+            "title": "Artifacts Created"
+          },
+          "observations_staged": {
+            "type": "integer",
+            "title": "Observations Staged"
+          },
+          "pending_tasks_created": {
+            "type": "integer",
+            "title": "Pending Tasks Created"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Warnings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "owner_id",
+          "tracks_imported",
+          "documents_ingested",
+          "turns_extracted",
+          "artifacts_created",
+          "observations_staged",
+          "pending_tasks_created"
+        ],
+        "title": "ImportSummaryResponse"
+      },
+      "LearningObservation": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "competency_key": {
+            "type": "string",
+            "title": "Competency Key"
+          },
+          "source_kind": {
+            "$ref": "#/components/schemas/SourceKind"
+          },
+          "assistance_level": {
+            "$ref": "#/components/schemas/AssistanceLevel"
+          },
+          "demonstrated": {
+            "type": "boolean",
+            "title": "Demonstrated",
+            "default": false
+          },
+          "evidence_text": {
+            "type": "string",
+            "title": "Evidence Text"
+          },
+          "message_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message Id"
+          },
+          "artifact_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Artifact Id"
+          },
+          "attempt_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attempt Id"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "owner_id",
+          "session_id",
+          "competency_key",
+          "source_kind",
+          "assistance_level",
+          "evidence_text"
+        ],
+        "title": "LearningObservation"
+      },
+      "LessonMicroGoal": {
+        "properties": {
+          "goal_id": {
+            "type": "string",
+            "title": "Goal Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "competency_key": {
+            "type": "string",
+            "title": "Competency Key"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "in_progress"
+          },
+          "is_editable": {
+            "type": "boolean",
+            "title": "Is Editable",
+            "default": true
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "goal_id",
+          "session_id",
+          "owner_id",
+          "description",
+          "competency_key"
+        ],
+        "title": "LessonMicroGoal"
+      },
+      "LessonTurnInput": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          },
+          "run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run Id"
+          },
+          "consecutive_correct_count": {
+            "type": "integer",
+            "title": "Consecutive Correct Count",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "message",
+          "expected_revision"
+        ],
+        "title": "LessonTurnInput"
+      },
+      "LessonTurnResponse": {
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "title": "Run Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "reply": {
+            "type": "string",
+            "title": "Reply"
+          },
+          "teaching_decision": {
+            "$ref": "#/components/schemas/TeachingDecision"
+          },
+          "observations_committed": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Observations Committed"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "run_id",
+          "session_id",
+          "reply",
+          "teaching_decision",
+          "observations_committed",
+          "status"
+        ],
+        "title": "LessonTurnResponse"
+      },
+      "MessageRecord": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "sender_role": {
+            "type": "string",
+            "pattern": "^(learner|tutor|system)$",
+            "title": "Sender Role"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "artifact_revision_snapshot": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Artifact Revision Snapshot"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "owner_id",
+          "session_id",
+          "sender_role",
+          "content"
+        ],
+        "title": "MessageRecord"
+      },
+      "MicroGoalInput": {
+        "properties": {
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "competency_key": {
+            "type": "string",
+            "title": "Competency Key"
+          },
+          "is_editable": {
+            "type": "boolean",
+            "title": "Is Editable",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "description",
+          "competency_key"
+        ],
+        "title": "MicroGoalInput"
+      },
+      "MicroGoalUpdateInput": {
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status"
+          }
+        },
+        "type": "object",
+        "title": "MicroGoalUpdateInput"
+      },
+      "ObservationInput": {
+        "properties": {
+          "competency_key": {
+            "type": "string",
+            "title": "Competency Key"
+          },
+          "source_kind": {
+            "$ref": "#/components/schemas/SourceKind"
+          },
+          "assistance_level": {
+            "$ref": "#/components/schemas/AssistanceLevel"
+          },
+          "demonstrated": {
+            "type": "boolean",
+            "title": "Demonstrated",
+            "default": false
+          },
+          "evidence_text": {
+            "type": "string",
+            "title": "Evidence Text"
+          },
+          "message_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message Id"
+          },
+          "artifact_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Artifact Id"
+          },
+          "attempt_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attempt Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "competency_key",
+          "source_kind",
+          "assistance_level",
+          "evidence_text"
+        ],
+        "title": "ObservationInput"
+      },
+      "OwnerResponse": {
+        "properties": {
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "authorized": {
+            "type": "boolean",
+            "title": "Authorized",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "owner_id",
+          "role"
+        ],
+        "title": "OwnerResponse"
+      },
+      "PendingTaskRecord": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "classroom_id": {
+            "type": "string",
+            "title": "Classroom Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "task_type": {
+            "$ref": "#/components/schemas/PendingTaskType"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "prompt_text": {
+            "type": "string",
+            "title": "Prompt Text"
+          },
+          "context_json": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Context Json"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PendingTaskStatus",
+            "default": "pending"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "owner_id",
+          "classroom_id",
+          "session_id",
+          "task_type",
+          "title",
+          "prompt_text"
+        ],
+        "title": "PendingTaskRecord"
+      },
+      "PendingTaskStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "resolved",
+          "cancelled"
+        ],
+        "title": "PendingTaskStatus"
+      },
+      "PendingTaskType": {
+        "type": "string",
+        "enum": [
+          "pending_question",
+          "unsubmitted_exercise",
+          "deferred_topic",
+          "unanswered_followup"
+        ],
+        "title": "PendingTaskType"
+      },
+      "RunEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "run_id": {
+            "type": "string",
+            "title": "Run Id"
+          },
+          "seq": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Seq"
+          },
+          "event_type": {
+            "$ref": "#/components/schemas/EventType"
+          },
+          "payload": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Payload"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "owner_id",
+          "run_id",
+          "seq",
+          "event_type"
+        ],
+        "title": "RunEvent"
+      },
+      "RunEventsResponse": {
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "title": "Run Id"
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/RunEvent"
+            },
+            "type": "array",
+            "title": "Events"
+          },
+          "latest_seq": {
+            "type": "integer",
+            "title": "Latest Seq"
+          },
+          "is_complete": {
+            "type": "boolean",
+            "title": "Is Complete"
+          }
+        },
+        "type": "object",
+        "required": [
+          "run_id",
+          "events",
+          "latest_seq",
+          "is_complete"
+        ],
+        "title": "RunEventsResponse"
+      },
+      "RunLane": {
+        "type": "string",
+        "enum": [
+          "foreground",
+          "background"
+        ],
+        "title": "RunLane"
+      },
+      "RunReceipt": {
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "title": "Run Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "message_id": {
+            "type": "string",
+            "title": "Message Id"
+          },
+          "accepted_revision": {
+            "type": "integer",
+            "title": "Accepted Revision"
+          },
+          "status_url": {
+            "type": "string",
+            "title": "Status Url"
+          },
+          "events_url": {
+            "type": "string",
+            "title": "Events Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "run_id",
+          "session_id",
+          "message_id",
+          "accepted_revision",
+          "status_url",
+          "events_url"
+        ],
+        "title": "RunReceipt"
+      },
+      "RunState": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "running",
+          "completed",
+          "failed",
+          "cancelled"
+        ],
+        "title": "RunState"
+      },
+      "RunStatusResponse": {
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "title": "Run Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "state": {
+            "$ref": "#/components/schemas/RunState"
+          },
+          "expected_revision": {
+            "type": "integer",
+            "title": "Expected Revision"
+          },
+          "decision": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TeachingDecision"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          },
+          "events_count": {
+            "type": "integer",
+            "title": "Events Count",
+            "default": 0
+          },
+          "events_url": {
+            "type": "string",
+            "title": "Events Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "run_id",
+          "session_id",
+          "state",
+          "expected_revision",
+          "events_url"
+        ],
+        "title": "RunStatusResponse"
+      },
+      "SessionCreateInput": {
+        "properties": {
+          "stage": {
+            "$ref": "#/components/schemas/SessionStage",
+            "default": "foundation"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/SessionMode",
+            "default": "practice"
+          }
+        },
+        "type": "object",
+        "title": "SessionCreateInput"
+      },
+      "SessionMessageInput": {
+        "properties": {
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          },
+          "client_request_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Request Id"
+          },
+          "auto_execute": {
+            "type": "boolean",
+            "title": "Auto Execute",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "content",
+          "expected_revision"
+        ],
+        "title": "SessionMessageInput"
+      },
+      "SessionMode": {
+        "type": "string",
+        "enum": [
+          "learn",
+          "practice",
+          "strict"
+        ],
+        "title": "SessionMode"
+      },
+      "SessionRecord": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "classroom_id": {
+            "type": "string",
+            "title": "Classroom Id"
+          },
+          "stage": {
+            "$ref": "#/components/schemas/SessionStage",
+            "default": "foundation"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/SessionMode",
+            "default": "practice"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "active"
+          },
+          "current_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Current Revision",
+            "default": 1
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "owner_id",
+          "classroom_id"
+        ],
+        "title": "SessionRecord"
+      },
+      "SessionStage": {
+        "type": "string",
+        "enum": [
+          "foundation",
+          "oa",
+          "technical_a",
+          "technical_b",
+          "engineering",
+          "project",
+          "behavioural"
+        ],
+        "title": "SessionStage"
+      },
+      "SourceKind": {
+        "type": "string",
+        "enum": [
+          "learner_work",
+          "tutor_explanation",
+          "self_report",
+          "derived_inference",
+          "execution_evidence"
+        ],
+        "title": "SourceKind"
+      },
+      "TeachingDecision": {
+        "properties": {
+          "decision_id": {
+            "type": "string",
+            "title": "Decision Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          },
+          "assessment": {
+            "type": "string",
+            "title": "Assessment"
+          },
+          "uncertainty": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Uncertainty"
+          },
+          "next_action": {
+            "type": "string",
+            "title": "Next Action",
+            "description": "probe, hint, advance, challenge, review, or diagnostic"
+          },
+          "reveal_limit": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Reveal Limit",
+            "default": 0
+          },
+          "observed_success_criteria": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Observed Success Criteria"
+          },
+          "rationale": {
+            "type": "string",
+            "title": "Rationale"
+          },
+          "model_version": {
+            "type": "string",
+            "title": "Model Version",
+            "default": "gemini-3.8-flash"
+          },
+          "candidate_explanations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Candidate Explanations"
+          },
+          "discriminating_probe": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discriminating Probe"
+          },
+          "uncertainty_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Uncertainty Reason"
+          },
+          "transition": {
+            "type": "string",
+            "title": "Transition",
+            "default": "continue"
+          },
+          "policy_version": {
+            "type": "string",
+            "title": "Policy Version",
+            "default": "v1"
+          },
+          "goal_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Goal Id"
+          },
+          "step_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Step Id"
+          },
+          "assistance_event": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assistance Event"
+          }
+        },
+        "type": "object",
+        "required": [
+          "decision_id",
+          "session_id",
+          "owner_id",
+          "expected_revision",
+          "assessment",
+          "uncertainty",
+          "next_action",
+          "rationale"
+        ],
+        "title": "TeachingDecision"
+      },
+      "TestResult": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "passed": {
+            "type": "boolean",
+            "title": "Passed"
+          },
+          "expected": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected"
+          },
+          "actual": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actual"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          },
+          "execution_time_ms": {
+            "type": "number",
+            "title": "Execution Time Ms",
+            "default": 0.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "passed"
+        ],
+        "title": "TestResult"
+      },
+      "TurnRunRecord": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "classroom_id": {
+            "type": "string",
+            "title": "Classroom Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "client_request_id": {
+            "type": "string",
+            "title": "Client Request Id"
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          },
+          "state": {
+            "$ref": "#/components/schemas/RunState",
+            "default": "queued"
+          },
+          "lane": {
+            "$ref": "#/components/schemas/RunLane",
+            "default": "foreground"
+          },
+          "message_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message Id"
+          },
+          "lease_owner": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lease Owner"
+          },
+          "lease_expires_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lease Expires At"
+          },
+          "fence": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Fence",
+            "default": 1
+          },
+          "decision": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TeachingDecision"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "owner_id",
+          "classroom_id",
+          "session_id",
+          "client_request_id",
+          "expected_revision"
+        ],
+        "title": "TurnRunRecord"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

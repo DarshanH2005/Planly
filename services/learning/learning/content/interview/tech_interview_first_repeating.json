@@ -1,0 +1,72 @@
+{
+  "scenario_id": "tech_interview_first_repeating",
+  "prompt_id": "FX-HASH-A",
+  "title": "Technical Interview: First Repeating Element",
+  "stage_flow": [
+    "clarification",
+    "approach",
+    "implementation",
+    "complexity",
+    "follow_up",
+    "debrief"
+  ],
+  "candidate_prompt": {
+    "title": "First Repeating Element",
+    "statement": "Given an array of integers nums, find the first element that repeats in the array. If no element repeats, return None. An element is considered repeating if it appears more than once and its second occurrence has the smallest index.",
+    "starter_code": "def first_repeat(nums: list[int]):\n    # Your solution here\n    pass\n"
+  },
+  "rubric": {
+    "rubric_id": "rubric-tech-oa-hash-01",
+    "rubric_version": 1,
+    "approach_criteria": [
+      {
+        "approach_type": "hash_set",
+        "description": "Uses a hash set to track seen elements in one pass",
+        "valid": true,
+        "interviewer_probe": "That sounds like a solid O(n) approach. How will you keep track of which element appeared first versus second occurrence?"
+      },
+      {
+        "approach_type": "sorting",
+        "description": "Sorts the array to find duplicates adjacent to each other",
+        "valid": true,
+        "interviewer_probe": "Sorting can group duplicates, but what happens to the original element indices and ordering when you sort?"
+      },
+      {
+        "approach_type": "brute_force",
+        "description": "Nested loops checking every pair",
+        "valid": true,
+        "interviewer_probe": "That will find duplicates, but what would the time complexity be for an array with 100,000 elements?"
+      }
+    ],
+    "complexity_expectations": {
+      "hash_set": {
+        "expected_time": "O(n)",
+        "expected_space": "O(n)",
+        "common_misconceptions": [
+          {
+            "pattern": "O(1) space",
+            "gap_key": "complexity.space_hash_set_underestimated",
+            "description": "Claimed O(1) space while allocating a hash set that stores up to N distinct elements."
+          },
+          {
+            "pattern": "O(n^2) time",
+            "gap_key": "complexity.time_hash_lookup_overestimated",
+            "description": "Assumed hash set lookups take O(n) instead of average O(1)."
+          }
+        ]
+      }
+    },
+    "follow_ups": [
+      {
+        "id": "fup_stream",
+        "prompt": "What if the input stream is potentially infinite and you have bounded memory? How could you approximate or handle the stream?",
+        "expected_concept": "bloom_filter_or_sliding_window"
+      },
+      {
+        "id": "fup_indices",
+        "prompt": "What if we also need to return the tuple of exact 0-based indices (first_index, second_index) of the duplicate?",
+        "expected_concept": "dict_mapping_element_to_first_index"
+      }
+    ]
+  }
+}

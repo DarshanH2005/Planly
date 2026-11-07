@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "track": "ai_ml",
+  "skills": [
+    {
+      "id": "ml.numpy.vectorization",
+      "name": "NumPy Array Vectorization & Shapes",
+      "track": "ai_ml",
+      "category": "foundations",
+      "description": "Vectorized arithmetic and 1D/2D shape manipulation in NumPy without explicit Python loops.",
+      "prerequisites": [],
+      "difficulty": 1
+    },
+    {
+      "id": "ml.loss.mse_computation",
+      "name": "Mean Squared Error Loss",
+      "track": "ai_ml",
+      "category": "loss_functions",
+      "description": "Computing scalar MSE loss between true targets and model predictions with shape validation.",
+      "prerequisites": ["ml.numpy.vectorization"],
+      "difficulty": 2
+    },
+    {
+      "id": "ml.numpy.linear_regression",
+      "name": "NumPy Linear Regression Gradient Descent",
+      "track": "ai_ml",
+      "category": "modeling",
+      "description": "Training univariate/multivariate linear regression via iterative gradient descent in pure NumPy.",
+      "prerequisites": ["ml.numpy.vectorization", "ml.loss.mse_computation"],
+      "difficulty": 3
+    },
+    {
+      "id": "ml.optimization.gradient_descent",
+      "name": "Gradient Descent Optimization & Learning Rate",
+      "track": "ai_ml",
+      "category": "optimization",
+      "description": "Understanding partial derivatives, direction of steepest descent, learning rate divergence, and parameter updates.",
+      "prerequisites": ["ml.numpy.linear_regression"],
+      "difficulty": 2
+    },
+    {
+      "id": "ml.evaluation.generalization",
+      "name": "Model Generalization vs Training Loss",
+      "track": "ai_ml",
+      "category": "evaluation",
+      "description": "Distinguishing training loss minimization from out-of-sample generalization performance.",
+      "prerequisites": ["ml.loss.mse_computation"],
+      "difficulty": 2
+    }
+  ]
+}

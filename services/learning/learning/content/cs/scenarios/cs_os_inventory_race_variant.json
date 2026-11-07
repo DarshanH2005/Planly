@@ -1,0 +1,21 @@
+{
+  "id": "cs_os_inventory_race_variant",
+  "micro_skill_id": "cs.os.scenario.inventory_decrement_transfer",
+  "title": "E-Commerce Flash Sale Inventory Decrement Race",
+  "category": "scenario_reasoning",
+  "prompt": "During a flash sale, `stock = 1`. Two users click Buy at the exact same millisecond. Trace the step-by-step interleaving of reads and writes that causes `stock` to become `-1` if no mutex is used.",
+  "evaluator_rubric": {
+    "required_concepts": [
+      "read_modify_write_interleaving",
+      "concurrent_read_of_stale_stock",
+      "sequential_decrements",
+      "negative_stock_result"
+    ],
+    "forbidden_misconceptions": [
+      "Python integers are atomic under thread race",
+      "decrement happens instantly without read step"
+    ],
+    "scoring_criteria": "Learner must trace: (1) Thread 1 reads stock=1; (2) Thread 2 reads stock=1 before Thread 1 writes; (3) Thread 1 computes 1-1=0 and writes stock=0; (4) Thread 2 computes 1-1=0 from stale read or decrements again leading to negative stock; resulting in oversold inventory.",
+    "ideal_response_summary": "1. Thread 1 reads stock=1.\n2. Thread 2 reads stock=1 before Thread 1 writes back.\n3. Thread 1 calculates 1 - 1 = 0 and writes stock = 0.\n4. Thread 2, having read stock = 1, proceeds to write stock = 0 or if acting on updated state, executes another decrement on stock=0 writing stock = -1.\nBoth requests succeed, resulting in oversold stock and an invalid negative inventory state."
+  }
+}

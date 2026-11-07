@@ -1,0 +1,96 @@
+{
+  "version": "1.0",
+  "track": "dsa",
+  "skills": [
+    {
+      "id": "dsa.arrays.iteration",
+      "name": "Array Iteration & Indexing",
+      "track": "dsa",
+      "category": "arrays",
+      "description": "Sequential array traversal, bounds handling, and element lookup.",
+      "prerequisites": [],
+      "difficulty": 1
+    },
+    {
+      "id": "dsa.hash_map.lookup",
+      "name": "Hash Map Complements",
+      "track": "dsa",
+      "category": "hashing",
+      "description": "O(1) expected dictionary lookup to match targets and complements.",
+      "prerequisites": ["dsa.arrays.iteration"],
+      "difficulty": 2
+    },
+    {
+      "id": "dsa.hash_set.membership",
+      "name": "Hash Set Membership",
+      "track": "dsa",
+      "category": "hashing",
+      "description": "Using a hash set to query presence and avoid duplicates.",
+      "prerequisites": ["dsa.arrays.iteration"],
+      "difficulty": 2
+    },
+    {
+      "id": "dsa.hash_set.consecutive_sequence",
+      "name": "Sequence Start Identification",
+      "track": "dsa",
+      "category": "hashing",
+      "description": "Checking for x - 1 to identify sequence starts and traversing consecutive integers in O(N).",
+      "prerequisites": ["dsa.hash_set.membership"],
+      "difficulty": 3
+    },
+    {
+      "id": "dsa.two_pointers.basics",
+      "name": "Two Pointers Opposing Movement",
+      "track": "dsa",
+      "category": "two_pointers",
+      "description": "Initializing left and right boundary pointers and converging inward.",
+      "prerequisites": ["dsa.arrays.iteration"],
+      "difficulty": 2
+    },
+    {
+      "id": "dsa.two_pointers.inward_convergence",
+      "name": "Sorted Inward Convergence Invariant",
+      "track": "dsa",
+      "category": "two_pointers",
+      "description": "Exploiting sorted array property to monotonically increase or decrease pair sum.",
+      "prerequisites": ["dsa.two_pointers.basics"],
+      "difficulty": 2
+    },
+    {
+      "id": "dsa.two_pointers.merge",
+      "name": "Sorted Two Pointers Merge",
+      "track": "dsa",
+      "category": "two_pointers",
+      "description": "Merging two sorted arrays using dual index pointers.",
+      "prerequisites": ["dsa.two_pointers.basics"],
+      "difficulty": 3
+    },
+    {
+      "id": "dsa.arrays.prefix_sums",
+      "name": "Prefix Sums with Hash Map",
+      "track": "dsa",
+      "category": "arrays",
+      "description": "Tracking cumulative running sum in hash table to find sub-arrays summing to K in O(N).",
+      "prerequisites": ["dsa.hash_map.lookup"],
+      "difficulty": 3
+    },
+    {
+      "id": "dsa.sorting.merge_sort",
+      "name": "Divide and Conquer Merge Sort",
+      "track": "dsa",
+      "category": "sorting",
+      "description": "Recursive array halving and linear merging in O(N log N).",
+      "prerequisites": ["dsa.two_pointers.merge"],
+      "difficulty": 4
+    },
+    {
+      "id": "dsa.advanced.inversion_counting",
+      "name": "Inversion Counting via Merge Sort",
+      "track": "dsa",
+      "category": "advanced",
+      "description": "Counting split inversions during the merge step of merge sort.",
+      "prerequisites": ["dsa.sorting.merge_sort"],
+      "difficulty": 4
+    }
+  ]
+}

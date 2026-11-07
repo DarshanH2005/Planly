@@ -1,0 +1,130 @@
+{
+  "catalog_id": "catalog_project_behavioral_v1",
+  "version": 1,
+  "description": "Project Defense and Behavioral Interview Scenarios, Rubrics, and Study Routing",
+  "official_interview_policy": {
+    "default_is_official": false,
+    "disclaimer": "Role-specific practice is not an official company interview unless supported by attributable current requirements with verified credentials.",
+    "attribution_required_fields": ["verified_job_req_id", "company_domain", "official_rubric_signature"]
+  },
+  "project_templates": [
+    {
+      "template_id": "tmpl_distributed_pipeline",
+      "title": "Event-Driven Distributed Pipeline",
+      "tagline": "High-throughput asynchronous ingestion stream with deduplication and idempotency.",
+      "tech_stack": ["Python", "FastAPI", "Apache Kafka", "Redis", "PostgreSQL", "Docker"],
+      "core_decisions": [
+        {
+          "decision_id": "dec_redis_dedup",
+          "component": "Deduplication Window",
+          "choice": "Redis sliding TTL window with SETNX idempotency keys",
+          "tradeoff": "Low latency sub-millisecond lookups vs potential memory pressure if TTL is oversized"
+        },
+        {
+          "decision_id": "dec_outbox_pattern",
+          "component": "Event Publishing",
+          "choice": "Transactional Outbox table in PostgreSQL polled via Debezium CDC",
+          "tradeoff": "Eliminates dual-write race conditions and partial commits at the expense of CDC connector complexity"
+        }
+      ],
+      "known_constraints": [
+        "Network partition between ingestion gateway and Kafka broker cluster",
+        "Poison-pill payloads causing repeated consumer worker crashes",
+        "Connection pool exhaustion on downstream PostgreSQL during burst traffic"
+      ],
+      "rubric_dimensions": [
+        "architecture_tradeoffs",
+        "debugging_depth",
+        "failure_recovery",
+        "concurrency_constraints",
+        "operational_telemetry"
+      ]
+    },
+    {
+      "template_id": "tmpl_adaptive_workbench",
+      "title": "Adaptive Learning & Evaluation Platform",
+      "tagline": "Private adaptive interview tutor with deterministic planning and RLS isolation.",
+      "tech_stack": ["TypeScript", "Next.js 16", "PostgreSQL", "Supabase", "Tailwind CSS", "Vitest"],
+      "core_decisions": [
+        {
+          "decision_id": "dec_rls_isolation",
+          "component": "Data Security",
+          "choice": "Composite primary keys (owner_id, id) with Supabase Row-Level Security",
+          "tradeoff": "Guaranteed multi-tenant isolation at the DB engine vs manual composite key propagation in queries"
+        },
+        {
+          "decision_id": "dec_deterministic_planner",
+          "component": "Capacity Planning",
+          "choice": "Linear 80% capacity planning guard with priority revision queue",
+          "tradeoff": "Prevents learner cognitive overload and churn vs slower sprint velocity"
+        }
+      ],
+      "known_constraints": [
+        "Zero leakage of private solutions and hidden test suites to candidate UI",
+        "Offline event synchronization during intermittent network connectivity"
+      ],
+      "rubric_dimensions": [
+        "architecture_tradeoffs",
+        "data_security_isolation",
+        "state_management",
+        "system_reliability"
+      ]
+    }
+  ],
+  "behavioral_scenarios": [
+    {
+      "scenario_id": "beh_incident_triage",
+      "title": "Major Production Incident & Critical Outage Triage",
+      "framework": "STAR",
+      "evaluation_criteria": [
+        "Clear Situation: environment, blast radius, latency/error spike specifics",
+        "Actionable Task: candidate's specific ownership and role vs passive bystander",
+        "Systematic Action: telemetry analysis, mitigation before deep diagnosis, rollback decision",
+        "Quantified Result: MTTR, customer impact prevention, permanent blameless postmortem fixes"
+      ],
+      "rubric_dimension": "behavioral_star_impact"
+    },
+    {
+      "scenario_id": "beh_technical_disagreement",
+      "title": "Architectural Disagreement & Cross-Functional Alignment",
+      "framework": "STAR",
+      "evaluation_criteria": [
+        "Situation: conflicting architectural proposals between engineers or teams",
+        "Task: candidate's responsibility in driving consensus and unblocking the roadmap",
+        "Action: objective benchmarking, prototype spikes, collaborative RFC review without dogmatism",
+        "Result: agreed architectural direction, delivered milestone, team relationship preservation"
+      ],
+      "rubric_dimension": "behavioral_collaboration_alignment"
+    }
+  ],
+  "gap_to_study_routing": [
+    {
+      "gap_key": "missing_deployment_telemetry",
+      "activity_id": "act_cs_distributed_telemetry",
+      "activity_title": "Production Telemetry, APM & Observability",
+      "track": "cs",
+      "rationale": "Learner lacked deployment metrics or could not quantify production scale vs local testing."
+    },
+    {
+      "gap_key": "concurrency_lock_contention",
+      "activity_id": "act_cs_concurrency_locks",
+      "activity_title": "Concurrency Control, Locks & Deadlock Prevention",
+      "track": "cs",
+      "rationale": "Learner could not explain database or cache locking semantics under concurrent write bursts."
+    },
+    {
+      "gap_key": "unverified_scale_claim",
+      "activity_id": "act_project_capacity_modeling",
+      "activity_title": "Back-of-the-Envelope Capacity & Scale Modeling",
+      "track": "engineering",
+      "rationale": "Learner asserted high throughput without bottleneck identification or memory/network sizing."
+    },
+    {
+      "gap_key": "vague_star_result",
+      "activity_id": "act_behavioral_star_structuring",
+      "activity_title": "STAR Framework: Quantifying Engineering Impact",
+      "track": "behavioral",
+      "rationale": "Learner provided vague behavioral results without measurable outcomes or blameless postmortem follow-up."
+    }
+  ]
+}

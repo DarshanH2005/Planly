@@ -1,0 +1,21 @@
+{
+  "id": "cs_os_concurrency_terminology",
+  "micro_skill_id": "cs.os.terminology.race_condition",
+  "title": "Core Concurrency Terminology: Race Condition, Critical Section, Mutex",
+  "category": "terminology",
+  "prompt": "Give me the difference between these three in one sentence each:\n1. Race condition\n2. Critical section\n3. Mutex",
+  "evaluator_rubric": {
+    "required_concepts": [
+      "race_condition_execution_order",
+      "critical_section_shared_resource_code",
+      "mutex_mutual_exclusion_primitive"
+    ],
+    "forbidden_misconceptions": [
+      "mutex causes race condition",
+      "critical section is an error or bug",
+      "race condition requires different processes only"
+    ],
+    "scoring_criteria": "Learner must define: (1) Race condition as bug where output depends on timing/interleaving of concurrent access to shared state; (2) Critical section as code segment accessing shared resources that requires exclusive access; (3) Mutex as mutual exclusion synchronization mechanism enforcing single-thread execution in critical section.",
+    "ideal_response_summary": "A race condition occurs when concurrent threads access shared data and the final outcome depends on the non-deterministic timing of their execution. A critical section is a sequence of code accessing shared resources that must not be executed concurrently by more than one thread. A mutex is a mutual exclusion locking primitive used to ensure that only one thread can execute a critical section at any given time."
+  }
+}

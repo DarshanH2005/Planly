@@ -1,0 +1,22 @@
+{
+  "id": "cs_os_thread_stack_isolation",
+  "micro_skill_id": "cs.os.explanation.thread_stack_isolation",
+  "title": "Thread Stack Isolation & Independent Execution Paths",
+  "category": "explanation",
+  "prompt": "Imagine Thread A currently executes function1() and Thread B executes function2(). Why can't they use the same stack?",
+  "evaluator_rubric": {
+    "required_concepts": [
+      "call_stack_activation_records",
+      "independent_call_paths",
+      "return_addresses_corruption",
+      "local_variables_isolation"
+    ],
+    "forbidden_misconceptions": [
+      "threads share stack frames",
+      "OS merges stacks automatically",
+      "threads only need registers without stacks"
+    ],
+    "scoring_criteria": "Learner must explain that the stack stores activation records (local variables, frame pointers, and return addresses). If threads shared a single stack, pushing and popping frames from independent functions would corrupt return addresses and overwrite each other's local variables.",
+    "ideal_response_summary": "Each thread executes its own sequence of function calls independently. The stack stores activation frames containing local variables and return addresses. If two threads shared a stack, Thread B pushing a frame for function2() would overwrite or interleave with Thread A's function1() frame, corrupting stack pointers, local variable offsets, and return addresses upon function exit."
+  }
+}

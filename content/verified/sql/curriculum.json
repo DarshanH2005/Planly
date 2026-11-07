@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "track": "sql",
+  "skills": [
+    {
+      "id": "sql.aggregation.groupby_having",
+      "name": "SQL Aggregations & HAVING Filtering",
+      "track": "sql",
+      "category": "querying",
+      "description": "Grouping data and applying post-aggregation filters via GROUP BY and HAVING clauses.",
+      "prerequisites": [],
+      "difficulty": 2
+    },
+    {
+      "id": "sql.joins.inner_left_join",
+      "name": "SQL Relational Joins",
+      "track": "sql",
+      "category": "querying",
+      "description": "Combining relational tables using INNER JOIN and LEFT JOIN with appropriate null handling.",
+      "prerequisites": [],
+      "difficulty": 2
+    },
+    {
+      "id": "sql.window.ranking_functions",
+      "name": "SQL Window Ranking Functions",
+      "track": "sql",
+      "category": "window_functions",
+      "description": "Computing partitioned rankings using ROW_NUMBER, RANK, and DENSE_RANK over ordered subsets.",
+      "prerequisites": ["sql.aggregation.groupby_having"],
+      "difficulty": 3
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+project_id = "planly"
+
+[api]
+enabled = true
+port = 54321
+# The browser only exposes the public API schema.  Planly's learner records
+# live in a separate schema and are accessed through authenticated APIs/RPCs.
+schemas = ["public", "planly"]
+extra_search_path = ["public", "planly", "extensions"]
+max_rows = 100
+
+[db]
+port = 54322
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://localhost:3000/**"]
+jwt_expiry = 3600
+enable_signup = false

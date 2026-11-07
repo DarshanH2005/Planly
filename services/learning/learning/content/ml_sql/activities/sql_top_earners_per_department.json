@@ -1,0 +1,31 @@
+{
+  "id": "sql_top_earners_per_department",
+  "micro_skill_id": "sql.window.ranking_functions",
+  "title": "Top Earners Per Department Using Window Functions",
+  "track": "sql",
+  "category": "window_functions",
+  "prompt": "Write a query using window functions to find the top 2 highest paid employees in each department. Return department_name, employee_name, and salary, ordered by department_name asc and salary desc.",
+  "fixture_ddl": "CREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    department_id INTEGER NOT NULL,\n    name TEXT NOT NULL,\n    salary REAL NOT NULL,\n    FOREIGN KEY (department_id) REFERENCES departments(id)\n);\n",
+  "fixture_data": {
+    "departments": [
+      {"id": 1, "name": "Engineering"},
+      {"id": 2, "name": "Design"}
+    ],
+    "employees": [
+      {"id": 1, "department_id": 1, "name": "Alice", "salary": 120000.0},
+      {"id": 2, "department_id": 1, "name": "Bob", "salary": 110000.0},
+      {"id": 3, "department_id": 1, "name": "Charlie", "salary": 95000.0},
+      {"id": 4, "department_id": 2, "name": "Diana", "salary": 105000.0},
+      {"id": 5, "department_id": 2, "name": "Evan", "salary": 100000.0},
+      {"id": 6, "department_id": 2, "name": "Fiona", "salary": 85000.0}
+    ]
+  },
+  "reference_query": "WITH ranked AS (\n    SELECT d.name AS department_name, e.name AS employee_name, e.salary,\n           DENSE_RANK() OVER (PARTITION BY e.department_id ORDER BY e.salary DESC) as rnk\n    FROM employees e\n    JOIN departments d ON e.department_id = d.id\n)\nSELECT department_name, employee_name, salary\nFROM ranked\nWHERE rnk <= 2\nORDER BY department_name ASC, salary DESC;",
+  "expected_columns": ["department_name", "employee_name", "salary"],
+  "expected_rows": [
+    ["Design", "Diana", 105000.0],
+    ["Design", "Evan", 100000.0],
+    ["Engineering", "Alice", 120000.0],
+    ["Engineering", "Bob", 110000.0]
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "act_cs_process_vs_thread",
+  "title": "Process Isolation vs Thread Shared Memory Scenario",
+  "track": "cs",
+  "micro_skill_id": "cs.os.scenario.multi_process_isolation_transfer",
+  "demands": {
+    "reasoning": 2,
+    "syntax": 1,
+    "implementation": 1,
+    "explanation": 3
+  },
+  "candidate": {
+    "statement": "An HTTP server handles concurrent requests. Analyze the difference when worker units are spawned as processes versus threads: if Worker A mutates a global in-memory cache pointer, does Worker B observe this mutation under multi-processing vs multi-threading?",
+    "constraints": [
+      "Operating System: POSIX / Linux virtual memory architecture",
+      "No IPC configured initially"
+    ],
+    "examples": [
+      {
+        "scenario": "Worker A updates cache['user_1'] = data",
+        "observation": "Visible to Worker B only in multi-threaded model"
+      }
+    ],
+    "starter_code": "# Explain memory visibility for multi-processing vs multi-threading:\ndef analyze_visibility(model: str) -> str:\n    pass\n",
+    "hints": [
+      "Consider virtual address spaces, page tables, and whether memory is isolated or shared."
+    ],
+    "short_diagnostics": [
+      "Why does multi-processing require explicit IPC (pipes/shared memory) to share state?"
+    ]
+  },
+  "evaluator": {
+    "reference_solution": "Under multi-processing, each process has its own isolated virtual address space and private page tables. Worker A mutating memory does not affect Worker B without explicit shared memory IPC. Under multi-threading, threads share the same virtual address space and process heap; Worker A mutation is immediately visible in Worker B address space.",
+    "rubric": "Candidate clearly articulates isolated virtual address spaces for processes vs shared heap/address space for threads.",
+    "test_cases": [
+      {
+        "input": "multi-processing",
+        "expected": "isolated address space"
+      },
+      {
+        "input": "multi-threading",
+        "expected": "shared address space"
+      }
+    ],
+    "known_pitfalls": [
+      "Confusing thread stack isolation with process heap sharing."
+    ],
+    "oracle_notes": "Crucial foundation before diagnosing race conditions."
+  },
+  "provenance": {
+    "source_problem_id": "cs_proc_thread_01",
+    "version": "1.0",
+    "content_hash": "e640266fa157e5c9a4a01331a3447908d54321adae079b05b3ead358f5ad4ba0",
+    "review_status": "verified_ready",
+    "author": "curator"
+  },
+  "planning_effort_minutes_range": [
+    15,
+    30
+  ],
+  "is_transfer_eligible": true
+}

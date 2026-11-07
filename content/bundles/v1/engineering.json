@@ -1,0 +1,89 @@
+{
+  "bundleId": "bundle-v1-engineering",
+  "version": 1,
+  "description": "Engineering Practical: Production Data Structures & Concurrency Invariants",
+  "prompts": [
+    {
+      "id": "PROMPT-ENG-01",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F10", "F06"],
+      "difficulty": "medium",
+      "statement": "Design and implement a data structure for a Least Recently Used (LRU) Cache with capacity and time-to-live (TTL) support. Implement the LRUCache class:\n- LRUCache(int capacity, int defaultTtlSeconds): Initialize the LRU cache with positive size capacity and default expiration.\n- int get(int key): Return the value of the key if the key exists and has not expired, otherwise return -1.\n- void put(int key, int value, int ttlSeconds = 0): Update or insert the key and value. When capacity is reached, invalidate the least recently used unexpired item before inserting. If all items are expired, evict expired items first.",
+      "constraints": [
+        "1 <= capacity <= 3,000",
+        "0 <= key <= 10,000",
+        "0 <= value <= 100,000",
+        "At most 200,000 calls will be made to get and put",
+        "get and put must each operate in O(1) average time complexity"
+      ],
+      "examples": [
+        {
+          "input": "lru = new LRUCache(2, 60); lru.put(1, 1); lru.put(2, 2); lru.get(1); lru.put(3, 3); lru.get(2);",
+          "expected": "[null, null, null, 1, null, -1]",
+          "explanation": "Key 2 was evicted because key 1 was recently accessed via get(1)."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-ttl-override",
+          "question": "Does put with explicit ttlSeconds = 0 use the defaultTtlSeconds specified at initialization?",
+          "answer": "Yes, passing 0 or omitting uses the constructor defaultTtlSeconds."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-concurrency-guards",
+          "trigger": "correct_doubly_linked_list",
+          "question": "How would you ensure thread-safety for concurrent reads and writes across multiple worker threads?",
+          "criterion": "Proposes Reader-Writer locks (shared read lock with upgrading, or partitioned lock striping to minimize contention)."
+        }
+      ],
+      "privateReference": {
+        "approach": "Combine a hash map with a doubly linked list. The hash map maps keys to list nodes for O(1) key access. The doubly linked list maintains access recency order. Each node tracks key, value, and expiration timestamp. On access, move node to the head. On eviction, pop node from the tail.",
+        "checks": [
+          "O(1) get and put operations",
+          "Correct eviction of least recently used item upon capacity limit",
+          "Correct eviction of expired item upon get",
+          "Updating existing key updates value, resets TTL, and moves node to MRU head"
+        ],
+        "expectedComplexity": "O(1) time per get/put, O(capacity) space"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "official",
+        "note": "Canonical Engineering Practical benchmark",
+        "confidence": "confirmed"
+      }
+    }
+  ],
+  "packs": [
+    {
+      "id": "PACK-ENG-01",
+      "version": 1,
+      "stage": "engineering",
+      "status": "validated",
+      "title": "Engineering Practical: LRU Cache with TTL Eviction",
+      "instructions": "Implement the complete class. Write modular, defensive code with explicit class contracts, clear invariant encapsulation, and O(1) operations.",
+      "durationMinutes": 60,
+      "debriefMinutes": 15,
+      "inputFormat": "function",
+      "resourcePolicy": {
+        "docs": true,
+        "ai": false,
+        "hints": false,
+        "notes": true
+      },
+      "promptIds": ["PROMPT-ENG-01"],
+      "rubricId": "rubric-engineering-v1",
+      "rubricVersion": 1,
+      "prerequisites": ["PACK-TECH-B-01"],
+      "source": {
+        "kind": "official",
+        "note": "Engineering Practical standard pack",
+        "confidence": "confirmed"
+      }
+    }
+  ]
+}

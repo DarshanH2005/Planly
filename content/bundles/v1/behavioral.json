@@ -1,0 +1,85 @@
+{
+  "bundleId": "bundle-v1-behavioral",
+  "version": 1,
+  "description": "Behavioral Evaluation: STAR Methodology & Engineering Conflict Resolution",
+  "prompts": [
+    {
+      "id": "PROMPT-BEHAVIORAL-01",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F01"],
+      "difficulty": "medium",
+      "statement": "Tell me about a time when you had a fundamental technical disagreement with a team member or mentor regarding the architecture or implementation approach for a critical deliverable. How did you handle the disagreement, what evidence or prototypes did you use to evaluate options, and what was the ultimate outcome?",
+      "constraints": [
+        "Structure response using the STAR framework (Situation, Task, Action, Result)",
+        "Focus on technical merits and data-driven evaluation rather than interpersonal tension",
+        "Articulate specific trade-offs and retrospective lessons learned"
+      ],
+      "examples": [
+        {
+          "input": "Disagreement on ORM versus raw SQL queries under tight production latencies",
+          "expected": "Built a side-by-side benchmark harness simulating 1,000 req/s, demonstrated 4x latency reduction and predictable query plans, aligned team on a hybrid approach."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-outcome-scope",
+          "question": "Can the outcome be one where my preferred approach was NOT chosen?",
+          "answer": "Yes. Demonstrating 'disagree and commit' with objective post-launch monitoring is viewed favorably."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-retrospective-regret",
+          "trigger": "clear_star_structure",
+          "question": "Looking back, what is one thing you would do differently in how you communicated the technical trade-offs?",
+          "criterion": "Demonstrates self-awareness and prioritizes empathy and early alignment over being proven right."
+        }
+      ],
+      "privateReference": {
+        "approach": "Evaluate candidate on 4 dimensions: (1) Constructive framing without blame, (2) Grounding in empirical data or reproducible prototypes, (3) Professional alignment and execution discipline, (4) Honest reflection on lessons learned.",
+        "checks": [
+          "Covers all 4 STAR components within 4 minutes",
+          "Shows ownership and bias for action",
+          "Avoids speaking negatively about colleagues"
+        ],
+        "expectedComplexity": "High signal on emotional intelligence and technical maturity"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "official",
+        "note": "Canonical Behavioral STAR benchmark",
+        "confidence": "confirmed"
+      }
+    }
+  ],
+  "packs": [
+    {
+      "id": "PACK-BEHAVIORAL-01",
+      "version": 1,
+      "stage": "behavioural",
+      "status": "validated",
+      "title": "Behavioral Evaluation: Technical Disagreement & STAR",
+      "instructions": "Simulated live behavioral interview. Deliver a concise, evidence-driven STAR narrative demonstrating leadership, technical conviction, and collaboration.",
+      "durationMinutes": 30,
+      "debriefMinutes": 10,
+      "inputFormat": "spoken_or_text",
+      "resourcePolicy": {
+        "docs": false,
+        "ai": false,
+        "hints": false,
+        "notes": true
+      },
+      "promptIds": ["PROMPT-BEHAVIORAL-01"],
+      "rubricId": "rubric-behavioral-v1",
+      "rubricVersion": 1,
+      "prerequisites": ["PACK-PROJECT-01"],
+      "source": {
+        "kind": "official",
+        "note": "Behavioral STAR standard pack",
+        "confidence": "confirmed"
+      }
+    }
+  ]
+}

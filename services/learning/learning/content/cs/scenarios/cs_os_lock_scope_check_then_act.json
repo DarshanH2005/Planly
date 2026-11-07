@@ -1,0 +1,23 @@
+{
+  "id": "cs_os_lock_scope_check_then_act",
+  "micro_skill_id": "cs.os.scenario.check_then_act_lock_scope",
+  "title": "Check-Then-Act Critical Section Lock Scoping",
+  "category": "scenario_reasoning",
+  "prompt": "Why do we need to put both `if balance >= 80:` and `balance -= 80` inside the lock? What could happen if only `balance -= 80` were locked?",
+  "context_code": "if balance >= 80:\n    with lock:\n        balance -= 80",
+  "evaluator_rubric": {
+    "required_concepts": [
+      "check_then_act_race",
+      "interleaved_check",
+      "overdraft_or_negative_balance",
+      "atomicity_of_check_and_update"
+    ],
+    "forbidden_misconceptions": [
+      "locking write is sufficient",
+      "check is thread safe by itself",
+      "GIL prevents check-then-act races"
+    ],
+    "scoring_criteria": "Learner must articulate that if only the decrement is locked, two threads can concurrently execute the balance check while balance=100. Both evaluate 100 >= 80 as true. Then both sequentially acquire the lock and deduct 80, causing an overdraft (balance becomes -60). Check and update must be atomic inside the lock.",
+    "ideal_response_summary": "If only the decrement is locked, both threads can evaluate `balance >= 80` simultaneously before either has updated the balance. Both threads see balance=100 and pass the check. Then Thread A acquires the lock and deducts 80 (leaving 20), releases the lock, and Thread B acquires the lock and deducts 80 (leaving -60). Both the condition check and the modification must be enclosed atomically inside the critical section to prevent this TOCTOU race."
+  }
+}

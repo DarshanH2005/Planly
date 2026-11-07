@@ -1,0 +1,100 @@
+{
+  "id": "act_dsa_two_sum_hash_map",
+  "title": "Two Sum: Complement Lookup",
+  "track": "dsa",
+  "micro_skill_id": "dsa.hash_map.lookup",
+  "demands": {
+    "reasoning": 2,
+    "syntax": 2,
+    "implementation": 2,
+    "explanation": 2
+  },
+  "candidate": {
+    "statement": "Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.",
+    "constraints": [
+      "2 <= nums.length <= 10^4",
+      "-10^9 <= nums[i] <= 10^9",
+      "-10^9 <= target <= 10^9",
+      "Only one valid answer exists"
+    ],
+    "examples": [
+      {
+        "input": "nums = [2, 7, 11, 15], target = 9",
+        "output": "[0, 1]",
+        "explanation": "Because nums[0] + nums[1] == 9, we return [0, 1]."
+      }
+    ],
+    "starter_code": "def two_sum(nums: list[int], target: int) -> list[int]:\n    # Hash map complement lookup in O(N)\n    pass\n",
+    "hints": [
+      "For each element x, what value would complete the sum to target?",
+      "Can you store previously seen values and their indices in a hash map?"
+    ],
+    "short_diagnostics": [
+      "Why must the check `target - num in seen` precede inserting `seen[num] = i`?"
+    ]
+  },
+  "evaluator": {
+    "reference_solution": "def two_sum(nums: list[int], target: int) -> list[int]:\n    seen = {}\n    for i, num in enumerate(nums):\n        diff = target - num\n        if diff in seen:\n            return [seen[diff], i]\n        seen[num] = i\n    return []\n",
+    "rubric": "Learner checks for complement before inserting current value to prevent matching an element with itself.",
+    "test_cases": [
+      {
+        "input": {
+          "nums": [
+            2,
+            7,
+            11,
+            15
+          ],
+          "target": 9
+        },
+        "expected": [
+          0,
+          1
+        ]
+      },
+      {
+        "input": {
+          "nums": [
+            3,
+            2,
+            4
+          ],
+          "target": 6
+        },
+        "expected": [
+          1,
+          2
+        ]
+      },
+      {
+        "input": {
+          "nums": [
+            3,
+            3
+          ],
+          "target": 6
+        },
+        "expected": [
+          0,
+          1
+        ]
+      }
+    ],
+    "known_pitfalls": [
+      "Inserting into dictionary before checking, causing self-pairing when target == 2 * num."
+    ],
+    "oracle_notes": "Single-pass dictionary lookup operates in O(N) time and O(N) space."
+  },
+  "provenance": {
+    "source_problem_id": "ARR2-03",
+    "version": "1.0",
+    "content_hash": "85c4c11ec1eeb2eab37355222d3fc91f2bc5f7d056ba8b117e276ce28d9575ba",
+    "review_status": "verified_ready",
+    "author": "curator"
+  },
+  "planning_effort_minutes_range": [
+    15,
+    25
+  ],
+  "is_transfer_eligible": true
+}

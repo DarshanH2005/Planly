@@ -1,0 +1,2203 @@
+[
+  {
+    "id": "ARR1-01",
+    "title": "Merge Sorting",
+    "tier": "A",
+    "sourceGroupNumber": 1,
+    "sourceGroupName": "Sorting & Arrays I",
+    "patternNote": "F02 merge/divide and conquer; commonly “Merge Sort”",
+    "familyIds": [
+      "F02"
+    ]
+  },
+  {
+    "id": "ARR1-02",
+    "title": "Quick Sorting",
+    "tier": "A",
+    "sourceGroupNumber": 1,
+    "sourceGroupName": "Sorting & Arrays I",
+    "patternNote": "F02 partition sorting; commonly “Quick Sort”",
+    "familyIds": [
+      "F02"
+    ]
+  },
+  {
+    "id": "ARR1-03",
+    "title": "Longest Consecutive Sequence in an Array",
+    "tier": "A",
+    "sourceGroupNumber": 1,
+    "sourceGroupName": "Sorting & Arrays I",
+    "patternNote": "F01 set and sequence starts",
+    "familyIds": [
+      "F01"
+    ]
+  },
+  {
+    "id": "ARR1-04",
+    "title": "Print the matrix in spiral manner",
+    "tier": "A",
+    "sourceGroupNumber": 1,
+    "sourceGroupName": "Sorting & Arrays I",
+    "patternNote": "F02 matrix boundaries",
+    "familyIds": [
+      "F02"
+    ]
+  },
+  {
+    "id": "ARR1-05",
+    "title": "Kadane's Algorithm",
+    "tier": "A",
+    "sourceGroupNumber": 1,
+    "sourceGroupName": "Sorting & Arrays I",
+    "patternNote": "F01 running optimum",
+    "familyIds": [
+      "F01"
+    ]
+  },
+  {
+    "id": "ARR2-01",
+    "title": "Pascal's Triangle III",
+    "tier": "B",
+    "sourceGroupNumber": 2,
+    "sourceGroupName": "Arrays II",
+    "patternNote": "F01/F16; **verify exact requested output/variant**",
+    "familyIds": [
+      "F01",
+      "F16"
+    ]
+  },
+  {
+    "id": "ARR2-02",
+    "title": "Rotate matrix by 90 degrees",
+    "tier": "A",
+    "sourceGroupNumber": 2,
+    "sourceGroupName": "Arrays II",
+    "patternNote": "F02 matrix mapping; verify square/in-place requirement",
+    "familyIds": [
+      "F02"
+    ]
+  },
+  {
+    "id": "ARR2-03",
+    "title": "Two Sum",
+    "tier": "A",
+    "sourceGroupNumber": 2,
+    "sourceGroupName": "Arrays II",
+    "patternNote": "F01 complement lookup",
+    "familyIds": [
+      "F01"
+    ]
+  },
+  {
+    "id": "ARR2-04",
+    "title": "3 Sum",
+    "tier": "A",
+    "sourceGroupNumber": 2,
+    "sourceGroupName": "Arrays II",
+    "patternNote": "F02 sorted two pointers",
+    "familyIds": [
+      "F02"
+    ]
+  },
+  {
+    "id": "ARR2-05",
+    "title": "4 Sum",
+    "tier": "B",
+    "sourceGroupNumber": 2,
+    "sourceGroupName": "Arrays II",
+    "patternNote": "F02 fixed prefixes and two pointers",
+    "familyIds": [
+      "F02"
+    ]
+  },
+  {
+    "id": "ARR3-01",
+    "title": "Majority Element-I",
+    "tier": "A",
+    "sourceGroupNumber": 3,
+    "sourceGroupName": "Array III",
+    "patternNote": "F01 counting/voting; verify guarantee",
+    "familyIds": [
+      "F01"
+    ]
+  },
+  {
+    "id": "ARR3-02",
+    "title": "Majority Element-II",
+    "tier": "B",
+    "sourceGroupNumber": 3,
+    "sourceGroupName": "Array III",
+    "patternNote": "F01 candidate elimination",
+    "familyIds": [
+      "F01"
+    ]
+  },
+  {
+    "id": "ARR3-03",
+    "title": "Find the repeating and missing number",
+    "tier": "B",
+    "sourceGroupNumber": 3,
+    "sourceGroupName": "Array III",
+    "patternNote": "F01/F07 counting, algebra or XOR",
+    "familyIds": [
+      "F01",
+      "F07"
+    ]
+  },
+  {
+    "id": "ARR3-04",
+    "title": "Count Inversions",
+    "tier": "A",
+    "sourceGroupNumber": 3,
+    "sourceGroupName": "Array III",
+    "patternNote": "F02 merge counting",
+    "familyIds": [
+      "F02"
+    ]
+  },
+  {
+    "id": "ARR3-05",
+    "title": "Reverse Pairs",
+    "tier": "C",
+    "sourceGroupNumber": 3,
+    "sourceGroupName": "Array III",
+    "patternNote": "F02 merge counting with scaled comparison",
+    "familyIds": [
+      "F02"
+    ]
+  },
+  {
+    "id": "ARR4-01",
+    "title": "Maximum Product Subarray in an Array",
+    "tier": "A",
+    "sourceGroupNumber": 4,
+    "sourceGroupName": "Arrays IV & Hashing",
+    "patternNote": "F01/F16 minimum and maximum state",
+    "familyIds": [
+      "F01",
+      "F16"
+    ]
+  },
+  {
+    "id": "ARR4-02",
+    "title": "Merge two sorted arrays without extra space",
+    "tier": "B",
+    "sourceGroupNumber": 4,
+    "sourceGroupName": "Arrays IV & Hashing",
+    "patternNote": "F02 in-place merging; verify storage contract",
+    "familyIds": [
+      "F02"
+    ]
+  },
+  {
+    "id": "ARR4-03",
+    "title": "Longest subarray with sum K",
+    "tier": "A",
+    "sourceGroupNumber": 4,
+    "sourceGroupName": "Arrays IV & Hashing",
+    "patternNote": "F01 prefix map; F09 only with suitable value constraints",
+    "familyIds": [
+      "F01",
+      "F09"
+    ]
+  },
+  {
+    "id": "ARR4-04",
+    "title": "Count subarrays with given sum",
+    "tier": "A",
+    "sourceGroupNumber": 4,
+    "sourceGroupName": "Arrays IV & Hashing",
+    "patternNote": "F01 prefix frequencies",
+    "familyIds": [
+      "F01"
+    ]
+  },
+  {
+    "id": "ARR4-05",
+    "title": "Count subarrays with given xor K",
+    "tier": "B",
+    "sourceGroupNumber": 4,
+    "sourceGroupName": "Arrays IV & Hashing",
+    "patternNote": "F01/F07 prefix XOR",
+    "familyIds": [
+      "F01",
+      "F07"
+    ]
+  },
+  {
+    "id": "BS1-01",
+    "title": "Lower Bound",
+    "tier": "A",
+    "sourceGroupNumber": 5,
+    "sourceGroupName": "Binary Search I",
+    "patternNote": "F03 first qualifying index",
+    "familyIds": [
+      "F03"
+    ]
+  },
+  {
+    "id": "BS1-02",
+    "title": "Upper Bound",
+    "tier": "A",
+    "sourceGroupNumber": 5,
+    "sourceGroupName": "Binary Search I",
+    "patternNote": "F03 first strictly greater index",
+    "familyIds": [
+      "F03"
+    ]
+  },
+  {
+    "id": "BS1-03",
+    "title": "Search in rotated sorted array-II",
+    "tier": "B",
+    "sourceGroupNumber": 5,
+    "sourceGroupName": "Binary Search I",
+    "patternNote": "F03 rotated search with duplicates",
+    "familyIds": [
+      "F03"
+    ]
+  },
+  {
+    "id": "BS1-04",
+    "title": "Find minimum in Rotated Sorted Array",
+    "tier": "A",
+    "sourceGroupNumber": 5,
+    "sourceGroupName": "Binary Search I",
+    "patternNote": "F03 partition; verify duplicates policy",
+    "familyIds": [
+      "F03"
+    ]
+  },
+  {
+    "id": "BS1-05",
+    "title": "Find the smallest divisor",
+    "tier": "B",
+    "sourceGroupNumber": 5,
+    "sourceGroupName": "Binary Search I",
+    "patternNote": "F04 monotone feasibility",
+    "familyIds": [
+      "F04"
+    ]
+  },
+  {
+    "id": "BS2-01",
+    "title": "Koko eating bananas",
+    "tier": "A",
+    "sourceGroupNumber": 6,
+    "sourceGroupName": "Binary Search II",
+    "patternNote": "F04 rate feasibility",
+    "familyIds": [
+      "F04"
+    ]
+  },
+  {
+    "id": "BS2-02",
+    "title": "Minimum days to make M bouquets",
+    "tier": "B",
+    "sourceGroupNumber": 6,
+    "sourceGroupName": "Binary Search II",
+    "patternNote": "F04 threshold feasibility",
+    "familyIds": [
+      "F04"
+    ]
+  },
+  {
+    "id": "BS2-03",
+    "title": "Aggressive Cows",
+    "tier": "B",
+    "sourceGroupNumber": 6,
+    "sourceGroupName": "Binary Search II",
+    "patternNote": "F04 maximize minimum distance",
+    "familyIds": [
+      "F04"
+    ]
+  },
+  {
+    "id": "BS2-04",
+    "title": "Book Allocation Problem",
+    "tier": "A",
+    "sourceGroupNumber": 6,
+    "sourceGroupName": "Binary Search II",
+    "patternNote": "F04 minimize maximum load",
+    "familyIds": [
+      "F04"
+    ]
+  },
+  {
+    "id": "BS2-05",
+    "title": "Median of 2 sorted arrays",
+    "tier": "C",
+    "sourceGroupNumber": 6,
+    "sourceGroupName": "Binary Search II",
+    "patternNote": "F03 partition across two arrays",
+    "familyIds": [
+      "F03"
+    ]
+  },
+  {
+    "id": "BS3-01",
+    "title": "Find row with maximum 1's",
+    "tier": "B",
+    "sourceGroupNumber": 7,
+    "sourceGroupName": "Binary Search III",
+    "patternNote": "F03 row ordering; verify rows sorted",
+    "familyIds": [
+      "F03"
+    ]
+  },
+  {
+    "id": "BS3-02",
+    "title": "Search in a 2D matrix",
+    "tier": "A",
+    "sourceGroupNumber": 7,
+    "sourceGroupName": "Binary Search III",
+    "patternNote": "F03 flattened order; verify ordering contract",
+    "familyIds": [
+      "F03"
+    ]
+  },
+  {
+    "id": "BS3-03",
+    "title": "Search in 2D matrix - II",
+    "tier": "B",
+    "sourceGroupNumber": 7,
+    "sourceGroupName": "Binary Search III",
+    "patternNote": "F03/F02 staircase elimination under row/column ordering",
+    "familyIds": [
+      "F03",
+      "F02"
+    ]
+  },
+  {
+    "id": "BS3-04",
+    "title": "Find peak element",
+    "tier": "B",
+    "sourceGroupNumber": 7,
+    "sourceGroupName": "Binary Search III",
+    "patternNote": "F03 slope-based elimination",
+    "familyIds": [
+      "F03"
+    ]
+  },
+  {
+    "id": "BS3-05",
+    "title": "Matrix Median",
+    "tier": "C",
+    "sourceGroupNumber": 7,
+    "sourceGroupName": "Binary Search III",
+    "patternNote": "F04 answer search and per-row counts",
+    "familyIds": [
+      "F04"
+    ]
+  },
+  {
+    "id": "REC1-01",
+    "title": "Power Set",
+    "tier": "A",
+    "sourceGroupNumber": 8,
+    "sourceGroupName": "Recursion I",
+    "patternNote": "F05 include/exclude",
+    "familyIds": [
+      "F05"
+    ]
+  },
+  {
+    "id": "REC1-02",
+    "title": "Check if there exists a subsequence with sum K",
+    "tier": "A",
+    "sourceGroupNumber": 8,
+    "sourceGroupName": "Recursion I",
+    "patternNote": "F05 decision recursion",
+    "familyIds": [
+      "F05"
+    ]
+  },
+  {
+    "id": "REC1-03",
+    "title": "Combination Sum",
+    "tier": "A",
+    "sourceGroupNumber": 8,
+    "sourceGroupName": "Recursion I",
+    "patternNote": "F05 repeated choices; verify value constraints",
+    "familyIds": [
+      "F05"
+    ]
+  },
+  {
+    "id": "REC1-04",
+    "title": "Combination Sum II",
+    "tier": "B",
+    "sourceGroupNumber": 8,
+    "sourceGroupName": "Recursion I",
+    "patternNote": "F05 single use and duplicate skipping",
+    "familyIds": [
+      "F05"
+    ]
+  },
+  {
+    "id": "REC1-05",
+    "title": "Combination Sum III",
+    "tier": "B",
+    "sourceGroupNumber": 8,
+    "sourceGroupName": "Recursion I",
+    "patternNote": "F05 bounded choices and cardinality",
+    "familyIds": [
+      "F05"
+    ]
+  },
+  {
+    "id": "REC2-01",
+    "title": "Palindrome partitioning",
+    "tier": "B",
+    "sourceGroupNumber": 9,
+    "sourceGroupName": "Recursion II",
+    "patternNote": "F05 partition backtracking",
+    "familyIds": [
+      "F05"
+    ]
+  },
+  {
+    "id": "REC2-02",
+    "title": "N Queen",
+    "tier": "B",
+    "sourceGroupNumber": 9,
+    "sourceGroupName": "Recursion II",
+    "patternNote": "F05 constraint backtracking",
+    "familyIds": [
+      "F05"
+    ]
+  },
+  {
+    "id": "REC2-03",
+    "title": "Rat in a Maze",
+    "tier": "B",
+    "sourceGroupNumber": 9,
+    "sourceGroupName": "Recursion II",
+    "patternNote": "F05/F14 path backtracking",
+    "familyIds": [
+      "F05",
+      "F14"
+    ]
+  },
+  {
+    "id": "REC2-04",
+    "title": "M Coloring Problem",
+    "tier": "C",
+    "sourceGroupNumber": 9,
+    "sourceGroupName": "Recursion II",
+    "patternNote": "F05/F14 constraint assignment",
+    "familyIds": [
+      "F05",
+      "F14"
+    ]
+  },
+  {
+    "id": "REC2-05",
+    "title": "Sudoku Solver",
+    "tier": "C",
+    "sourceGroupNumber": 9,
+    "sourceGroupName": "Recursion II",
+    "patternNote": "F05 constraint search",
+    "familyIds": [
+      "F05"
+    ]
+  },
+  {
+    "id": "LL1-01",
+    "title": "Segregate odd and even nodes in Linked List",
+    "tier": "B",
+    "sourceGroupNumber": 10,
+    "sourceGroupName": "Linked List I",
+    "patternNote": "F06 relinking; verify positions versus values",
+    "familyIds": [
+      "F06"
+    ]
+  },
+  {
+    "id": "LL1-02",
+    "title": "Sort a Linked List of 0's 1's and 2's",
+    "tier": "B",
+    "sourceGroupNumber": 10,
+    "sourceGroupName": "Linked List I",
+    "patternNote": "F06 counting or relinking",
+    "familyIds": [
+      "F06"
+    ]
+  },
+  {
+    "id": "LL1-03",
+    "title": "Find the intersection point of Y LL",
+    "tier": "A",
+    "sourceGroupNumber": 10,
+    "sourceGroupName": "Linked List I",
+    "patternNote": "F06 pointer alignment/node identity",
+    "familyIds": [
+      "F06"
+    ]
+  },
+  {
+    "id": "LL1-04",
+    "title": "Reverse a LL",
+    "tier": "A",
+    "sourceGroupNumber": 10,
+    "sourceGroupName": "Linked List I",
+    "patternNote": "F06 pointer reversal",
+    "familyIds": [
+      "F06"
+    ]
+  },
+  {
+    "id": "LL1-05",
+    "title": "Check if LL is palindrome or not",
+    "tier": "A",
+    "sourceGroupNumber": 10,
+    "sourceGroupName": "Linked List I",
+    "patternNote": "F06 midpoint and reversal",
+    "familyIds": [
+      "F06"
+    ]
+  },
+  {
+    "id": "LL2-01",
+    "title": "Find the starting point in LL",
+    "tier": "A",
+    "sourceGroupNumber": 11,
+    "sourceGroupName": "Linked List II",
+    "patternNote": "F06 **assumed loop-entry variant; verify statement**",
+    "familyIds": [
+      "F06"
+    ]
+  },
+  {
+    "id": "LL2-02",
+    "title": "Length of loop in LL",
+    "tier": "B",
+    "sourceGroupNumber": 11,
+    "sourceGroupName": "Linked List II",
+    "patternNote": "F06 cycle traversal",
+    "familyIds": [
+      "F06"
+    ]
+  },
+  {
+    "id": "LL2-03",
+    "title": "Reverse LL in group of given size K",
+    "tier": "C",
+    "sourceGroupNumber": 11,
+    "sourceGroupName": "Linked List II",
+    "patternNote": "F06 block reversal",
+    "familyIds": [
+      "F06"
+    ]
+  },
+  {
+    "id": "LL2-04",
+    "title": "Flattening of LL",
+    "tier": "C",
+    "sourceGroupNumber": 11,
+    "sourceGroupName": "Linked List II",
+    "patternNote": "F06 **verify child/bottom structure and sortedness**",
+    "familyIds": [
+      "F06"
+    ]
+  },
+  {
+    "id": "LL2-05",
+    "title": "Sort LL",
+    "tier": "A",
+    "sourceGroupNumber": 11,
+    "sourceGroupName": "Linked List II",
+    "patternNote": "F06/F02 merge sort",
+    "familyIds": [
+      "F06",
+      "F02"
+    ]
+  },
+  {
+    "id": "LL3-01",
+    "title": "Clone a LL with random and next pointer",
+    "tier": "A",
+    "sourceGroupNumber": 12,
+    "sourceGroupName": "Linked List III & Bit Manipulation",
+    "patternNote": "F06 identity mapping/interleaving",
+    "familyIds": [
+      "F06"
+    ]
+  },
+  {
+    "id": "LL3-02",
+    "title": "Delete the middle node in LL",
+    "tier": "A",
+    "sourceGroupNumber": 12,
+    "sourceGroupName": "Linked List III & Bit Manipulation",
+    "patternNote": "F06 slow/fast pointers",
+    "familyIds": [
+      "F06"
+    ]
+  },
+  {
+    "id": "LL3-03",
+    "title": "Single Number - II",
+    "tier": "B",
+    "sourceGroupNumber": 12,
+    "sourceGroupName": "Linked List III & Bit Manipulation",
+    "patternNote": "F07 bit counts/state",
+    "familyIds": [
+      "F07"
+    ]
+  },
+  {
+    "id": "LL3-04",
+    "title": "Single Number - III",
+    "tier": "B",
+    "sourceGroupNumber": 12,
+    "sourceGroupName": "Linked List III & Bit Manipulation",
+    "patternNote": "F07 XOR partition",
+    "familyIds": [
+      "F07"
+    ]
+  },
+  {
+    "id": "LL3-05",
+    "title": "XOR of numbers in a given range",
+    "tier": "B",
+    "sourceGroupNumber": 12,
+    "sourceGroupName": "Linked List III & Bit Manipulation",
+    "patternNote": "F07 prefix XOR periodicity",
+    "familyIds": [
+      "F07"
+    ]
+  },
+  {
+    "id": "GR-01",
+    "title": "N meetings in one room",
+    "tier": "A",
+    "sourceGroupNumber": 13,
+    "sourceGroupName": "Greedy Algorithms",
+    "patternNote": "F08 earliest finishing interval",
+    "familyIds": [
+      "F08"
+    ]
+  },
+  {
+    "id": "GR-02",
+    "title": "Non-overlapping Intervals",
+    "tier": "A",
+    "sourceGroupNumber": 13,
+    "sourceGroupName": "Greedy Algorithms",
+    "patternNote": "F08 interval selection/removal",
+    "familyIds": [
+      "F08"
+    ]
+  },
+  {
+    "id": "GR-03",
+    "title": "Minimum number of platforms required for a railway",
+    "tier": "B",
+    "sourceGroupNumber": 13,
+    "sourceGroupName": "Greedy Algorithms",
+    "patternNote": "F08 event ordering/resources",
+    "familyIds": [
+      "F08"
+    ]
+  },
+  {
+    "id": "GR-04",
+    "title": "Valid Paranthesis Checker",
+    "tier": "B",
+    "sourceGroupNumber": 13,
+    "sourceGroupName": "Greedy Algorithms",
+    "patternNote": "**Verify whether ordinary brackets or wildcard validity; F10 or F08**",
+    "familyIds": [
+      "F10",
+      "F08"
+    ]
+  },
+  {
+    "id": "GR-05",
+    "title": "Candy",
+    "tier": "B",
+    "sourceGroupNumber": 13,
+    "sourceGroupName": "Greedy Algorithms",
+    "patternNote": "F08 two-direction constraints",
+    "familyIds": [
+      "F08"
+    ]
+  },
+  {
+    "id": "SW1-01",
+    "title": "Longest Substring Without Repeating Characters",
+    "tier": "A",
+    "sourceGroupNumber": 14,
+    "sourceGroupName": "Sliding Window I",
+    "patternNote": "F09 uniqueness window",
+    "familyIds": [
+      "F09"
+    ]
+  },
+  {
+    "id": "SW1-02",
+    "title": "Max Consecutive Ones III",
+    "tier": "A",
+    "sourceGroupNumber": 14,
+    "sourceGroupName": "Sliding Window I",
+    "patternNote": "F09 at-most replacement budget",
+    "familyIds": [
+      "F09"
+    ]
+  },
+  {
+    "id": "SW1-03",
+    "title": "Longest Substring With At Most K Distinct Characters",
+    "tier": "B",
+    "sourceGroupNumber": 14,
+    "sourceGroupName": "Sliding Window I",
+    "patternNote": "F09 distinct-count window",
+    "familyIds": [
+      "F09"
+    ]
+  },
+  {
+    "id": "SW1-04",
+    "title": "Longest Repeating Character Replacement",
+    "tier": "A",
+    "sourceGroupNumber": 14,
+    "sourceGroupName": "Sliding Window I",
+    "patternNote": "F09 frequency and replacement budget",
+    "familyIds": [
+      "F09"
+    ]
+  },
+  {
+    "id": "SW1-05",
+    "title": "Fruit Into Baskets",
+    "tier": "A",
+    "sourceGroupNumber": 14,
+    "sourceGroupName": "Sliding Window I",
+    "patternNote": "F09 at-most two distinct",
+    "familyIds": [
+      "F09"
+    ]
+  },
+  {
+    "id": "SW2-01",
+    "title": "Maximum Points You Can Obtain from Cards",
+    "tier": "A",
+    "sourceGroupNumber": 15,
+    "sourceGroupName": "Sliding Window II",
+    "patternNote": "F09 fixed window/complement",
+    "familyIds": [
+      "F09"
+    ]
+  },
+  {
+    "id": "SW2-02",
+    "title": "Minimum Window Substring",
+    "tier": "A",
+    "sourceGroupNumber": 15,
+    "sourceGroupName": "Sliding Window II",
+    "patternNote": "F09 coverage counts",
+    "familyIds": [
+      "F09"
+    ]
+  },
+  {
+    "id": "SW2-03",
+    "title": "Number of Substrings Containing All Three Characters",
+    "tier": "B",
+    "sourceGroupNumber": 15,
+    "sourceGroupName": "Sliding Window II",
+    "patternNote": "F09 coverage counting",
+    "familyIds": [
+      "F09"
+    ]
+  },
+  {
+    "id": "SW2-04",
+    "title": "Binary Subarrays With Sum",
+    "tier": "A",
+    "sourceGroupNumber": 15,
+    "sourceGroupName": "Sliding Window II",
+    "patternNote": "F09 exact from at-most; F01 alternative",
+    "familyIds": [
+      "F09",
+      "F01"
+    ]
+  },
+  {
+    "id": "SW2-05",
+    "title": "Count number of Nice subarrays",
+    "tier": "B",
+    "sourceGroupNumber": 15,
+    "sourceGroupName": "Sliding Window II",
+    "patternNote": "F09 transformed parity counts",
+    "familyIds": [
+      "F09"
+    ]
+  },
+  {
+    "id": "SQ1-01",
+    "title": "Next Greater Element - 2",
+    "tier": "A",
+    "sourceGroupNumber": 16,
+    "sourceGroupName": "Stack and Queue I",
+    "patternNote": "F10 circular monotonic stack",
+    "familyIds": [
+      "F10"
+    ]
+  },
+  {
+    "id": "SQ1-02",
+    "title": "Asteroid Collision",
+    "tier": "A",
+    "sourceGroupNumber": 16,
+    "sourceGroupName": "Stack and Queue I",
+    "patternNote": "F10 stack simulation",
+    "familyIds": [
+      "F10"
+    ]
+  },
+  {
+    "id": "SQ1-03",
+    "title": "Sum of Subarray Minimums",
+    "tier": "C",
+    "sourceGroupNumber": 16,
+    "sourceGroupName": "Stack and Queue I",
+    "patternNote": "F10 contribution counting and ties",
+    "familyIds": [
+      "F10"
+    ]
+  },
+  {
+    "id": "SQ1-04",
+    "title": "Sum of Subarray Ranges",
+    "tier": "C",
+    "sourceGroupNumber": 16,
+    "sourceGroupName": "Stack and Queue I",
+    "patternNote": "F10 min/max contribution counting",
+    "familyIds": [
+      "F10"
+    ]
+  },
+  {
+    "id": "SQ1-05",
+    "title": "Remove K Digits",
+    "tier": "B",
+    "sourceGroupNumber": 16,
+    "sourceGroupName": "Stack and Queue I",
+    "patternNote": "F10/F08 monotonic greedy stack",
+    "familyIds": [
+      "F10",
+      "F08"
+    ]
+  },
+  {
+    "id": "SQ2-01",
+    "title": "Implement Min Stack",
+    "tier": "A",
+    "sourceGroupNumber": 17,
+    "sourceGroupName": "Stack and Queue II",
+    "patternNote": "F10 augmented stack",
+    "familyIds": [
+      "F10"
+    ]
+  },
+  {
+    "id": "SQ2-02",
+    "title": "Sliding Window Maximum",
+    "tier": "A",
+    "sourceGroupNumber": 17,
+    "sourceGroupName": "Stack and Queue II",
+    "patternNote": "F10 monotonic deque",
+    "familyIds": [
+      "F10"
+    ]
+  },
+  {
+    "id": "SQ2-03",
+    "title": "Trapping Rainwater",
+    "tier": "A",
+    "sourceGroupNumber": 17,
+    "sourceGroupName": "Stack and Queue II",
+    "patternNote": "F02/F10 boundary maxima",
+    "familyIds": [
+      "F02",
+      "F10"
+    ]
+  },
+  {
+    "id": "SQ2-04",
+    "title": "Largest rectangle in a histogram",
+    "tier": "C",
+    "sourceGroupNumber": 17,
+    "sourceGroupName": "Stack and Queue II",
+    "patternNote": "F10 nearest-smaller boundaries",
+    "familyIds": [
+      "F10"
+    ]
+  },
+  {
+    "id": "SQ2-05",
+    "title": "LRU Cache",
+    "tier": "A",
+    "sourceGroupNumber": 17,
+    "sourceGroupName": "Stack and Queue II",
+    "patternNote": "F10/F06 map and doubly linked order",
+    "familyIds": [
+      "F10",
+      "F06"
+    ]
+  },
+  {
+    "id": "HP-01",
+    "title": "Heap Sort",
+    "tier": "B",
+    "sourceGroupNumber": 18,
+    "sourceGroupName": "Heaps",
+    "patternNote": "F11 heap construction/extraction",
+    "familyIds": [
+      "F11"
+    ]
+  },
+  {
+    "id": "HP-02",
+    "title": "K-th Largest element in an array",
+    "tier": "A",
+    "sourceGroupNumber": 18,
+    "sourceGroupName": "Heaps",
+    "patternNote": "F11 bounded heap; F02 quickselect alternative",
+    "familyIds": [
+      "F11",
+      "F02"
+    ]
+  },
+  {
+    "id": "HP-03",
+    "title": "Kth largest element in a stream of running integers",
+    "tier": "A",
+    "sourceGroupNumber": 18,
+    "sourceGroupName": "Heaps",
+    "patternNote": "F11 persistent bounded heap",
+    "familyIds": [
+      "F11"
+    ]
+  },
+  {
+    "id": "BT1-01",
+    "title": "Preorder Traversal",
+    "tier": "A",
+    "sourceGroupNumber": 19,
+    "sourceGroupName": "Binary Tree I",
+    "patternNote": "F12 root-first DFS",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT1-02",
+    "title": "Inorder Traversal",
+    "tier": "A",
+    "sourceGroupNumber": 19,
+    "sourceGroupName": "Binary Tree I",
+    "patternNote": "F12 left-root-right DFS",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT1-03",
+    "title": "Postorder Traversal",
+    "tier": "A",
+    "sourceGroupNumber": 19,
+    "sourceGroupName": "Binary Tree I",
+    "patternNote": "F12 children-first DFS",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT1-04",
+    "title": "Level Order Traversal",
+    "tier": "A",
+    "sourceGroupNumber": 19,
+    "sourceGroupName": "Binary Tree I",
+    "patternNote": "F12 BFS",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT1-05",
+    "title": "Maximum Depth in BT",
+    "tier": "A",
+    "sourceGroupNumber": 19,
+    "sourceGroupName": "Binary Tree I",
+    "patternNote": "F12 subtree aggregation",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT2-01",
+    "title": "Diameter of Binary Tree",
+    "tier": "A",
+    "sourceGroupNumber": 20,
+    "sourceGroupName": "Binary Tree II",
+    "patternNote": "F12 height and global path",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT2-02",
+    "title": "Maximum path sum",
+    "tier": "A",
+    "sourceGroupNumber": 20,
+    "sourceGroupName": "Binary Tree II",
+    "patternNote": "F12 subtree contribution",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT2-03",
+    "title": "Check for symmetrical BTs",
+    "tier": "A",
+    "sourceGroupNumber": 20,
+    "sourceGroupName": "Binary Tree II",
+    "patternNote": "F12 paired mirror recursion",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT2-04",
+    "title": "Boundary Traversal",
+    "tier": "B",
+    "sourceGroupNumber": 20,
+    "sourceGroupName": "Binary Tree II",
+    "patternNote": "F12 traversal decomposition",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT2-05",
+    "title": "Vertical Order Traversal",
+    "tier": "B",
+    "sourceGroupNumber": 20,
+    "sourceGroupName": "Binary Tree II",
+    "patternNote": "F12 coordinates and tie ordering",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT3-01",
+    "title": "Top View of BT",
+    "tier": "B",
+    "sourceGroupNumber": 21,
+    "sourceGroupName": "Binary Tree III",
+    "patternNote": "F12 horizontal coordinates",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT3-02",
+    "title": "Right/Left View of BT",
+    "tier": "B",
+    "sourceGroupNumber": 21,
+    "sourceGroupName": "Binary Tree III",
+    "patternNote": "F12 first/last at depth",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT3-03",
+    "title": "Print root to leaf path in BT",
+    "tier": "B",
+    "sourceGroupNumber": 21,
+    "sourceGroupName": "Binary Tree III",
+    "patternNote": "F12/F05 path state; verify one/all paths",
+    "familyIds": [
+      "F12",
+      "F05"
+    ]
+  },
+  {
+    "id": "BT3-04",
+    "title": "LCA in BT",
+    "tier": "A",
+    "sourceGroupNumber": 21,
+    "sourceGroupName": "Binary Tree III",
+    "patternNote": "F12 recursive ancestor aggregation",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT3-05",
+    "title": "Maximum Width of BT",
+    "tier": "B",
+    "sourceGroupNumber": 21,
+    "sourceGroupName": "Binary Tree III",
+    "patternNote": "F12 positional indexing",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT4-01",
+    "title": "Minimum time taken to burn the BT from a given Node",
+    "tier": "B",
+    "sourceGroupNumber": 22,
+    "sourceGroupName": "Binary Tree IV",
+    "patternNote": "F12/F14 parent links and BFS",
+    "familyIds": [
+      "F12",
+      "F14"
+    ]
+  },
+  {
+    "id": "BT4-02",
+    "title": "Count total nodes in a complete BT",
+    "tier": "B",
+    "sourceGroupNumber": 22,
+    "sourceGroupName": "Binary Tree IV",
+    "patternNote": "F12 complete-tree structure",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT4-03",
+    "title": "Construct a BT from Preorder and Inorder",
+    "tier": "A",
+    "sourceGroupNumber": 22,
+    "sourceGroupName": "Binary Tree IV",
+    "patternNote": "F12 traversal partitioning",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT4-04",
+    "title": "Construct a BT from Postorder and Inorder",
+    "tier": "B",
+    "sourceGroupNumber": 22,
+    "sourceGroupName": "Binary Tree IV",
+    "patternNote": "F12 traversal partitioning",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT4-05",
+    "title": "Serialize and De-serialize BT",
+    "tier": "A",
+    "sourceGroupNumber": 22,
+    "sourceGroupName": "Binary Tree IV",
+    "patternNote": "F12 structure encoding",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT5-01",
+    "title": "Morris Inorder Traversal",
+    "tier": "C",
+    "sourceGroupNumber": 23,
+    "sourceGroupName": "Binary Tree V and BST I",
+    "patternNote": "F12 temporary threaded pointers",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT5-02",
+    "title": "Morris Preorder Traversal",
+    "tier": "C",
+    "sourceGroupNumber": 23,
+    "sourceGroupName": "Binary Tree V and BST I",
+    "patternNote": "F12 temporary threaded pointers",
+    "familyIds": [
+      "F12"
+    ]
+  },
+  {
+    "id": "BT5-03",
+    "title": "LCA in BST",
+    "tier": "A",
+    "sourceGroupNumber": 23,
+    "sourceGroupName": "Binary Tree V and BST I",
+    "patternNote": "F13 ordered descent",
+    "familyIds": [
+      "F13"
+    ]
+  },
+  {
+    "id": "BT5-04",
+    "title": "Kth Smallest and Largest element in BST",
+    "tier": "A",
+    "sourceGroupNumber": 23,
+    "sourceGroupName": "Binary Tree V and BST I",
+    "patternNote": "F13 inorder order statistics",
+    "familyIds": [
+      "F13"
+    ]
+  },
+  {
+    "id": "BT5-05",
+    "title": "Construct a BST from a preorder traversal",
+    "tier": "B",
+    "sourceGroupNumber": 23,
+    "sourceGroupName": "Binary Tree V and BST I",
+    "patternNote": "F13 value bounds",
+    "familyIds": [
+      "F13"
+    ]
+  },
+  {
+    "id": "BST2-01",
+    "title": "BST iterator",
+    "tier": "A",
+    "sourceGroupNumber": 24,
+    "sourceGroupName": "Binary Search Tree II",
+    "patternNote": "F13 incremental inorder stack",
+    "familyIds": [
+      "F13"
+    ]
+  },
+  {
+    "id": "BST2-02",
+    "title": "Inorder successor and predecessor in BST",
+    "tier": "B",
+    "sourceGroupNumber": 24,
+    "sourceGroupName": "Binary Search Tree II",
+    "patternNote": "F13 ordered candidate search",
+    "familyIds": [
+      "F13"
+    ]
+  },
+  {
+    "id": "BST2-03",
+    "title": "Two sum in BST",
+    "tier": "B",
+    "sourceGroupNumber": 24,
+    "sourceGroupName": "Binary Search Tree II",
+    "patternNote": "F13/F01 traversal lookup or two iterators",
+    "familyIds": [
+      "F13",
+      "F01"
+    ]
+  },
+  {
+    "id": "BST2-04",
+    "title": "Correct BST with two nodes swapped",
+    "tier": "C",
+    "sourceGroupNumber": 24,
+    "sourceGroupName": "Binary Search Tree II",
+    "patternNote": "F13 inorder violations",
+    "familyIds": [
+      "F13"
+    ]
+  },
+  {
+    "id": "BST2-05",
+    "title": "Largest BST in Binary Tree",
+    "tier": "C",
+    "sourceGroupNumber": 24,
+    "sourceGroupName": "Binary Search Tree II",
+    "patternNote": "F13/F12 subtree metadata",
+    "familyIds": [
+      "F13",
+      "F12"
+    ]
+  },
+  {
+    "id": "G1-01",
+    "title": "Traversal Techniques",
+    "tier": "B",
+    "sourceGroupNumber": 25,
+    "sourceGroupName": "Graph I",
+    "patternNote": "F14 **broad label; verify included exercises before splitting**",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G1-02",
+    "title": "Number of islands",
+    "tier": "A",
+    "sourceGroupNumber": 25,
+    "sourceGroupName": "Graph I",
+    "patternNote": "F14 components; verify adjacency rules",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G1-03",
+    "title": "Flood fill algorithm",
+    "tier": "A",
+    "sourceGroupNumber": 25,
+    "sourceGroupName": "Graph I",
+    "patternNote": "F14 component traversal",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G1-04",
+    "title": "Rotten Oranges",
+    "tier": "A",
+    "sourceGroupNumber": 25,
+    "sourceGroupName": "Graph I",
+    "patternNote": "F14 multi-source BFS",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G1-05",
+    "title": "Surrounded Regions",
+    "tier": "B",
+    "sourceGroupNumber": 25,
+    "sourceGroupName": "Graph I",
+    "patternNote": "F14 boundary reachability",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G2-01",
+    "title": "Number of distinct islands",
+    "tier": "B",
+    "sourceGroupNumber": 26,
+    "sourceGroupName": "Graph II",
+    "patternNote": "F14 normalized component shape",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G2-02",
+    "title": "Bipartite graph",
+    "tier": "A",
+    "sourceGroupNumber": 26,
+    "sourceGroupName": "Graph II",
+    "patternNote": "F14 two-color traversal",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G2-03",
+    "title": "Topological sort or Kahn's algorithm",
+    "tier": "A",
+    "sourceGroupNumber": 26,
+    "sourceGroupName": "Graph II",
+    "patternNote": "F14 indegree elimination",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G2-04",
+    "title": "Detect a cycle in a directed graph",
+    "tier": "A",
+    "sourceGroupNumber": 26,
+    "sourceGroupName": "Graph II",
+    "patternNote": "F14 active-state DFS or Kahn count",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G2-05",
+    "title": "Find eventual safe states",
+    "tier": "B",
+    "sourceGroupNumber": 26,
+    "sourceGroupName": "Graph II",
+    "patternNote": "F14 cycle/dependency reasoning",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G3-01",
+    "title": "Course Schedule I",
+    "tier": "A",
+    "sourceGroupNumber": 27,
+    "sourceGroupName": "Graph III",
+    "patternNote": "F14 feasibility/topological sort",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G3-02",
+    "title": "Course Schedule II",
+    "tier": "B",
+    "sourceGroupNumber": 27,
+    "sourceGroupName": "Graph III",
+    "patternNote": "F14 output dependency order",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G3-03",
+    "title": "Alien Dictionary",
+    "tier": "B",
+    "sourceGroupNumber": 27,
+    "sourceGroupName": "Graph III",
+    "patternNote": "F14 inferred ordering and invalid prefixes",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G3-04",
+    "title": "Shortest path in DAG",
+    "tier": "B",
+    "sourceGroupNumber": 27,
+    "sourceGroupName": "Graph III",
+    "patternNote": "F15/F14 topological relaxation",
+    "familyIds": [
+      "F15",
+      "F14"
+    ]
+  },
+  {
+    "id": "G3-05",
+    "title": "Shortest path in undirected graph with unit weights",
+    "tier": "A",
+    "sourceGroupNumber": 27,
+    "sourceGroupName": "Graph III",
+    "patternNote": "F14 BFS distances",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G4-01",
+    "title": "Word ladder I",
+    "tier": "B",
+    "sourceGroupNumber": 28,
+    "sourceGroupName": "Graph IV",
+    "patternNote": "F14 implicit-graph BFS",
+    "familyIds": [
+      "F14"
+    ]
+  },
+  {
+    "id": "G4-02",
+    "title": "Word ladder II",
+    "tier": "C",
+    "sourceGroupNumber": 28,
+    "sourceGroupName": "Graph IV",
+    "patternNote": "F14/F05 shortest-path DAG enumeration",
+    "familyIds": [
+      "F14",
+      "F05"
+    ]
+  },
+  {
+    "id": "G4-03",
+    "title": "Dijkstra's algorithm",
+    "tier": "A",
+    "sourceGroupNumber": 28,
+    "sourceGroupName": "Graph IV",
+    "patternNote": "F15 nonnegative shortest paths",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G4-04",
+    "title": "Path with minimum effort",
+    "tier": "B",
+    "sourceGroupNumber": 28,
+    "sourceGroupName": "Graph IV",
+    "patternNote": "F15 minimax path",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G4-05",
+    "title": "Cheapest flight within K stops",
+    "tier": "C",
+    "sourceGroupNumber": 28,
+    "sourceGroupName": "Graph IV",
+    "patternNote": "F15/F17 constrained path state",
+    "familyIds": [
+      "F15",
+      "F17"
+    ]
+  },
+  {
+    "id": "G5-01",
+    "title": "Number of ways to arrive at destination",
+    "tier": "C",
+    "sourceGroupNumber": 29,
+    "sourceGroupName": "Graph V",
+    "patternNote": "F15 shortest-path counting; verify weight constraints",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G5-02",
+    "title": "Bellman ford algorithm",
+    "tier": "B",
+    "sourceGroupNumber": 29,
+    "sourceGroupName": "Graph V",
+    "patternNote": "F15 repeated relaxation",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G5-03",
+    "title": "Floyd warshall algorithm",
+    "tier": "B",
+    "sourceGroupNumber": 29,
+    "sourceGroupName": "Graph V",
+    "patternNote": "F15 all-pairs DP",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G5-04",
+    "title": "Find the city with the smallest number of neighbors",
+    "tier": "B",
+    "sourceGroupNumber": 29,
+    "sourceGroupName": "Graph V",
+    "patternNote": "F15 thresholded shortest paths",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G5-05",
+    "title": "Disjoint Set",
+    "tier": "A",
+    "sourceGroupNumber": 29,
+    "sourceGroupName": "Graph V",
+    "patternNote": "F15 union-find",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G6-01",
+    "title": "Find the MST weight",
+    "tier": "A",
+    "sourceGroupNumber": 30,
+    "sourceGroupName": "Graph VI",
+    "patternNote": "F15 Prim/Kruskal; verify connectedness",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G6-02",
+    "title": "Number of operations to make network connected",
+    "tier": "B",
+    "sourceGroupNumber": 30,
+    "sourceGroupName": "Graph VI",
+    "patternNote": "F15 components and spare edges",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G6-03",
+    "title": "Number of islands II",
+    "tier": "C",
+    "sourceGroupNumber": 30,
+    "sourceGroupName": "Graph VI",
+    "patternNote": "F15 dynamic connectivity",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G6-04",
+    "title": "Making a large island",
+    "tier": "C",
+    "sourceGroupNumber": 30,
+    "sourceGroupName": "Graph VI",
+    "patternNote": "F15 component aggregation",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G6-05",
+    "title": "Kosaraju's algorithm",
+    "tier": "C",
+    "sourceGroupNumber": 30,
+    "sourceGroupName": "Graph VI",
+    "patternNote": "F15 strongly connected components",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G7M-01",
+    "title": "Bridges in graph",
+    "tier": "C",
+    "sourceGroupNumber": 31,
+    "sourceGroupName": "Graph VII and Maths",
+    "patternNote": "F15 DFS low-link values",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G7M-02",
+    "title": "Articulation point in graph",
+    "tier": "C",
+    "sourceGroupNumber": 31,
+    "sourceGroupName": "Graph VII and Maths",
+    "patternNote": "F15 DFS low-link values",
+    "familyIds": [
+      "F15"
+    ]
+  },
+  {
+    "id": "G7M-03",
+    "title": "Print all primes till N",
+    "tier": "B",
+    "sourceGroupNumber": 31,
+    "sourceGroupName": "Graph VII and Maths",
+    "patternNote": "F07 sieve",
+    "familyIds": [
+      "F07"
+    ]
+  },
+  {
+    "id": "G7M-04",
+    "title": "Prime factorisation of a Number",
+    "tier": "B",
+    "sourceGroupNumber": 31,
+    "sourceGroupName": "Graph VII and Maths",
+    "patternNote": "F07 divisibility/factors",
+    "familyIds": [
+      "F07"
+    ]
+  },
+  {
+    "id": "G7M-05",
+    "title": "Count primes in range L to R",
+    "tier": "C",
+    "sourceGroupNumber": 31,
+    "sourceGroupName": "Graph VII and Maths",
+    "patternNote": "F07 **verify bounds/query count before choosing sieve variant**",
+    "familyIds": [
+      "F07"
+    ]
+  },
+  {
+    "id": "DP1-01",
+    "title": "Climbing stairs",
+    "tier": "A",
+    "sourceGroupNumber": 32,
+    "sourceGroupName": "Dynamic Programming I",
+    "patternNote": "F16 one-dimensional recurrence",
+    "familyIds": [
+      "F16"
+    ]
+  },
+  {
+    "id": "DP1-02",
+    "title": "Frog jump with K distances",
+    "tier": "B",
+    "sourceGroupNumber": 32,
+    "sourceGroupName": "Dynamic Programming I",
+    "patternNote": "F16 last-jump choices",
+    "familyIds": [
+      "F16"
+    ]
+  },
+  {
+    "id": "DP1-03",
+    "title": "Maximum sum of non adjacent elements",
+    "tier": "A",
+    "sourceGroupNumber": 32,
+    "sourceGroupName": "Dynamic Programming I",
+    "patternNote": "F16 take/skip",
+    "familyIds": [
+      "F16"
+    ]
+  },
+  {
+    "id": "DP1-04",
+    "title": "House robber",
+    "tier": "B",
+    "sourceGroupNumber": 32,
+    "sourceGroupName": "Dynamic Programming I",
+    "patternNote": "F16 **verify linear/circular variant; may overlap DP1-03**",
+    "familyIds": [
+      "F16"
+    ]
+  },
+  {
+    "id": "DP1-05",
+    "title": "Ninja's training",
+    "tier": "B",
+    "sourceGroupNumber": 32,
+    "sourceGroupName": "Dynamic Programming I",
+    "patternNote": "F16 last-choice state",
+    "familyIds": [
+      "F16"
+    ]
+  },
+  {
+    "id": "DP2-01",
+    "title": "Grid unique paths",
+    "tier": "A",
+    "sourceGroupNumber": 33,
+    "sourceGroupName": "Dynamic Programming II",
+    "patternNote": "F16 grid recurrence",
+    "familyIds": [
+      "F16"
+    ]
+  },
+  {
+    "id": "DP2-02",
+    "title": "Unique paths II",
+    "tier": "A",
+    "sourceGroupNumber": 33,
+    "sourceGroupName": "Dynamic Programming II",
+    "patternNote": "F16 grid obstacles",
+    "familyIds": [
+      "F16"
+    ]
+  },
+  {
+    "id": "DP2-03",
+    "title": "Minimum Falling Path Sum",
+    "tier": "B",
+    "sourceGroupNumber": 33,
+    "sourceGroupName": "Dynamic Programming II",
+    "patternNote": "F16 grid optimum",
+    "familyIds": [
+      "F16"
+    ]
+  },
+  {
+    "id": "DP2-04",
+    "title": "Triangle",
+    "tier": "B",
+    "sourceGroupNumber": 33,
+    "sourceGroupName": "Dynamic Programming II",
+    "patternNote": "F16 irregular-grid optimum",
+    "familyIds": [
+      "F16"
+    ]
+  },
+  {
+    "id": "DP2-05",
+    "title": "Cherry pickup II",
+    "tier": "C",
+    "sourceGroupNumber": 33,
+    "sourceGroupName": "Dynamic Programming II",
+    "patternNote": "F16 multi-agent grid state",
+    "familyIds": [
+      "F16"
+    ]
+  },
+  {
+    "id": "DP3-01",
+    "title": "Best time to buy and sell stock",
+    "tier": "A",
+    "sourceGroupNumber": 34,
+    "sourceGroupName": "Dynamic Programming III",
+    "patternNote": "F01 running minimum; F17 state interpretation",
+    "familyIds": [
+      "F01",
+      "F17"
+    ]
+  },
+  {
+    "id": "DP3-02",
+    "title": "Best time to buy and sell stock II",
+    "tier": "B",
+    "sourceGroupNumber": 34,
+    "sourceGroupName": "Dynamic Programming III",
+    "patternNote": "F17 holding state; F08 greedy alternative",
+    "familyIds": [
+      "F17",
+      "F08"
+    ]
+  },
+  {
+    "id": "DP3-03",
+    "title": "Best time to buy and sell stock III",
+    "tier": "B",
+    "sourceGroupNumber": 34,
+    "sourceGroupName": "Dynamic Programming III",
+    "patternNote": "F17 bounded transactions",
+    "familyIds": [
+      "F17"
+    ]
+  },
+  {
+    "id": "DP3-04",
+    "title": "Best time to buy and sell stock IV",
+    "tier": "C",
+    "sourceGroupNumber": 34,
+    "sourceGroupName": "Dynamic Programming III",
+    "patternNote": "F17 generalized transaction dimension",
+    "familyIds": [
+      "F17"
+    ]
+  },
+  {
+    "id": "DP3-05",
+    "title": "Best time to buy and sell stock with transaction fees",
+    "tier": "B",
+    "sourceGroupNumber": 34,
+    "sourceGroupName": "Dynamic Programming III",
+    "patternNote": "F17 transition cost",
+    "familyIds": [
+      "F17"
+    ]
+  },
+  {
+    "id": "DP4-01",
+    "title": "Partition a set into two subsets with minimum absolute sum difference",
+    "tier": "B",
+    "sourceGroupNumber": 35,
+    "sourceGroupName": "Dynamic Programming IV",
+    "patternNote": "F17 reachable subset sums; verify signed inputs",
+    "familyIds": [
+      "F17"
+    ]
+  },
+  {
+    "id": "DP4-02",
+    "title": "Count subsets with sum K",
+    "tier": "B",
+    "sourceGroupNumber": 35,
+    "sourceGroupName": "Dynamic Programming IV",
+    "patternNote": "F17 subset count",
+    "familyIds": [
+      "F17"
+    ]
+  },
+  {
+    "id": "DP4-03",
+    "title": "Count partitions with given difference",
+    "tier": "B",
+    "sourceGroupNumber": 35,
+    "sourceGroupName": "Dynamic Programming IV",
+    "patternNote": "F17 transformed subset count",
+    "familyIds": [
+      "F17"
+    ]
+  },
+  {
+    "id": "DP4-04",
+    "title": "0 and 1 Knapsack",
+    "tier": "A",
+    "sourceGroupNumber": 35,
+    "sourceGroupName": "Dynamic Programming IV",
+    "patternNote": "F17 single-use capacity",
+    "familyIds": [
+      "F17"
+    ]
+  },
+  {
+    "id": "DP4-05",
+    "title": "Target sum",
+    "tier": "B",
+    "sourceGroupNumber": 35,
+    "sourceGroupName": "Dynamic Programming IV",
+    "patternNote": "F17 signed choices/subset transform",
+    "familyIds": [
+      "F17"
+    ]
+  },
+  {
+    "id": "DP5-01",
+    "title": "Coin change II",
+    "tier": "A",
+    "sourceGroupNumber": 36,
+    "sourceGroupName": "Dynamic Programming V",
+    "patternNote": "F17 unbounded combination count",
+    "familyIds": [
+      "F17"
+    ]
+  },
+  {
+    "id": "DP5-02",
+    "title": "Unbounded knapsack",
+    "tier": "B",
+    "sourceGroupNumber": 36,
+    "sourceGroupName": "Dynamic Programming V",
+    "patternNote": "F17 reusable capacity choices",
+    "familyIds": [
+      "F17"
+    ]
+  },
+  {
+    "id": "DP5-03",
+    "title": "Rod cutting problem",
+    "tier": "B",
+    "sourceGroupNumber": 36,
+    "sourceGroupName": "Dynamic Programming V",
+    "patternNote": "F17 length-capacity optimum",
+    "familyIds": [
+      "F17"
+    ]
+  },
+  {
+    "id": "DP5-04",
+    "title": "Minimum coins",
+    "tier": "A",
+    "sourceGroupNumber": 36,
+    "sourceGroupName": "Dynamic Programming V",
+    "patternNote": "F17 unbounded minimum; verify coin domain",
+    "familyIds": [
+      "F17"
+    ]
+  },
+  {
+    "id": "DP5-05",
+    "title": "Longest common subsequence",
+    "tier": "A",
+    "sourceGroupNumber": 36,
+    "sourceGroupName": "Dynamic Programming V",
+    "patternNote": "F18 two-prefix DP",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP6-01",
+    "title": "Longest common substring",
+    "tier": "B",
+    "sourceGroupNumber": 37,
+    "sourceGroupName": "Dynamic Programming VI",
+    "patternNote": "F18 matching suffix state",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP6-02",
+    "title": "Minimum insertions or deletions to convert string A to B",
+    "tier": "B",
+    "sourceGroupNumber": 37,
+    "sourceGroupName": "Dynamic Programming VI",
+    "patternNote": "F18 LCS relationship",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP6-03",
+    "title": "Shortest common supersequence",
+    "tier": "B",
+    "sourceGroupNumber": 37,
+    "sourceGroupName": "Dynamic Programming VI",
+    "patternNote": "F18 LCS reconstruction",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP6-04",
+    "title": "Distinct subsequences",
+    "tier": "C",
+    "sourceGroupNumber": 37,
+    "sourceGroupName": "Dynamic Programming VI",
+    "patternNote": "F18 count alignments",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP6-05",
+    "title": "Edit distance",
+    "tier": "A",
+    "sourceGroupNumber": 37,
+    "sourceGroupName": "Dynamic Programming VI",
+    "patternNote": "F18 operation choices",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP7-01",
+    "title": "Wildcard matching",
+    "tier": "C",
+    "sourceGroupNumber": 38,
+    "sourceGroupName": "Dynamic Programming VII",
+    "patternNote": "F18 string/pattern state",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP7-02",
+    "title": "Longest Increasing Subsequence",
+    "tier": "A",
+    "sourceGroupNumber": 38,
+    "sourceGroupName": "Dynamic Programming VII",
+    "patternNote": "F18 end-at-index DP or tails search",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP7-03",
+    "title": "Longest String Chain",
+    "tier": "B",
+    "sourceGroupNumber": 38,
+    "sourceGroupName": "Dynamic Programming VII",
+    "patternNote": "F18 predecessor chain",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP7-04",
+    "title": "Longest Bitonic Subsequence",
+    "tier": "C",
+    "sourceGroupNumber": 38,
+    "sourceGroupName": "Dynamic Programming VII",
+    "patternNote": "F18 paired subsequence directions",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP7-05",
+    "title": "Number of Longest Increasing Subsequences",
+    "tier": "C",
+    "sourceGroupNumber": 38,
+    "sourceGroupName": "Dynamic Programming VII",
+    "patternNote": "F18 length and count",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP7-06",
+    "title": "Print Longest Increasing Subsequence",
+    "tier": "B",
+    "sourceGroupNumber": 38,
+    "sourceGroupName": "Dynamic Programming VII",
+    "patternNote": "F18 predecessor reconstruction",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP8-01",
+    "title": "Matrix chain multiplication",
+    "tier": "C",
+    "sourceGroupNumber": 39,
+    "sourceGroupName": "Dynamic Programming VIII",
+    "patternNote": "F18 interval partition DP",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP8-02",
+    "title": "Burst balloons",
+    "tier": "C",
+    "sourceGroupNumber": 39,
+    "sourceGroupName": "Dynamic Programming VIII",
+    "patternNote": "F18 last-choice interval DP",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "DP8-03",
+    "title": "Maximum Rectangles",
+    "tier": "C",
+    "sourceGroupNumber": 39,
+    "sourceGroupName": "Dynamic Programming VIII",
+    "patternNote": "**Ambiguous title; verify statement; do not silently rename to Maximal Rectangle**",
+    "familyIds": []
+  },
+  {
+    "id": "DP8-04",
+    "title": "Palindrome partitioning II",
+    "tier": "C",
+    "sourceGroupNumber": 39,
+    "sourceGroupName": "Dynamic Programming VIII",
+    "patternNote": "F18 minimum-cut DP",
+    "familyIds": [
+      "F18"
+    ]
+  },
+  {
+    "id": "ST-01",
+    "title": "Rabin Karp Algorithm",
+    "tier": "C",
+    "sourceGroupNumber": 40,
+    "sourceGroupName": "String and Trie",
+    "patternNote": "F19 rolling-hash matching",
+    "familyIds": [
+      "F19"
+    ]
+  },
+  {
+    "id": "ST-02",
+    "title": "Z function",
+    "tier": "C",
+    "sourceGroupNumber": 40,
+    "sourceGroupName": "String and Trie",
+    "patternNote": "F19 prefix-match reuse",
+    "familyIds": [
+      "F19"
+    ]
+  },
+  {
+    "id": "ST-03",
+    "title": "KMP Algorithm or LPS array",
+    "tier": "C",
+    "sourceGroupNumber": 40,
+    "sourceGroupName": "String and Trie",
+    "patternNote": "F19 borders/prefix matching",
+    "familyIds": [
+      "F19"
+    ]
+  },
+  {
+    "id": "ST-04",
+    "title": "Longest Word with All Prefixes",
+    "tier": "C",
+    "sourceGroupNumber": 40,
+    "sourceGroupName": "String and Trie",
+    "patternNote": "F19 trie and terminal-prefix checks",
+    "familyIds": [
+      "F19"
+    ]
+  },
+  {
+    "id": "ST-05",
+    "title": "Maximum Xor with an element from an array",
+    "tier": "C",
+    "sourceGroupNumber": 40,
+    "sourceGroupName": "String and Trie",
+    "patternNote": "F19/F07 bit trie; verify query eligibility constraint",
+    "familyIds": [
+      "F19",
+      "F07"
+    ]
+  }
+]

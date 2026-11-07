@@ -1,0 +1,85 @@
+{
+  "bundleId": "bundle-v1-project",
+  "version": 1,
+  "description": "Project Deep-Dive: System Architecture Defense & Failure Mode Analysis",
+  "prompts": [
+    {
+      "id": "PROMPT-PROJECT-01",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F01", "F10"],
+      "difficulty": "advanced",
+      "statement": "Defend the core architecture and concurrency trade-offs of an event-driven distributed pipeline. Walk through: (1) Ingestion flow and backpressure mechanisms, (2) Exactly-once versus at-least-once message delivery semantics with idempotent consumers, (3) Failure recovery and dead-letter queue (DLQ) processing when downstream workers fail or time out.",
+      "constraints": [
+        "Defend architectural choices under 50,000 requests/second burst traffic",
+        "Specify deduplication strategy and state window retention",
+        "Demonstrate failure recovery without data loss or split-brain states"
+      ],
+      "examples": [
+        {
+          "input": "Upstream producer retries identical message batch after network partition timeout",
+          "expected": "Deduplicated via unique idempotency key; downstream database executes single idempotent write without duplicate rows."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-storage-consistency",
+          "question": "What is the primary database consistency model for the state store?",
+          "answer": "Strong consistency for idempotency receipts and transactional account ledger balances; eventual consistency for read-heavy analytics aggregations."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-hot-partitioning",
+          "trigger": "correct_idempotency_explanation",
+          "question": "If a single tenant suddenly generates 80% of all events, how do you prevent consumer lag from stalling other tenants on the same partition?",
+          "criterion": "Explains composite partitioning (tenant_id + hash salt) or dynamic virtual queues with dedicated tenant rate limiters."
+        }
+      ],
+      "privateReference": {
+        "approach": "Structure answer with clear component boundaries: Ingestion Gateway -> Kafka/Event Log -> Consumer Pool with Outbox Pattern & Redis Deduplication Window -> PostgreSQL Transactional Commit -> Async DLQ on poison pills.",
+        "checks": [
+          "Defines explicit idempotency receipt table schema with unique constraints",
+          "Identifies backpressure signals (consumer lag metrics, TCP window / HTTP 429)",
+          "Articulates split-brain prevention and atomic commits"
+        ],
+        "expectedComplexity": "High system architecture depth with measurable trade-offs"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "official",
+        "note": "Canonical Project Deep-Dive Architecture benchmark",
+        "confidence": "confirmed"
+      }
+    }
+  ],
+  "packs": [
+    {
+      "id": "PACK-PROJECT-01",
+      "version": 1,
+      "stage": "project",
+      "status": "validated",
+      "title": "Project Architecture Defense: High-Throughput Pipelines",
+      "instructions": "Simulated live architecture deep-dive. Explain trade-offs, state management, failure scenarios, and production telemetry in depth.",
+      "durationMinutes": 45,
+      "debriefMinutes": 15,
+      "inputFormat": "spoken_or_text",
+      "resourcePolicy": {
+        "docs": true,
+        "ai": false,
+        "hints": false,
+        "notes": true
+      },
+      "promptIds": ["PROMPT-PROJECT-01"],
+      "rubricId": "rubric-project-v1",
+      "rubricVersion": 1,
+      "prerequisites": ["PACK-ENG-01"],
+      "source": {
+        "kind": "official",
+        "note": "Project Deep-Dive standard pack",
+        "confidence": "confirmed"
+      }
+    }
+  ]
+}

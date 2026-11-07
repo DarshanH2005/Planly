@@ -1,0 +1,302 @@
+[
+  {
+    "id": "F01",
+    "title": "Arrays, hashing and prefix sums",
+    "conceptCue": "track frequencies or previously seen information; contiguous sums with signed values often need prefix sums.",
+    "representatives": [
+      "Two Sum (ARR2-03)",
+      "Longest Consecutive (ARR1-03)",
+      "Kadane (ARR1-05)",
+      "Longest subarray K (ARR4-03)",
+      "Count subarrays sum (ARR4-04)."
+    ],
+    "pitfalls": "confusing longest with count, overwriting earliest indexes, omitting prefix sum zero, assuming positive values.",
+    "cost": "these standard approaches are O(n) expected time with hash tables; Kadane uses O(1) extra space, prefix maps up to O(n).",
+    "say": "“The stored information represents all earlier prefixes; I query before inserting the current prefix.”",
+    "review": "contrast a running optimum, set membership and prefix counting."
+  },
+  {
+    "id": "F02",
+    "title": "Sorting, two pointers and matrix indexing",
+    "conceptCue": "order enables elimination or merging; a matrix transformation is an index mapping.",
+    "representatives": [
+      "Merge Sorting (ARR1-01)",
+      "Quick Sorting (ARR1-02)",
+      "3 Sum (ARR2-04)",
+      "Rotate matrix (ARR2-02)",
+      "Count Inversions (ARR3-04)."
+    ],
+    "pitfalls": "duplicate triplets, pointer progress, sorting mutation, square-matrix assumptions and merge counting boundaries.",
+    "cost": "merge sort O(n log n) time/O(n) auxiliary space; standard quicksort average O(n log n), worst O(n²); sorted 3 Sum O(n²); square rotation O(n²) time/O(1) extra space in place.",
+    "say": "“Once sorted, this comparison lets me discard this side.”",
+    "review": "re-derive the pointer move or coordinate transform."
+  },
+  {
+    "id": "F03",
+    "title": "Binary search over indexes",
+    "conceptCue": "a sorted interval or structured partition permits half the candidates to be removed.",
+    "representatives": [
+      "Lower Bound (BS1-01)",
+      "Upper Bound (BS1-02)",
+      "Rotated Minimum (BS1-04)",
+      "Search 2D matrix (BS3-02)",
+      "Peak (BS3-04)."
+    ],
+    "pitfalls": "mixing closed and half-open intervals, no progress at two elements, duplicates, assuming all matrix variants share ordering.",
+    "cost": "bounds O(log n)/O(1); globally ordered flattened matrix O(log(rc))/O(1); duplicate-heavy rotated variants may degrade to O(n).",
+    "say": "“My answer remains inside this interval after every update.”",
+    "review": "trace empty, absent, first, last and duplicate cases permitted by the statement."
+  },
+  {
+    "id": "F04",
+    "title": "Binary search on an answer",
+    "conceptCue": "a proposed capacity, rate or distance has a monotone feasibility test.",
+    "representatives": [
+      "Koko (BS2-01)",
+      "Bouquets (BS2-02)",
+      "Aggressive Cows (BS2-03)",
+      "Book Allocation (BS2-04)",
+      "Smallest divisor (BS1-05)."
+    ],
+    "pitfalls": "reversed monotonicity, invalid bounds, integer ceiling and impossible cases.",
+    "cost": "commonly O(n log R) time for answer-range size R and O(1) working space; sorting may add O(n log n), such as cows.",
+    "say": "“If this value is feasible, every larger/smaller value is also feasible because…”",
+    "review": "prove the predicate before writing the search."
+  },
+  {
+    "id": "F05",
+    "title": "Recursion and backtracking",
+    "conceptCue": "enumerate choices while carrying state and undoing changes.",
+    "representatives": [
+      "Power Set (REC1-01)",
+      "Subsequence sum K (REC1-02)",
+      "Combination Sum (REC1-03)",
+      "Palindrome partitioning (REC2-01)",
+      "N Queen (REC2-02)."
+    ],
+    "pitfalls": "missing base cases, sharing a mutable result, duplicate choices, reusing an index incorrectly, invalid positive-only pruning.",
+    "cost": "subset enumeration has 2^n leaves and O(n·2^n) output size; other bounds depend on candidates and target. Avoid calling all recursion O(2^n).",
+    "say": "“At this depth the choice means…, and the recursive call owns…”",
+    "review": "draw three levels and state what is restored."
+  },
+  {
+    "id": "F06",
+    "title": "Linked lists",
+    "conceptCue": "pointer changes, middle finding and cycles require explicit reference invariants.",
+    "representatives": [
+      "Reverse LL (LL1-04)",
+      "Palindrome (LL1-05)",
+      "Intersection (LL1-03)",
+      "Loop start (LL2-01)",
+      "Delete middle (LL3-02)."
+    ],
+    "pitfalls": "losing the remainder, dereferencing null, changing a list unexpectedly, confusing node identity with equal values.",
+    "cost": "the standard approaches are O(n+m) or O(n) time and O(1) auxiliary space, assuming the applicable cycle/acyclic conditions.",
+    "say": "“These pointers refer to the processed prefix, current node and untouched suffix.”",
+    "review": "draw before/after arrows for lengths 1, 2 and 3; explain restoration for palindrome if required."
+  },
+  {
+    "id": "F07",
+    "title": "Bits and elementary number theory",
+    "conceptCue": "bit counts/parity, XOR cancellation or factor/divisibility structure.",
+    "representatives": [
+      "Single Number II (LL3-03)",
+      "Single Number III (LL3-04)",
+      "Range XOR (LL3-05)",
+      "Primes till N (G7M-03)",
+      "Prime factorisation (G7M-04)."
+    ],
+    "pitfalls": "signed shifts, overflow, fixed-width assumptions, XOR not preserving order.",
+    "cost": "fixed-width bit scans O(n·b), XOR range O(1), classic sieve O(N log log N) time/O(N) space, trial factorisation O(√N) worst-case time.",
+    "say": "“This operation preserves exactly this frequency information.”",
+    "review": "use tiny binary examples. B/C until array and control-flow basics are stable."
+  },
+  {
+    "id": "F08",
+    "title": "Greedy intervals and local choices",
+    "conceptCue": "a choice can be proven safe by exchanging it with part of an optimal solution.",
+    "representatives": [
+      "N meetings (GR-01)",
+      "Non-overlapping Intervals (GR-02)",
+      "Platforms (GR-03)",
+      "Candy (GR-05)",
+      "Valid Paranthesis Checker (GR-04",
+      "statement required)."
+    ],
+    "pitfalls": "intuition without proof, touching endpoints, mixing minimum resources with maximum accepted intervals.",
+    "cost": "interval sorting approaches O(n log n); candy standard two-pass O(n) time/O(n) space.",
+    "say": "“Replacing the first choice in an optimum with my choice cannot reduce the remaining options.”",
+    "review": "construct a counterexample to the tempting wrong sorting key. Do not assign GR-04 an algorithm until its exact alphabet/rules are known."
+  },
+  {
+    "id": "F09",
+    "title": "Sliding windows",
+    "conceptCue": "maintain a contiguous range whose validity can be restored monotonically.",
+    "representatives": [
+      "Longest non-repeating substring (SW1-01)",
+      "Max Consecutive Ones III (SW1-02)",
+      "Fruit (SW1-05)",
+      "Character Replacement (SW1-04)",
+      "Minimum Window (SW2-02)."
+    ],
+    "pitfalls": "using windows for arbitrary signed sums, stale frequencies, count versus length, shrinking too little or too far.",
+    "cost": "standard solutions O(n) expected time with alphabet-sized or O(n) storage; explain why each pointer advances at most n times.",
+    "say": "“After shrinking, the window satisfies this invariant.”",
+    "review": "contrast at-most K and exactly K counting; verify any stale-maximum optimization before relying on it."
+  },
+  {
+    "id": "F10",
+    "title": "Stacks, queues, deques and cache structure",
+    "conceptCue": "nearest greater/smaller boundaries use a monotonic stack; a moving maximum uses a deque; LRU combines order and lookup.",
+    "representatives": [
+      "Next Greater 2 (SQ1-01)",
+      "Min Stack (SQ2-01)",
+      "Asteroid Collision (SQ1-02)",
+      "Sliding Window Maximum (SQ2-02)",
+      "LRU Cache (SQ2-05)."
+    ],
+    "pitfalls": "indexes versus values, equal-element ties, expired deque elements, circular iteration and linked-list bookkeeping.",
+    "cost": "stack/deque scans O(n) amortized; Min Stack O(1) operations; LRU expected O(1) operations with O(capacity) space.",
+    "say": "“An element popped now can never become useful later because…”",
+    "review": "count pushes/pops and explain the data structure invariant."
+  },
+  {
+    "id": "F11",
+    "title": "Heaps",
+    "conceptCue": "repeatedly retain or extract an extreme without fully sorting. All three source representatives: Heap Sort (HP-01), K-th Largest array (HP-02), Kth Largest stream (HP-03). **Pitfalls:** min-heap versus max-heap, duplicates, k greater than current size, treating heap iteration as sorted. **Cost:** maintaining top k costs O(n log k) time/O(k) space; stream insertion O(log k); heap sort O(n log n) time and can use O(1) auxiliary array space. **Say:** “The root is the worst element among the candidates I keep.” **Review:** trace one insertion and explain why the heap has k elements.",
+    "representatives": [],
+    "pitfalls": "min-heap versus max-heap, duplicates, k greater than current size, treating heap iteration as sorted.",
+    "cost": "maintaining top k costs O(n log k) time/O(k) space; stream insertion O(log k); heap sort O(n log n) time and can use O(1) auxiliary array space.",
+    "say": "“The root is the worst element among the candidates I keep.”",
+    "review": "trace one insertion and explain why the heap has k elements."
+  },
+  {
+    "id": "F12",
+    "title": "Binary trees",
+    "conceptCue": "define a subtree answer and combine children, or traverse levels.",
+    "representatives": [
+      "Inorder (BT1-02)",
+      "Level Order (BT1-04)",
+      "Maximum Depth (BT1-05)",
+      "Diameter (BT2-01)",
+      "LCA (BT3-04)."
+    ],
+    "pitfalls": "returning the wrong quantity, counting nodes versus edges, treating a tree as a BST, deep recursion.",
+    "cost": "standard single-pass solutions O(n), DFS O(h) stack or BFS O(w) queue; naïvely recomputing heights for diameter can become O(n²).",
+    "say": "“This function returns subtree height, while the best complete path is updated separately.”",
+    "review": "use skewed and branching trees and state exactly what every call returns."
+  },
+  {
+    "id": "F13",
+    "title": "Binary search trees",
+    "conceptCue": "values constrain which subtree can hold an answer; inorder visits sorted values under the chosen duplicate policy.",
+    "representatives": [
+      "LCA (BT5-03)",
+      "Kth Smallest/Largest (BT5-04)",
+      "Construct preorder (BT5-05)",
+      "BST iterator (BST2-01)",
+      "Two sum (BST2-03)."
+    ],
+    "pitfalls": "assuming balanced height, local-only validation and unclear duplicate policy.",
+    "cost": "search/LCA O(h), potentially O(n); inorder kth selection O(h+k) until found; standard iterator next O(1) amortized/O(h) storage.",
+    "say": "“Both targets lie on this side according to ordering, so the other subtree is irrelevant.”",
+    "review": "compare the same query on a generic tree and a skewed BST."
+  },
+  {
+    "id": "F14",
+    "title": "Graph traversal and dependencies",
+    "conceptCue": "reachability, components, unweighted propagation and prerequisites use BFS/DFS or indegrees.",
+    "representatives": [
+      "Islands (G1-02)",
+      "Flood fill (G1-03)",
+      "Rotten Oranges (G1-04)",
+      "Topological/Kahn (G2-03)",
+      "Directed cycle (G2-04)."
+    ],
+    "pitfalls": "disconnected graphs, marking visited too late, directed versus undirected cycle rules, confusing a BFS layer with a node count.",
+    "cost": "adjacency-list traversal O(V+E) time/O(V) auxiliary storage; grids O(rc); graph representation itself costs O(V+E).",
+    "say": "“A node enters the queue only when this condition becomes true.”",
+    "review": "manually trace a disconnected graph, a cycle and a multi-source grid."
+  },
+  {
+    "id": "F15",
+    "title": "Weighted paths, DSU and graph structure",
+    "conceptCue": "edge weights change shortest-path tools; connectivity under unions suggests DSU.",
+    "representatives": [
+      "Dijkstra (G4-03)",
+      "Bellman Ford (G5-02)",
+      "Floyd Warshall (G5-03)",
+      "Disjoint Set (G5-05)",
+      "MST weight (G6-01)."
+    ],
+    "pitfalls": "Dijkstra with negative edges, confusing MST with shortest paths, overflow at infinity, treating DSU as directed reachability.",
+    "cost": "heap Dijkstra O((V+E) log V) for nonnegative weights, Bellman Ford O(VE), Floyd Warshall O(V³)/O(V²) space, optimized DSU amortized O(α(V)) per operation.",
+    "say": "“The input property that makes this algorithm valid is…”",
+    "review": "choose from constraints before coding; Dijkstra, DSU and MST are now core extensions after F14, while the other graph methods remain selective."
+  },
+  {
+    "id": "F16",
+    "title": "DP on sequences of positions and grids",
+    "conceptCue": "overlapping subproblems arise when future choices depend on a small state.",
+    "representatives": [
+      "Climbing stairs (DP1-01)",
+      "Non-adjacent maximum (DP1-03)",
+      "Ninja training (DP1-05)",
+      "Grid paths (DP2-01)",
+      "Minimum Falling Path (DP2-03)."
+    ],
+    "pitfalls": "copying a recurrence without defining state, wrong boundary values, mixing negative values with zero defaults.",
+    "cost": "basic 1D cases O(n) time with O(1) possible space; simple grid cases O(rc) with O(c) possible space.",
+    "say": "“dp[i] means exactly…, and the final choice can only have come from…”",
+    "review": "derive recursion, memoization and table order before space optimization."
+  },
+  {
+    "id": "F17",
+    "title": "DP on capacity, stock state and subsets",
+    "conceptCue": "remaining capacity/amount or holding/transaction state determines valid future choices.",
+    "representatives": [
+      "Stock I (DP3-01",
+      "also simple running minimum)",
+      "Stock II (DP3-02)",
+      "0/1 Knapsack (DP4-04)",
+      "Coin change II (DP5-01)",
+      "Minimum coins (DP5-04)."
+    ],
+    "pitfalls": "counting combinations versus permutations, reuse versus single use, loop direction, impossible states and target assumptions.",
+    "cost": "amount/capacity DP commonly O(nA) or O(nW) and pseudo-polynomial; unlimited-stock two-state DP O(n).",
+    "say": "“This state records what is still available, and this transition does/does not permit reuse.”",
+    "review": "change one rule and explain which transition breaks."
+  },
+  {
+    "id": "F18",
+    "title": "DP on pairs, subsequences and intervals",
+    "conceptCue": "two prefixes, a subsequence ending at an index, or a final split determines a reusable state.",
+    "representatives": [
+      "LCS (DP5-05)",
+      "Edit distance (DP6-05)",
+      "LIS (DP7-02)",
+      "Matrix chain (DP8-01)",
+      "Burst balloons (DP8-02)."
+    ],
+    "pitfalls": "substring versus subsequence, interval boundaries, LIS tie handling and prematurely memorizing advanced formulas.",
+    "cost": "classic LCS/edit O(nm); basic LIS O(n²), a separate tails method O(n log n); common interval DP O(n³)/O(n²) space.",
+    "say": "“Conditioning on this last match/operation/split makes the remaining subproblems independent.”",
+    "review": "develop LCS, Edit Distance and LIS after simpler states; keep advanced interval work parked unless the target requires it."
+  },
+  {
+    "id": "F19",
+    "title": "String matching and tries",
+    "conceptCue": "reuse information about matched prefixes, share dictionary prefixes or choose bits greedily through a trie.",
+    "representatives": [
+      "Rabin Karp (ST-01)",
+      "Z function (ST-02)",
+      "KMP/LPS (ST-03)",
+      "Longest Word with All Prefixes (ST-04)",
+      "Maximum Xor query (ST-05)."
+    ],
+    "pitfalls": "hash collisions, confusing border length with position, terminal markers and missing eligible query elements.",
+    "cost": "KMP O(n+m); Rabin Karp can degrade to O(nm) when verifying many collisions; trie construction O(total characters), fixed-bit traversal O(b) per item/query before sorting costs where required.",
+    "say": "“The prefix information lets me avoid comparing these characters again.”",
+    "review": "C until core string/map work and problem-specific need justify it."
+  }
+]

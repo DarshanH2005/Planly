@@ -1,0 +1,86 @@
+{
+  "id": "act_dsa_two_sum_variant_diff",
+  "title": "Two Sum Difference: Close Variant",
+  "track": "dsa",
+  "micro_skill_id": "dsa.two_pointers.inward_convergence",
+  "demands": {
+    "reasoning": 2,
+    "syntax": 2,
+    "implementation": 2,
+    "explanation": 2
+  },
+  "candidate": {
+    "statement": "Given a sorted array of positive integers `numbers` and a positive integer `k`, find two indices `[i, j]` such that `numbers[j] - numbers[i] == k`. Return 1-based indices.",
+    "constraints": [
+      "2 <= numbers.length <= 3 * 10^4",
+      "numbers is sorted in non-decreasing order",
+      "k > 0"
+    ],
+    "examples": [
+      {
+        "input": "numbers = [1, 3, 5, 8], k = 2",
+        "output": "[1, 2]",
+        "explanation": "numbers[2] - numbers[1] = 3 - 1 = 2."
+      }
+    ],
+    "starter_code": "def find_pair_diff(numbers: list[int], k: int) -> list[int]:\n    # Two pointers same-direction variant\n    pass\n",
+    "hints": [
+      "Notice that since it is a difference rather than sum, moving pointers changes the delta differently."
+    ],
+    "short_diagnostics": [
+      "Why does difference require two pointers moving in the same direction rather than inward convergence?"
+    ]
+  },
+  "evaluator": {
+    "reference_solution": "def find_pair_diff(numbers: list[int], k: int) -> list[int]:\n    i, j = 0, 1\n    while i < len(numbers) and j < len(numbers):\n        if i != j and numbers[j] - numbers[i] == k:\n            return [i + 1, j + 1]\n        elif numbers[j] - numbers[i] < k:\n            j += 1\n        else:\n            i += 1\n    return []\n",
+    "rubric": "Close variant of two-pointer array indexing testing target difference. Verifies candidate understands direction change.",
+    "test_cases": [
+      {
+        "input": {
+          "numbers": [
+            1,
+            3,
+            5,
+            8
+          ],
+          "k": 2
+        },
+        "expected": [
+          1,
+          2
+        ]
+      },
+      {
+        "input": {
+          "numbers": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "k": 3
+        },
+        "expected": [
+          1,
+          4
+        ]
+      }
+    ],
+    "known_pitfalls": [
+      "Using inward convergence (left from 0, right from end) which fails for difference."
+    ],
+    "oracle_notes": "Close variant to Two Sum II."
+  },
+  "provenance": {
+    "source_problem_id": "ARR2-03-VAR",
+    "version": "1.0",
+    "content_hash": "06f3698fc92effd62db61e92dfc4191ee318a438099a737611f9ed6c26687c69",
+    "review_status": "verified_ready",
+    "author": "curator"
+  },
+  "planning_effort_minutes_range": [
+    15,
+    25
+  ],
+  "is_transfer_eligible": false
+}

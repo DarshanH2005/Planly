@@ -1,0 +1,25 @@
+{
+  "id": "ml_numpy_linear_regression",
+  "micro_skill_id": "ml.numpy.linear_regression",
+  "title": "NumPy Vectorized Linear Regression Gradient Descent",
+  "track": "ai_ml",
+  "category": "modeling",
+  "starter_code": "import numpy as np\n\ndef train_linear_regression(X: np.ndarray, y: np.ndarray, lr: float = 0.01, epochs: int = 1000) -> tuple[float, float, list[float]]:\n    w = 0.0\n    b = 0.0\n    loss_history = []\n    n = len(X)\n    for epoch in range(epochs):\n        # 1. Predictions\n        y_pred = w * X + b\n        # 2. Compute MSE loss\n        loss = float(np.mean((y_pred - y) ** 2))\n        loss_history.append(loss)\n        # 3. Gradients\n        dw = float((2.0 / n) * np.sum(X * (y_pred - y)))\n        db = float((2.0 / n) * np.sum(y_pred - y))\n        # 4. Updates\n        w -= lr * dw\n        b -= lr * db\n    return w, b, loss_history\n",
+  "dataset": {
+    "X": [1.0, 2.0, 3.0, 4.0, 5.0],
+    "y": [3.0, 5.0, 7.0, 9.0, 11.0]
+  },
+  "expected_parameters": {
+    "target_w": 2.0,
+    "target_b": 1.0,
+    "tolerance_w": 0.15,
+    "tolerance_b": 0.35
+  },
+  "conceptual_questions": [
+    "Why do we subtract the gradient instead of adding it?",
+    "What does dw actually represent?",
+    "If learning_rate = 100, what do you expect to happen, and why?",
+    "What are the shapes of X, y_pred, and error?",
+    "If loss goes 25 -> 17 -> 11 -> 7 -> 4, does that prove good performance on unseen data? Why or why not?"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "scenario_id": "proj_pipeline_defense",
+  "version": "1.0",
+  "type": "project_defense",
+  "title": "Distributed Event-Driven Pipeline Architecture Defense",
+  "description": "Defend the core architecture, concurrency trade-offs, state store consistency, and failure modes of an event-driven data pipeline under production burst traffic.",
+  "required_dimensions": [
+    "architecture_overview",
+    "concurrency_and_scaling",
+    "trade_offs_and_decisions",
+    "debugging_and_failure_modes",
+    "metrics_and_telemetry"
+  ],
+  "probing_guidelines": [
+    {
+      "dimension": "architecture_overview",
+      "prompt_template": "In your project artifact {artifact_id} under {section}, you outlined {topic}. Walk through how requests flow from the entry point to the final state store.",
+      "evidence_check": "Candidate must articulate clear boundary between ingestion, message broker, and consumer workers."
+    },
+    {
+      "dimension": "concurrency_and_scaling",
+      "prompt_template": "Referring back to your note on {topic} in {artifact_id}: what happens when 50,000 requests burst into the system in under 2 seconds? How does your backpressure mechanism behave?",
+      "evidence_check": "Distinguishes between producer throttling (HTTP 429 / TCP window) and consumer worker autoscaling."
+    },
+    {
+      "dimension": "trade_offs_and_decisions",
+      "prompt_template": "In your design for {topic}, why did you select {choice_a} rather than {choice_b}? What concrete latency or operational trade-off led to that choice?",
+      "evidence_check": "Must articulate concrete drawbacks of chosen approach rather than presenting it as flawless."
+    },
+    {
+      "dimension": "debugging_and_failure_modes",
+      "prompt_template": "You noted a production incident regarding {topic}. When downstream database writes fail repeatedly due to a network partition, how are poison pills quarantined without message loss?",
+      "evidence_check": "Mentions dead-letter queue (DLQ) isolation, exponential retry backoff, and idempotent deduplication window."
+    },
+    {
+      "dimension": "metrics_and_telemetry",
+      "prompt_template": "What exact latency, throughput, or user count metrics were measured in your deployment?",
+      "evidence_check": "If the project was a prototype/student project without live telemetry, candidate must state metrics are unmeasured/unknown rather than inventing numbers."
+    }
+  ],
+  "study_recommendations": {
+    "project.trade_off.unjustified": {
+      "title": "Distributed State Store Consistency Trade-offs",
+      "description": "Deep-dive CAP theorem compromises, ACID vs BASE guarantees, and write-ahead log idempotency.",
+      "estimated_minutes": 25
+    },
+    "project.failure_mode.unhandled_poison_pill": {
+      "title": "Dead-Letter Queue (DLQ) & Poison Pill Isolation",
+      "description": "Implement backoff retries, DLQ routing, and consumer fencing for non-recoverable payloads.",
+      "estimated_minutes": 30
+    },
+    "project.telemetry.missing_production_evidence": {
+      "title": "Production Observability & SLA Measurement",
+      "description": "Structure synthetic benchmarking, p99 latency profiling, and Prometheus/Grafana counter monitoring.",
+      "estimated_minutes": 20
+    }
+  }
+}

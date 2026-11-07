@@ -1,0 +1,48 @@
+{
+  "id": "act_dsa_advanced_inversion_count",
+  "title": "Count Inversions in an Array",
+  "track": "dsa",
+  "micro_skill_id": "dsa.advanced.inversion_counting",
+  "demands": {
+    "reasoning": 4,
+    "syntax": 2,
+    "implementation": 4,
+    "explanation": 4
+  },
+  "candidate": {
+    "statement": "Given an integer array `arr`, return the number of inversions in the array. Two elements `a[i]` and `a[j]` form an inversion if `a[i] > a[j]` and `i < j`.",
+    "constraints": [
+      "1 <= arr.length <= 10^5",
+      "1 <= arr[i] <= 10^9"
+    ],
+    "examples": [
+      {
+        "input": "arr = [2, 4, 1, 3, 5]",
+        "output": "3",
+        "explanation": "The inversions are (2, 1), (4, 1), and (4, 3)."
+      }
+    ],
+    "starter_code": "def count_inversions(arr: list[int]) -> int:\n    # Merge sort inversion counting: O(N log N)\n    pass\n",
+    "hints": [],
+    "short_diagnostics": []
+  },
+  "evaluator": {
+    "reference_solution": "# Unverified: pending formal verification suite\n",
+    "rubric": "Catalogued unverified target activity.",
+    "test_cases": [],
+    "known_pitfalls": [],
+    "oracle_notes": null
+  },
+  "provenance": {
+    "source_problem_id": "ARR3-04",
+    "version": "1.0",
+    "content_hash": "5ab2344daee8389aee38bb56417c27ec5112e9ef44713c0a332d70504b3b5653",
+    "review_status": "catalogued_unverified",
+    "author": "curator"
+  },
+  "planning_effort_minutes_range": [
+    30,
+    60
+  ],
+  "is_transfer_eligible": false
+}

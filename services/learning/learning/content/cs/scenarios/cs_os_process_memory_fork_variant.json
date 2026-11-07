@@ -1,0 +1,22 @@
+{
+  "id": "cs_os_process_memory_fork_variant",
+  "micro_skill_id": "cs.os.scenario.multi_process_isolation_transfer",
+  "title": "Fork Process Memory & Copy-on-Write Transfer",
+  "category": "scenario_reasoning",
+  "prompt": "A Python script initializes a global list `items = [1, 2, 3]` and spawns a child process using `os.fork()`. The child modifies `items.append(4)`. Does the parent process see `4` in `items`? Explain why in terms of address spaces and memory sharing.",
+  "evaluator_rubric": {
+    "required_concepts": [
+      "separate_virtual_address_spaces",
+      "copy_on_write",
+      "no_shared_heap_across_processes",
+      "isolated_memory"
+    ],
+    "forbidden_misconceptions": [
+      "child modification directly alters parent list",
+      "processes share heap automatically",
+      "global variables are shared across processes"
+    ],
+    "scoring_criteria": "Learner must state that the parent will NOT see 4. After fork, child and parent have distinct virtual address spaces. Even with copy-on-write optimization, modifications allocate a new physical page for the child, keeping parent memory untouched.",
+    "ideal_response_summary": "The parent process does NOT see 4. Upon fork, the operating system creates a distinct virtual address space for the child process. Although pages are initially shared read-only via copy-on-write (COW), when the child appends to the list, the OS allocates a new private page for the child. The parent's heap remains completely unmodified."
+  }
+}

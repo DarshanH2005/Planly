@@ -1,0 +1,22 @@
+{
+  "id": "cs_os_intermittent_race_seat_booking",
+  "micro_skill_id": "cs.os.scenario.intermittent_race_debugging",
+  "title": "Intermittent Production Concurrency Failure: Seat Booking Race",
+  "category": "scenario_reasoning",
+  "prompt": "A production backend occasionally creates two bookings for the final available seat, but developers cannot reproduce it easily locally. Why might this bug only occur occasionally instead of on every request?",
+  "evaluator_rubric": {
+    "required_concepts": [
+      "non_deterministic_scheduling",
+      "exact_thread_interleaving_window",
+      "high_concurrency_load",
+      "time_window_between_check_and_update"
+    ],
+    "forbidden_misconceptions": [
+      "race conditions happen deterministically on every request",
+      "production hardware has broken CPU locks",
+      "local environments simulate real-time production thread jitter"
+    ],
+    "scoring_criteria": "Learner must explain that race conditions require a very specific, narrow timing window: Thread 1 reads the final available seat, and before it marks the seat booked, the OS scheduler context-switches to Thread 2 which also reads the seat as available. In local tests with low load and single requests, this preemption window is rarely hit, whereas high concurrent production traffic triggers the interleaving frequently.",
+    "ideal_response_summary": "The race condition requires a precise, microscopic interleaving where one thread checks availability and is preempted before it updates the record, allowing a second thread to read the stale state. In local development with sequential or low-volume testing, requests rarely overlap in that narrow window. In production, thousands of concurrent requests increase the probability of threads hitting that exact critical section window simultaneously."
+  }
+}

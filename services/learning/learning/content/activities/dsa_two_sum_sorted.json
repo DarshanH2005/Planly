@@ -1,0 +1,101 @@
+{
+  "id": "act_dsa_two_sum_sorted",
+  "title": "Two Sum II: Input Array Is Sorted",
+  "track": "dsa",
+  "micro_skill_id": "dsa.two_pointers.inward_convergence",
+  "demands": {
+    "reasoning": 2,
+    "syntax": 2,
+    "implementation": 2,
+    "explanation": 3
+  },
+  "candidate": {
+    "statement": "Given a 1-indexed array of integers `numbers` that is already sorted in non-decreasing order, find two numbers such that they add up to a specific `target` number. Return their 1-based indices `[index1, index2]`. You may not use the same element twice. Your solution must use only O(1) additional space.",
+    "constraints": [
+      "2 <= numbers.length <= 3 * 10^4",
+      "-1000 <= numbers[i] <= 1000",
+      "numbers is sorted in non-decreasing order",
+      "Exactly one valid solution exists"
+    ],
+    "examples": [
+      {
+        "input": "numbers = [2, 7, 11, 15], target = 9",
+        "output": "[1, 2]",
+        "explanation": "The sum of 2 and 7 is 9. Therefore, index1 = 1, index2 = 2. We return [1, 2]."
+      }
+    ],
+    "starter_code": "def two_sum(numbers: list[int], target: int) -> list[int]:\n    # Inward convergence: O(1) space\n    pass\n",
+    "hints": [
+      "The array is sorted. If the current sum is smaller than target, which pointer can be moved to increase it?",
+      "If numbers[left] + numbers[right] > target, moving right leftward strictly decreases or maintains the sum."
+    ],
+    "short_diagnostics": [
+      "What is the monotonic relationship between left index advance and sum in a sorted array?"
+    ]
+  },
+  "evaluator": {
+    "reference_solution": "def two_sum(numbers: list[int], target: int) -> list[int]:\n    left, right = 0, len(numbers) - 1\n    while left < right:\n        cur = numbers[left] + numbers[right]\n        if cur == target:\n            return [left + 1, right + 1]\n        elif cur < target:\n            left += 1\n        else:\n            right -= 1\n    return []\n",
+    "rubric": "Learner must articulate why inward pointer movement monotonically approaches the target sum and implement O(1) space loop without nested scans.",
+    "test_cases": [
+      {
+        "input": {
+          "numbers": [
+            2,
+            7,
+            11,
+            15
+          ],
+          "target": 9
+        },
+        "expected": [
+          1,
+          2
+        ]
+      },
+      {
+        "input": {
+          "numbers": [
+            2,
+            3,
+            4
+          ],
+          "target": 6
+        },
+        "expected": [
+          1,
+          3
+        ]
+      },
+      {
+        "input": {
+          "numbers": [
+            -1,
+            0
+          ],
+          "target": -1
+        },
+        "expected": [
+          1,
+          2
+        ]
+      }
+    ],
+    "known_pitfalls": [
+      "Returning 0-indexed indices instead of 1-indexed.",
+      "Using hash map (O(N) space) when O(1) space is explicitly required."
+    ],
+    "oracle_notes": "Inward convergence works because every step discards an entire row or column of the Cartesian search space."
+  },
+  "provenance": {
+    "source_problem_id": "ARR2-03",
+    "version": "1.0",
+    "content_hash": "fc821d628bf5615ce28f9c24fe2be2863d8704d2a5e8c72f8b47c7519337e2eb",
+    "review_status": "verified_ready",
+    "author": "curator"
+  },
+  "planning_effort_minutes_range": [
+    15,
+    25
+  ],
+  "is_transfer_eligible": true
+}

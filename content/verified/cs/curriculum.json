@@ -1,0 +1,141 @@
+{
+  "version": "1.0",
+  "track": "cs",
+  "skills": [
+    {
+      "id": "cs.terminology.process_vs_thread",
+      "name": "Process vs Thread Terminology",
+      "track": "cs",
+      "category": "terminology",
+      "description": "Distinguishing OS processes (isolated address spaces, file descriptors) from threads (shared virtual address space, per-thread stack and registers).",
+      "prerequisites": [],
+      "difficulty": 1
+    },
+    {
+      "id": "cs.explanation.memory_models",
+      "name": "Process & Thread Memory Models",
+      "track": "cs",
+      "category": "explanation",
+      "description": "Explaining the difference between per-thread stack allocation (automatic lifetime, stack overflow) and process-wide heap allocation (dynamic allocation, fragmentation).",
+      "prerequisites": ["cs.terminology.process_vs_thread"],
+      "difficulty": 2
+    },
+    {
+      "id": "cs.scenario.shared_address_space",
+      "name": "Shared Address Space Scenario Reasoning",
+      "track": "cs",
+      "category": "scenario_reasoning",
+      "description": "Analyzing concurrency implications when multiple threads read and mutate pointers in a single process shared address space.",
+      "prerequisites": ["cs.explanation.memory_models"],
+      "difficulty": 2
+    },
+    {
+      "id": "cs.scenario.race_conditions",
+      "name": "Race Condition Diagnosis",
+      "track": "cs",
+      "category": "scenario_reasoning",
+      "description": "Diagnosing non-atomic read-modify-write sequences on shared counters or state, identifying interleavings that cause data corruption.",
+      "prerequisites": ["cs.scenario.shared_address_space"],
+      "difficulty": 3
+    },
+    {
+      "id": "cs.scenario.critical_sections",
+      "name": "Critical Section Synchronization",
+      "track": "cs",
+      "category": "scenario_reasoning",
+      "description": "Designing and evaluating mutual exclusion, mutex locks, and condition variables to guard critical section boundaries.",
+      "prerequisites": ["cs.scenario.race_conditions"],
+      "difficulty": 3
+    },
+    {
+      "id": "cs.os.terminology.race_condition",
+      "name": "Race Condition Terminology",
+      "track": "cs",
+      "category": "terminology",
+      "description": "Definition of race conditions, non-deterministic execution, and read-modify-write conflicts.",
+      "prerequisites": [],
+      "difficulty": 1
+    },
+    {
+      "id": "cs.os.terminology.critical_section",
+      "name": "Critical Section Terminology",
+      "track": "cs",
+      "category": "terminology",
+      "description": "Definition of critical section as shared mutable code blocks needing mutual exclusion.",
+      "prerequisites": ["cs.os.terminology.race_condition"],
+      "difficulty": 1
+    },
+    {
+      "id": "cs.os.terminology.mutex_lock",
+      "name": "Mutex and Lock Terminology",
+      "track": "cs",
+      "category": "terminology",
+      "description": "Mutual exclusion locks, lock acquisition, release, and deadlock risks.",
+      "prerequisites": ["cs.os.terminology.critical_section"],
+      "difficulty": 1
+    },
+    {
+      "id": "cs.os.explanation.per_process_heap",
+      "name": "Per-Process Heap & Address Space",
+      "track": "cs",
+      "category": "explanation",
+      "description": "Explaining private virtual address spaces, per-process heap isolation, and shared heap among threads.",
+      "prerequisites": [],
+      "difficulty": 2
+    },
+    {
+      "id": "cs.os.explanation.thread_stack_isolation",
+      "name": "Thread Stack Frame Isolation",
+      "track": "cs",
+      "category": "explanation",
+      "description": "Explaining per-thread stack allocation, local variables, and private execution contexts.",
+      "prerequisites": ["cs.os.explanation.per_process_heap"],
+      "difficulty": 2
+    },
+    {
+      "id": "cs.os.explanation.context_switching",
+      "name": "Thread Context Switching Overhead",
+      "track": "cs",
+      "category": "explanation",
+      "description": "Register save/restore, cache invalidation, and scheduling quantum in thread context switches.",
+      "prerequisites": ["cs.os.explanation.thread_stack_isolation"],
+      "difficulty": 2
+    },
+    {
+      "id": "cs.os.scenario.check_then_act_lock_scope",
+      "name": "Check-Then-Act Lock Scoping",
+      "track": "cs",
+      "category": "scenario_reasoning",
+      "description": "Diagnosing check-then-act race windows where lock release happens before state mutation.",
+      "prerequisites": ["cs.os.terminology.mutex_lock", "cs.os.explanation.per_process_heap"],
+      "difficulty": 3
+    },
+    {
+      "id": "cs.os.scenario.intermittent_race_debugging",
+      "name": "Production Intermittent Race Debugging",
+      "track": "cs",
+      "category": "scenario_reasoning",
+      "description": "Investigating intermittent overbooking or concurrency bugs occurring only under high throughput.",
+      "prerequisites": ["cs.os.scenario.check_then_act_lock_scope"],
+      "difficulty": 3
+    },
+    {
+      "id": "cs.os.scenario.inventory_decrement_transfer",
+      "name": "Inventory Decrement Transfer Scenario",
+      "track": "cs",
+      "category": "scenario_reasoning",
+      "description": "Applying lock scoping and atomicity reasoning to e-commerce inventory balance decrements.",
+      "prerequisites": ["cs.os.scenario.check_then_act_lock_scope"],
+      "difficulty": 3
+    },
+    {
+      "id": "cs.os.scenario.multi_process_isolation_transfer",
+      "name": "Multi-Process Isolation Transfer Scenario",
+      "track": "cs",
+      "category": "scenario_reasoning",
+      "description": "Reasoning about memory copy-on-write and pointer independence across process fork boundaries.",
+      "prerequisites": ["cs.os.explanation.per_process_heap"],
+      "difficulty": 3
+    }
+  ]
+}

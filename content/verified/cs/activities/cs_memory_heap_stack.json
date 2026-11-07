@@ -1,0 +1,58 @@
+{
+  "id": "act_cs_memory_heap_stack",
+  "title": "Thread Stack vs Process Heap Lifetime & Fragmentation",
+  "track": "cs",
+  "micro_skill_id": "cs.os.explanation.per_process_heap",
+  "demands": {
+    "reasoning": 3,
+    "syntax": 1,
+    "implementation": 1,
+    "explanation": 3
+  },
+  "candidate": {
+    "statement": "Thread 1 dynamically allocates a 10MB memory buffer on the heap inside a function, passes a reference pointer to Thread 2, and then exits its function and terminates. (1) Does the buffer remain accessible to Thread 2? (2) Contrast stack frame cleanup vs heap fragmentation.",
+    "constraints": [
+      "Language: C++ / Python / Java memory model",
+      "Pointer passed before thread termination"
+    ],
+    "examples": [
+      {
+        "scenario": "Thread 1 exits; Thread 2 reads pointer",
+        "result": "Memory valid on heap; invalid if on stack"
+      }
+    ],
+    "starter_code": "# Detail lifetime and fragmentation for thread stack vs process heap:\ndef evaluate_heap_lifespan() -> dict:\n    pass\n",
+    "hints": [
+      "Remember thread termination destroys thread stack, but process heap belongs to the entire process."
+    ],
+    "short_diagnostics": [
+      "Why does heap allocation lead to external fragmentation over time while stack frames do not?"
+    ]
+  },
+  "evaluator": {
+    "reference_solution": "(1) Yes, the buffer remains accessible to Thread 2 because the heap belongs to the process, surviving individual thread termination. (2) Stack frames follow strict LIFO automatic allocation/deallocation with zero fragmentation. The heap supports arbitrary sized allocations and out-of-order frees, creating external and internal memory fragmentation over time.",
+    "rubric": "Candidate recognizes process-wide heap survival across thread termination and explains heap fragmentation mechanics.",
+    "test_cases": [
+      {
+        "input": "thread_exit_heap_valid",
+        "expected": true
+      }
+    ],
+    "known_pitfalls": [
+      "Assuming thread termination frees all memory allocated by that thread."
+    ],
+    "oracle_notes": "Reference context from imported CS heap correction."
+  },
+  "provenance": {
+    "source_problem_id": "cs_heap_stack_01",
+    "version": "1.0",
+    "content_hash": "72ea16532cd1e10c83c0a46f9f7ca6309aa76cf7229adb27473724e5a6483e57",
+    "review_status": "verified_ready",
+    "author": "curator"
+  },
+  "planning_effort_minutes_range": [
+    15,
+    30
+  ],
+  "is_transfer_eligible": true
+}

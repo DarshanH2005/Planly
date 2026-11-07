@@ -1,0 +1,53 @@
+{
+  "scenario_id": "beh_leadership_conflict",
+  "version": "1.0",
+  "type": "behavioral_star",
+  "title": "Technical Disagreement & Cross-Functional Conflict Resolution",
+  "description": "Demonstrate leadership, communication, and pragmatic technical trade-off negotiation using the STAR framework (Situation, Task, Action, Result).",
+  "required_dimensions": [
+    "situation_context",
+    "task_ownership",
+    "personal_action",
+    "measurable_result",
+    "reflection_and_learning"
+  ],
+  "probing_guidelines": [
+    {
+      "dimension": "situation_context",
+      "prompt_template": "In your experience note {experience_id}, you described a conflict regarding {topic}. What was the specific business stakes or technical deadline at risk?",
+      "evidence_check": "Establishes authentic context without generic or embellished employer background."
+    },
+    {
+      "dimension": "task_ownership",
+      "prompt_template": "What was your direct responsibility versus the team's responsibility in resolving {topic}?",
+      "evidence_check": "Distinguishes candidate's specific ownership from collective group effort."
+    },
+    {
+      "dimension": "personal_action",
+      "prompt_template": "What concrete technical steps or communication channels did you personally lead to de-escalate the debate?",
+      "evidence_check": "Candidate must focus on 'I did' actions, prototyping, or data-driven benchmarking rather than 'we just agreed'."
+    },
+    {
+      "dimension": "measurable_result",
+      "prompt_template": "What was the final outcome, and what concrete metrics or team outcomes resulted?",
+      "evidence_check": "If metrics were not formally tracked, candidate must state impact honestly rather than fabricating percentages."
+    },
+    {
+      "dimension": "reflection_and_learning",
+      "prompt_template": "Looking back, what trade-off would you make differently next time?",
+      "evidence_check": "Shows introspection and growth without defensive justifications."
+    }
+  ],
+  "study_recommendations": {
+    "behavioral.star.missing_personal_action": {
+      "title": "STAR Framework: Personal Action Articulation",
+      "description": "Structure narrative around 'I' contributions, prototyping data points, and facilitating consensus.",
+      "estimated_minutes": 20
+    },
+    "behavioral.star.fabricated_metrics": {
+      "title": "Honest Impact & Qualitative Result Articulation",
+      "description": "Learn to frame qualitative outcomes, stakeholder alignment, and risk reduction when numeric metrics were not measured.",
+      "estimated_minutes": 15
+    }
+  }
+}

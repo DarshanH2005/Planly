@@ -1,0 +1,106 @@
+{
+  "bundleId": "bundle-v1-foundation",
+  "version": 1,
+  "description": "Foundation training prompts and session pack for Planly",
+  "prompts": [
+    {
+      "id": "PROMPT-FOUNDATION-01",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F01"],
+      "difficulty": "foundation",
+      "statement": "Implement first_repeat(values) which returns the value whose second occurrence has the smallest index in the input list. If no value appears more than once, return None.",
+      "constraints": [
+        "Integers in values",
+        "Length of values: 0 <= len(values) <= 100,000",
+        "Expected O(n) time and O(n) auxiliary space"
+      ],
+      "examples": [
+        {
+          "input": "[4, 2, 4, 2]",
+          "expected": "4",
+          "explanation": "4's second occurrence is at index 2, while 2's second occurrence is at index 3."
+        },
+        {
+          "input": "[]",
+          "expected": "None",
+          "explanation": "Empty list has no repeat."
+        },
+        {
+          "input": "[0, 0]",
+          "expected": "0",
+          "explanation": "0 repeats at index 1."
+        },
+        {
+          "input": "[1, 2]",
+          "expected": "None",
+          "explanation": "All elements distinct."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-types",
+          "question": "Can values contain negative integers or zeros?",
+          "answer": "Yes, values may contain arbitrary positive or negative integers, and zero."
+        },
+        {
+          "id": "clarify-empty",
+          "question": "What should be returned for an empty list or single-element list?",
+          "answer": "Return None."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-occurrence-indexes",
+          "trigger": "correct_implementation",
+          "question": "Instead of returning just the value, return a tuple (first_index, second_index) of the earliest repeating element, or None if none.",
+          "criterion": "Tracks initial index in hash map alongside presence, returns tuple of indices correctly."
+        }
+      ],
+      "privateReference": {
+        "approach": "Maintain a hash set of observed numbers while scanning left to right. The first number already in the set is the answer.",
+        "checks": [
+          "Returns None on empty list",
+          "Correctly detects earliest duplicate index",
+          "Handles large lists without timing out"
+        ],
+        "expectedComplexity": "O(n) time, O(n) space"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "official",
+        "note": "Canonical foundation benchmark",
+        "confidence": "confirmed"
+      }
+    }
+  ],
+  "packs": [
+    {
+      "id": "PACK-FOUNDATION-01",
+      "version": 1,
+      "stage": "foundation",
+      "status": "validated",
+      "title": "Foundation Drill: Core Invariants",
+      "instructions": "Implement the requested function within 30 minutes. Be mindful of hash lookups, boundary indices, and time complexity.",
+      "durationMinutes": 30,
+      "debriefMinutes": 10,
+      "inputFormat": "function",
+      "resourcePolicy": {
+        "docs": false,
+        "ai": false,
+        "hints": false,
+        "notes": true
+      },
+      "promptIds": ["PROMPT-FOUNDATION-01"],
+      "rubricId": "rubric-foundation-v1",
+      "rubricVersion": 1,
+      "prerequisites": [],
+      "source": {
+        "kind": "official",
+        "note": "Foundation core pack",
+        "confidence": "confirmed"
+      }
+    }
+  ]
+}

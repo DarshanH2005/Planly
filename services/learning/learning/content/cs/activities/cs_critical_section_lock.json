@@ -1,0 +1,58 @@
+{
+  "id": "act_cs_critical_section_lock",
+  "title": "Critical Section Boundaries & Mutex Synchronization",
+  "track": "cs",
+  "micro_skill_id": "cs.os.scenario.check_then_act_lock_scope",
+  "demands": {
+    "reasoning": 3,
+    "syntax": 2,
+    "implementation": 2,
+    "explanation": 3
+  },
+  "candidate": {
+    "statement": "A shared FIFO queue is accessed concurrently by multiple producers and consumers. Identify the critical section boundaries, explain the trade-offs of lock acquisition scope (coarse-grained outside loop vs fine-grained inside loop), and explain what failure occurs if an exception bypasses lock release.",
+    "constraints": [
+      "Multi-producer multi-consumer queue",
+      "Mutex / Lock synchronization"
+    ],
+    "examples": [
+      {
+        "pattern": "with lock: queue.push(item)",
+        "outcome": "Atomicity guaranteed with exception safety"
+      }
+    ],
+    "starter_code": "# Design synchronization boundaries and exception safety:\ndef design_critical_section() -> dict:\n    pass\n",
+    "hints": [
+      "Critical section encompasses any access to shared pointers, size counters, or internal buffers."
+    ],
+    "short_diagnostics": [
+      "Why must lock release be guaranteed via RAII or try/finally blocks?"
+    ]
+  },
+  "evaluator": {
+    "reference_solution": "The critical section must enclose all mutations and reads of queue head/tail pointers and item count. Coarse locking outside loops reduces lock overhead but serializes entire batches, starving other threads; fine locking inside loops maximizes concurrency at the cost of higher lock acquisition overhead. Unhandled exceptions that bypass lock release cause permanent deadlock as other waiting threads block indefinitely.",
+    "rubric": "Accurately defines critical section bounds, lock granularity trade-offs, and deadlock risk from unreleased mutexes.",
+    "test_cases": [
+      {
+        "input": "unreleased_mutex_outcome",
+        "expected": "deadlock"
+      }
+    ],
+    "known_pitfalls": [
+      "Enclosing non-shared I/O operations inside the critical section."
+    ],
+    "oracle_notes": "Evaluates practical systems concurrency judgment."
+  },
+  "provenance": {
+    "source_problem_id": "cs_crit_sec_01",
+    "version": "1.0",
+    "content_hash": "d4656ca9a62de8794ccdeb0e26a23ea5675b18a2f2b1983e0c7475b8db1ecafe",
+    "review_status": "verified_ready",
+    "author": "curator"
+  },
+  "planning_effort_minutes_range": [
+    15,
+    30
+  ],
+  "is_transfer_eligible": true
+}

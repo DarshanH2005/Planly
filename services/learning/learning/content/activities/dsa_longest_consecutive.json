@@ -1,0 +1,93 @@
+{
+  "id": "act_dsa_longest_consecutive",
+  "title": "Longest Consecutive Sequence",
+  "track": "dsa",
+  "micro_skill_id": "dsa.hash_set.consecutive_sequence",
+  "demands": {
+    "reasoning": 3,
+    "syntax": 2,
+    "implementation": 3,
+    "explanation": 3
+  },
+  "candidate": {
+    "statement": "Given an unsorted array of integers `nums`, return the length of the longest consecutive elements sequence. You must write an algorithm that runs in O(n) time.",
+    "constraints": [
+      "0 <= nums.length <= 10^5",
+      "-10^9 <= nums[i] <= 10^9"
+    ],
+    "examples": [
+      {
+        "input": "nums = [100, 4, 200, 1, 3, 2]",
+        "output": "4",
+        "explanation": "The longest consecutive elements sequence is [1, 2, 3, 4]. Its length is 4."
+      }
+    ],
+    "starter_code": "def longest_consecutive(nums: list[int]) -> int:\n    # O(N) sequence start identification\n    pass\n",
+    "hints": [
+      "To achieve O(N), only start counting streaks from numbers that are the beginning of a sequence.",
+      "A number x is the start of a streak if and only if x - 1 is not in the set."
+    ],
+    "short_diagnostics": [
+      "What loop variable is updated in the inner while loop to traverse the streak without infinite looping?"
+    ]
+  },
+  "evaluator": {
+    "reference_solution": "def longest_consecutive(nums: list[int]) -> int:\n    num_set = set(nums)\n    max_len = 0\n    for x in num_set:\n        if x - 1 not in num_set:\n            cur = x\n            current_len = 1\n            while cur + 1 in num_set:\n                cur += 1\n                current_len += 1\n            max_len = max(max_len, current_len)\n    return max_len\n",
+    "rubric": "Learner must verify sequence starts with x - 1 not in set and update advancing streak variable cur + 1 (not fixed x + 1).",
+    "test_cases": [
+      {
+        "input": {
+          "nums": [
+            100,
+            4,
+            200,
+            1,
+            3,
+            2
+          ]
+        },
+        "expected": 4
+      },
+      {
+        "input": {
+          "nums": [
+            0,
+            3,
+            7,
+            2,
+            5,
+            8,
+            4,
+            6,
+            0,
+            1
+          ]
+        },
+        "expected": 9
+      },
+      {
+        "input": {
+          "nums": []
+        },
+        "expected": 0
+      }
+    ],
+    "known_pitfalls": [
+      "Testing while x + 1 in num_set without advancing x, causing an infinite loop.",
+      "Iterating through original list with duplicates instead of set."
+    ],
+    "oracle_notes": "Since inner loop runs only for sequence starts, each element is visited at most twice, ensuring strict O(N) runtime."
+  },
+  "provenance": {
+    "source_problem_id": "ARR1-03",
+    "version": "1.0",
+    "content_hash": "9d132f10ec77876c5eb2e83c8b40744d1b18ebc2955f558b9dd82494871df90a",
+    "review_status": "verified_ready",
+    "author": "curator"
+  },
+  "planning_effort_minutes_range": [
+    20,
+    35
+  ],
+  "is_transfer_eligible": true
+}

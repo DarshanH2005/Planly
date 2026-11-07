@@ -1,0 +1,21 @@
+{
+  "id": "cs_os_transfer_lock_scope_variant",
+  "micro_skill_id": "cs.os.scenario.check_then_act_lock_scope",
+  "title": "Atomic Account Transfer Lock Scoping",
+  "category": "scenario_reasoning",
+  "prompt": "Consider transferring money from Account A to Account B. A developer locks Account A, deducts ₹500, unlocks A, then locks Account B and adds ₹500. What race condition or consistency violation can an observer reading both balances encounter?",
+  "evaluator_rubric": {
+    "required_concepts": [
+      "intermediate_inconsistent_state",
+      "temporary_lost_money",
+      "total_balance_invariant_violation",
+      "need_two_phase_or_joint_locking"
+    ],
+    "forbidden_misconceptions": [
+      "individual locks are always sufficient for multi-resource transfer",
+      "deadlock is the only problem with multi-resource locks"
+    ],
+    "scoring_criteria": "Learner must identify that an observer reading the sum of balances after the debit on A but before the credit on B will see that ₹500 has vanished from the system (violating atomicity and consistency). The transfer operation must be atomic across both accounts.",
+    "ideal_response_summary": "Between unlocking Account A and locking Account B, the system enters an inconsistent intermediate state. An auditing thread calculating total deposits across accounts during this window will observe ₹500 missing from the aggregate total balance. Both accounts must be locked together (or in a consistent global ordering) to make the transfer atomic."
+  }
+}

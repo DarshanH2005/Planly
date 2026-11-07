@@ -1,0 +1,25 @@
+{
+  "id": "sql_department_average_salary",
+  "micro_skill_id": "sql.aggregation.groupby_having",
+  "title": "Department Average Salary with HAVING Filtering",
+  "track": "sql",
+  "category": "querying",
+  "prompt": "Write a query to find the department and its average salary for all departments whose average salary is greater than 60,000. Order the results by average salary in descending order.",
+  "fixture_ddl": "CREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    department TEXT NOT NULL,\n    salary REAL NOT NULL\n);\n",
+  "fixture_data": {
+    "employees": [
+      {"id": 1, "name": "Alice", "department": "Engineering", "salary": 90000.0},
+      {"id": 2, "name": "Bob", "department": "Engineering", "salary": 85000.0},
+      {"id": 3, "name": "Charlie", "department": "Marketing", "salary": 55000.0},
+      {"id": 4, "name": "David", "department": "Marketing", "salary": 50000.0},
+      {"id": 5, "name": "Eve", "department": "Sales", "salary": 65000.0},
+      {"id": 6, "name": "Frank", "department": "Sales", "salary": 70000.0}
+    ]
+  },
+  "reference_query": "SELECT department, AVG(salary) AS avg_salary FROM employees GROUP BY department HAVING AVG(salary) > 60000 ORDER BY avg_salary DESC;",
+  "expected_columns": ["department", "avg_salary"],
+  "expected_rows": [
+    ["Engineering", 87500.0],
+    ["Sales", 67500.0]
+  ]
+}

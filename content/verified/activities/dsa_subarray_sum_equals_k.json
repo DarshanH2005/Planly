@@ -1,0 +1,91 @@
+{
+  "id": "act_dsa_subarray_sum_equals_k",
+  "title": "Subarray Sum Equals K",
+  "track": "dsa",
+  "micro_skill_id": "dsa.arrays.prefix_sums",
+  "demands": {
+    "reasoning": 3,
+    "syntax": 2,
+    "implementation": 3,
+    "explanation": 3
+  },
+  "candidate": {
+    "statement": "Given an array of integers `nums` and an integer `k`, return the total number of subarrays whose sum equals to `k`. A subarray is a contiguous non-empty sequence of elements within an array.",
+    "constraints": [
+      "1 <= nums.length <= 2 * 10^4",
+      "-1000 <= nums[i] <= 1000",
+      "-10^7 <= k <= 10^7"
+    ],
+    "examples": [
+      {
+        "input": "nums = [1, 1, 1], k = 2",
+        "output": "2",
+        "explanation": "Subarrays [1, 1] at indices [0, 1] and [1, 2] sum to 2."
+      }
+    ],
+    "starter_code": "def subarray_sum(nums: list[int], k: int) -> int:\n    # Prefix sum frequencies: O(N) time\n    pass\n",
+    "hints": [
+      "If the cumulative sum up to index j is S_j and up to index i-1 is S_{i-1}, the subarray sum from i to j is S_j - S_{i-1}.",
+      "If S_j - S_{i-1} == k, then S_{i-1} == S_j - k. Store prefix sum frequencies in a hash map."
+    ],
+    "short_diagnostics": [
+      "Why must the prefix frequency map be initialized with {0: 1}?"
+    ]
+  },
+  "evaluator": {
+    "reference_solution": "def subarray_sum(nums: list[int], k: int) -> int:\n    count = 0\n    cur_sum = 0\n    prefix_counts = {0: 1}\n    for x in nums:\n        cur_sum += x\n        if (cur_sum - k) in prefix_counts:\n            count += prefix_counts[cur_sum - k]\n        prefix_counts[cur_sum] = prefix_counts.get(cur_sum, 0) + 1\n    return count\n",
+    "rubric": "Learner must initialize prefix frequency map with base case {0: 1} and accumulate prefix_counts[cur_sum - k] before recording cur_sum.",
+    "test_cases": [
+      {
+        "input": {
+          "nums": [
+            1,
+            1,
+            1
+          ],
+          "k": 2
+        },
+        "expected": 2
+      },
+      {
+        "input": {
+          "nums": [
+            1,
+            2,
+            3
+          ],
+          "k": 3
+        },
+        "expected": 2
+      },
+      {
+        "input": {
+          "nums": [
+            1,
+            -1,
+            0
+          ],
+          "k": 0
+        },
+        "expected": 3
+      }
+    ],
+    "known_pitfalls": [
+      "Omitting {0: 1} base case in prefix counts, failing subarrays starting from index 0.",
+      "Assuming all numbers are positive and attempting two-pointer sliding window."
+    ],
+    "oracle_notes": "Because numbers can be negative, prefix sums may decrease, so monotonicity does not hold and sliding window fails."
+  },
+  "provenance": {
+    "source_problem_id": "ARR4-04",
+    "version": "1.0",
+    "content_hash": "f273741e32f1a07293820a91ef4cebd38decff7d0038bead86ff7b97c55f540b",
+    "review_status": "verified_ready",
+    "author": "curator"
+  },
+  "planning_effort_minutes_range": [
+    20,
+    35
+  ],
+  "is_transfer_eligible": true
+}

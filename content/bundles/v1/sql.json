@@ -1,0 +1,86 @@
+{
+  "bundleId": "bundle-v1-sql",
+  "version": 1,
+  "description": "SQL & Relational Analytics: Window Functions & Retention Cohort Analysis",
+  "prompts": [
+    {
+      "id": "PROMPT-SQL-01",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F01", "F08"],
+      "difficulty": "medium",
+      "statement": "Given a table UserLogins with columns (user_id INT, login_date DATE), write a SQL query to find all users who logged in for at least 3 consecutive days. Return the user_id for each qualifying user with duplicates removed, ordered by user_id ascending.",
+      "constraints": [
+        "UserLogins may contain duplicate entries for the same user on the same date",
+        "Dates are formatted as YYYY-MM-DD",
+        "Must run efficiently without Cartesian joins"
+      ],
+      "examples": [
+        {
+          "input": "UserLogins: [[1, '2026-09-01'], [1, '2026-09-02'], [1, '2026-09-03'], [2, '2026-09-01'], [2, '2026-09-03']]",
+          "expected": "user_id: [1]",
+          "explanation": "User 1 logged in on 3 consecutive days (Sep 1, 2, 3). User 2 skipped Sep 2."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-duplicate-dates",
+          "question": "If a user logs in multiple times on the same day, does that count as multiple consecutive days?",
+          "answer": "No. You must deduplicate (user_id, login_date) pairs before evaluating consecutive date streaks."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-streak-length",
+          "trigger": "correct_window_query",
+          "question": "How would you modify the query to return the length of the longest consecutive login streak for every user?",
+          "criterion": "Groups by (user_id, streak_group_id), calculates COUNT(*), then takes MAX(streak_length) partitioned by user_id."
+        }
+      ],
+      "privateReference": {
+        "approach": "Use the standard date grouping technique: deduplicate dates with DISTINCT, order dates per user using ROW_NUMBER(), subtract the row number in days from login_date to form a group anchor (login_date - ROW_NUMBER() * INTERVAL '1 day'), then GROUP BY user_id and the anchor with HAVING COUNT(*) >= 3.",
+        "checks": [
+          "Deduplicates multiple logins on the same day",
+          "Uses ROW_NUMBER() window function correctly partitioned by user_id",
+          "Returns distinct user_ids sorted ascending"
+        ],
+        "expectedComplexity": "O(N log N) time for sorting, O(N) memory"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "official",
+        "note": "Canonical SQL Consecutive Streaks benchmark",
+        "confidence": "confirmed"
+      }
+    }
+  ],
+  "packs": [
+    {
+      "id": "PACK-SQL-01",
+      "version": 1,
+      "stage": "engineering",
+      "status": "validated",
+      "title": "SQL Practice: Window Functions & Consecutive Streaks",
+      "instructions": "Write a single performant SQL query. Avoid quadratic self-joins and correctly handle duplicate date records.",
+      "durationMinutes": 30,
+      "debriefMinutes": 10,
+      "inputFormat": "stdin_stdout",
+      "resourcePolicy": {
+        "docs": true,
+        "ai": false,
+        "hints": false,
+        "notes": true
+      },
+      "promptIds": ["PROMPT-SQL-01"],
+      "rubricId": "rubric-sql-v1",
+      "rubricVersion": 1,
+      "prerequisites": ["PACK-FOUNDATION-01"],
+      "source": {
+        "kind": "official",
+        "note": "SQL Practical standard pack",
+        "confidence": "confirmed"
+      }
+    }
+  ]
+}

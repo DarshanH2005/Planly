@@ -1,0 +1,863 @@
+{
+  "bundleId": "bundle-v1-starter",
+  "version": 1,
+  "description": "Starter prompt and session packs with demo_exposed baseline fixtures",
+  "prompts": [
+    {
+      "id": "FX-HASH-A",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F01"],
+      "difficulty": "foundation",
+      "statement": "Implement first_repeat(values) which returns the value whose second occurrence has the smallest index in the input list. If no value appears more than once, return None.",
+      "constraints": [
+        "Integers in values",
+        "Length of values: 0 <= len(values) <= 100,000",
+        "Expected O(n) time and O(n) auxiliary space"
+      ],
+      "examples": [
+        {
+          "input": "[4, 2, 4, 2]",
+          "expected": "4",
+          "explanation": "4's second occurrence is at index 2, while 2's second occurrence is at index 3."
+        },
+        {
+          "input": "[]",
+          "expected": "None",
+          "explanation": "Empty list has no repeat."
+        },
+        {
+          "input": "[0, 0]",
+          "expected": "0",
+          "explanation": "0 repeats at index 1."
+        },
+        {
+          "input": "[1, 2]",
+          "expected": "None",
+          "explanation": "All elements distinct."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-types",
+          "question": "Can values contain negative integers or zeros?",
+          "answer": "Yes, values may contain arbitrary positive or negative integers, and zero."
+        },
+        {
+          "id": "clarify-empty",
+          "question": "What should be returned for an empty list or single-element list?",
+          "answer": "Return None."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-occurrence-indexes",
+          "trigger": "correct_implementation",
+          "question": "Instead of returning just the value, return a tuple (first_index, second_index) of the earliest repeating element, or None if none.",
+          "criterion": "Tracks initial index in hash map alongside presence, returns tuple of indices correctly."
+        }
+      ],
+      "privateReference": {
+        "approach": "Maintain a seen set. Iterate through values: if x in seen, return x immediately. Else add x to seen. Return None at end.",
+        "checks": [
+          "first_repeat([4, 2, 4, 2]) == 4",
+          "first_repeat([]) is None",
+          "first_repeat([0, 0]) == 0",
+          "first_repeat([1, 2]) is None"
+        ],
+        "expectedComplexity": "O(n) time, O(n) space"
+      },
+      "repairLinks": [
+        {
+          "competency": "boundaries",
+          "drillId": "FX-HASH-D",
+          "retestIds": ["FX-HASH-T"]
+        }
+      ],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "original",
+        "note": "Planly demo_exposed starter fixture FX-HASH-A",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "FX-HASH-D",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F01"],
+      "difficulty": "foundation",
+      "statement": "Debug first_pair(values, target) which should return the earliest completing pair of distinct indices (i, j) with i < j such that values[i] + values[j] == target. The seeded implementation incorrectly treats stored index 0 as falsy (e.g. if seen.get(comp):). Correct it.",
+      "constraints": [
+        "Integers in values, target integer",
+        "Distinct indices required (i != j)",
+        "Must correctly handle index 0"
+      ],
+      "examples": [
+        {
+          "input": "[3, 7], 10",
+          "expected": "(0, 1)",
+          "explanation": "3 + 7 = 10; index 0 and 1."
+        },
+        {
+          "input": "[5], 10",
+          "expected": "None",
+          "explanation": "Only one element, cannot pair with itself."
+        },
+        {
+          "input": "[5, 5], 10",
+          "expected": "(0, 1)",
+          "explanation": "Both values are 5 at distinct indices."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-indices",
+          "question": "Does earliest completing pair mean smallest j?",
+          "answer": "Yes, whichever index j completes a valid sum first during linear scan."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-truthiness-explanation",
+          "trigger": "fix_identified",
+          "question": "Explain why 'if comp in seen:' differs from 'if seen.get(comp):' in Python.",
+          "criterion": "Explains that index 0 evaluates to False in boolean context even though the key is present in the dictionary."
+        }
+      ],
+      "privateReference": {
+        "approach": "Use dict lookup with 'comp in seen' or check 'seen[comp] is not None' rather than relying on truthiness.",
+        "checks": [
+          "first_pair([3, 7], 10) == (0, 1)",
+          "first_pair([5], 10) is None",
+          "first_pair([5, 5], 10) == (0, 1)"
+        ],
+        "expectedComplexity": "O(n) time, O(n) space"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "original",
+        "note": "Planly demo_exposed debugging drill FX-HASH-D",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "FX-HASH-T",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F01"],
+      "difficulty": "easy",
+      "statement": "Implement prior_counts(values) which returns a list where each element at index i is the number of times values[i] appeared strictly earlier in values (i.e. at indices 0 <= j < i).",
+      "constraints": [
+        "Integers in values, length 0 <= len(values) <= 100,000",
+        "Expected O(n) time and O(n) auxiliary space"
+      ],
+      "examples": [
+        {
+          "input": "[8, 2, 8, 8]",
+          "expected": "[0, 0, 1, 2]",
+          "explanation": "First 8 has 0 prior; 2 has 0 prior; second 8 has 1 prior; third 8 has 2 prior."
+        },
+        {
+          "input": "[]",
+          "expected": "[]",
+          "explanation": "Empty input produces empty list."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-zeros",
+          "question": "Can values include negative numbers or zeros?",
+          "answer": "Yes, any integer values."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-streaming",
+          "trigger": "correct_implementation",
+          "question": "How would you structure this if values were arriving as an infinite generator/stream rather than an in-memory list?",
+          "criterion": "Implements or explains generator yield yielding counts while updating hash frequencies on the fly."
+        }
+      ],
+      "privateReference": {
+        "approach": "Iterate with a frequency dictionary. For each x, query counts.get(x, 0), append to output, then counts[x] += 1.",
+        "checks": [
+          "prior_counts([8, 2, 8, 8]) == [0, 0, 1, 2]",
+          "prior_counts([]) == []"
+        ],
+        "expectedComplexity": "O(n) time, O(n) space"
+      },
+      "repairLinks": [],
+      "reservedForRetest": true,
+      "source": {
+        "kind": "original",
+        "note": "Planly demo_exposed retest fixture FX-HASH-T",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "FX-SEARCH-A",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F03"],
+      "difficulty": "foundation",
+      "statement": "Implement first_at_least(a, x) which returns the first index in nondecreasing sorted list a with value >= x. If all elements are strictly less than x, return len(a).",
+      "constraints": [
+        "Sorted nondecreasing integers",
+        "Length: 0 <= len(a) <= 100,000",
+        "Must run in O(log n) time and O(1) auxiliary space"
+      ],
+      "examples": [
+        {
+          "input": "[], 4",
+          "expected": "0",
+          "explanation": "Empty list returns length 0."
+        },
+        {
+          "input": "[1, 3, 3, 8], 3",
+          "expected": "1",
+          "explanation": "First element >= 3 is at index 1."
+        },
+        {
+          "input": "[1, 3, 3, 8], 9",
+          "expected": "4",
+          "explanation": "All elements < 9, returns len(a) = 4."
+        },
+        {
+          "input": "[1, 3, 3, 8], 0",
+          "expected": "0",
+          "explanation": "First element >= 0 is at index 0."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-bounds",
+          "question": "If all elements are smaller than x, should it return -1 or len(a)?",
+          "answer": "Return len(a) (the insertion point)."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-half-open-invariant",
+          "trigger": "correct_implementation",
+          "question": "State the exact half-open loop invariant maintained by your pointers throughout the binary search.",
+          "criterion": "Defines [lo, hi) where a[i] < x for all i < lo, and a[j] >= x for all j >= hi."
+        }
+      ],
+      "privateReference": {
+        "approach": "lo, hi = 0, len(a). While lo < hi: mid = (lo + hi) // 2. If a[mid] >= x: hi = mid. Else: lo = mid + 1. Return lo.",
+        "checks": [
+          "first_at_least([], 4) == 0",
+          "first_at_least([1, 3, 3, 8], 3) == 1",
+          "first_at_least([1, 3, 3, 8], 9) == 4",
+          "first_at_least([1, 3, 3, 8], 0) == 0"
+        ],
+        "expectedComplexity": "O(log n) time, O(1) space"
+      },
+      "repairLinks": [
+        {
+          "competency": "boundaries",
+          "drillId": "FX-SEARCH-D",
+          "retestIds": ["FX-SEARCH-T"]
+        }
+      ],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "original",
+        "note": "Planly demo_exposed starter fixture FX-SEARCH-A",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "FX-SEARCH-D",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F03"],
+      "difficulty": "foundation",
+      "statement": "Debug a lower_bound implementation that enters an infinite loop when a[mid] < x because it sets lo = mid rather than lo = mid + 1. Repair it and explain why interval shrinkage is violated.",
+      "constraints": [
+        "Sorted nondecreasing integers",
+        "Must guarantee loop termination on 2-element intervals"
+      ],
+      "examples": [
+        {
+          "input": "[1, 2], 2",
+          "expected": "1",
+          "explanation": "Target 2 is at index 1."
+        },
+        {
+          "input": "[1], 2",
+          "expected": "1",
+          "explanation": "All elements < 2, return 1."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-reproduction",
+          "question": "On which inputs does lo = mid loop indefinitely?",
+          "answer": "When hi - lo == 1 and integer division mid = (lo + hi) // 2 rounds down to lo."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-interval-shrinkage",
+          "trigger": "fix_identified",
+          "question": "Why does setting lo = mid + 1 guarantee strictly decreasing interval length?",
+          "criterion": "Explains that mid >= lo, so mid + 1 > lo, strictly increasing lo and shrinking the window."
+        }
+      ],
+      "privateReference": {
+        "approach": "Replace lo = mid with lo = mid + 1 when a[mid] < x.",
+        "checks": [
+          "first_at_least([1, 2], 2) == 1",
+          "first_at_least([1], 2) == 1"
+        ],
+        "expectedComplexity": "O(log n) time, O(1) space"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "original",
+        "note": "Planly demo_exposed debugging drill FX-SEARCH-D",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "FX-SEARCH-T",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F03"],
+      "difficulty": "easy",
+      "statement": "Implement occurrence_span(a, x) which returns the (first_index, last_index) containing value x in nondecreasing sorted list a. If x is not found, return (-1, -1). Must run in O(log n) without a linear scan.",
+      "constraints": [
+        "Sorted integers",
+        "Must use binary search for both boundaries; O(log n) worst-case time"
+      ],
+      "examples": [
+        {
+          "input": "[1, 2, 2, 2, 5], 2",
+          "expected": "(1, 3)",
+          "explanation": "Value 2 starts at index 1 and ends at index 3."
+        },
+        {
+          "input": "[2], 2",
+          "expected": "(0, 0)",
+          "explanation": "Single element match."
+        },
+        {
+          "input": "[], 2",
+          "expected": "(-1, -1)",
+          "explanation": "Empty list."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-not-found",
+          "question": "What if x is absent?",
+          "answer": "Return (-1, -1)."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-upper-bound-difference",
+          "trigger": "correct_implementation",
+          "question": "Explain the boundary condition difference between searching for the first occurrence versus the last occurrence.",
+          "criterion": "Explains how the equality branch handles mid: hi = mid for lower bound, lo = mid + 1 for upper bound."
+        }
+      ],
+      "privateReference": {
+        "approach": "Run lower_bound(x) to find first occurrence. If not found, return (-1, -1). Then lower_bound(x + 1) - 1 to find last occurrence.",
+        "checks": [
+          "occurrence_span([1, 2, 2, 2, 5], 2) == (1, 3)",
+          "occurrence_span([2], 2) == (0, 0)",
+          "occurrence_span([], 2) == (-1, -1)"
+        ],
+        "expectedComplexity": "O(log n) time, O(1) space"
+      },
+      "repairLinks": [],
+      "reservedForRetest": true,
+      "source": {
+        "kind": "original",
+        "note": "Planly demo_exposed retest fixture FX-SEARCH-T",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "FX-TREE-LCA",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F12"],
+      "difficulty": "medium",
+      "statement": "Given a binary tree with distinct values, find the Lowest Common Ancestor (LCA) of two given nodes p and q. The LCA is the lowest node in the tree that has both p and q as descendants (where a node can be a descendant of itself).",
+      "constraints": [
+        "The number of nodes in the tree is in the range [2, 100,000]",
+        "-10^9 <= Node.val <= 10^9",
+        "All Node.val are unique",
+        "p != q",
+        "p and q will exist in the tree"
+      ],
+      "examples": [
+        {
+          "input": "root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1",
+          "expected": "3",
+          "explanation": "The LCA of nodes 5 and 1 is 3."
+        },
+        {
+          "input": "root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4",
+          "expected": "5",
+          "explanation": "The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-lca-presence",
+          "question": "Can we assume both target nodes always exist in the tree?",
+          "answer": "Yes, you may assume p and q are guaranteed to be present in the tree."
+        },
+        {
+          "id": "clarify-lca-duplicates",
+          "question": "Can there be duplicate node values?",
+          "answer": "No, all node values are strictly unique."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-tree-parent-pointers",
+          "trigger": "correct_implementation",
+          "question": "How would you find LCA if each node had a pointer to its parent?",
+          "criterion": "Explains path-tracing using a hash set or two-pointer intersection with O(h) time and O(1) space."
+        }
+      ],
+      "privateReference": {
+        "approach": "Post-order traversal: recurse left and right. If root matches p or q, return root. If both left and right return non-null, root is LCA. Otherwise return non-null child.",
+        "checks": [
+          "lca([3,5,1], 5, 1) == 3",
+          "lca([3,5,1], 5, 5) == 5"
+        ],
+        "expectedComplexity": "O(n) time, O(h) space"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "original",
+        "note": "Standard Technical B interview fixture FX-TREE-LCA",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "FX-ENG-RATELIMIT",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F10"],
+      "difficulty": "medium",
+      "statement": "Implement an in-memory TokenBucketRateLimiter class in Python. The initializer takes capacity (maximum tokens) and refill_rate (tokens added per second). Implement allow_request(tokens=1) -> bool which returns True if sufficient tokens are available and deducts them, or False otherwise.",
+      "constraints": [
+        "capacity > 0, refill_rate > 0",
+        "tokens argument to allow_request is a positive integer >= 1",
+        "Must handle continuous fractional token refills accurately using elapsed timestamps"
+      ],
+      "examples": [
+        {
+          "input": "limiter = TokenBucket(capacity=5, refill_rate=1.0); limiter.allow_request(3)",
+          "expected": "True",
+          "explanation": "Bucket starts full with 5 tokens. 3 are deducted, leaving 2."
+        },
+        {
+          "input": "limiter.allow_request(4)",
+          "expected": "False",
+          "explanation": "Only 2 tokens available, 4 requested: rejected without deduction."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-eng-precision",
+          "question": "Should tokens be stored as integer or float?",
+          "answer": "Store current tokens as a float to allow fractional continuous refills."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-eng-distributed",
+          "trigger": "correct_implementation",
+          "question": "How would you adapt this implementation for a horizontally-scaled multi-process service?",
+          "criterion": "Proposes Redis Lua script or central token store to ensure atomic check-and-decrement."
+        }
+      ],
+      "privateReference": {
+        "approach": "Lazy refill: on allow_request, compute elapsed = now - last_refill. tokens = min(capacity, tokens + elapsed * rate). If tokens >= cost, tokens -= cost, return True.",
+        "checks": [
+          "TokenBucket(5, 1).allow_request(5) == True",
+          "TokenBucket(5, 1).allow_request(1) == False"
+        ],
+        "expectedComplexity": "O(1) time and O(1) space per bucket"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "original",
+        "note": "Standard Engineering round fixture FX-ENG-RATELIMIT",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "FX-PROJ-PLANLY",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F01"],
+      "difficulty": "medium",
+      "statement": "Present the architectural design and concurrency guarantees of the Planly application. Explain aggregate locking, optimistic draft revision checks, and mutation receipt idempotency. Save your artifact revision notes.",
+      "constraints": [
+        "Cite concrete database schemas and composite keys (owner_id, id)",
+        "Walk through a reproduced race condition (e.g. concurrent tabs) and explain prevention"
+      ],
+      "examples": [
+        {
+          "input": "Tab A saves revision 1 -> revision 2; Tab B attempts to save revision 1",
+          "expected": "Tab B receives VERSION_CONFLICT; Tab A's draft preserved",
+          "explanation": "Optimistic revision lock prevents last-write-wins data loss."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-proj-artifact",
+          "question": "What artifact reference should be provided?",
+          "answer": "Provide your current git commit hash and modified file paths."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-proj-offline",
+          "trigger": "explanation_complete",
+          "question": "How does the system handle offline drafts upon network recovery?",
+          "criterion": "Explains namespaced local recovery storage and timestamped conflict detection."
+        }
+      ],
+      "privateReference": {
+        "approach": "Defend feature modular monolith, Supabase SSR client with authenticated owner verification, and composite foreign key chains.",
+        "checks": [
+          "version_conflict_prevented == True"
+        ],
+        "expectedComplexity": "O(1) aggregate transactional check"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "original",
+        "note": "Standard Project round fixture FX-PROJ-PLANLY",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "FX-BEHAV-DISAGREE",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F01"],
+      "difficulty": "medium",
+      "statement": "Tell me about a time when you strongly disagreed with a technical decision, architecture choice, or teammate's approach on a project. Structure your answer using the Situation, Action, Result, and Reflection (SAR) framework.",
+      "constraints": [
+        "Must be a truthful experience from personal or academic projects",
+        "Distinguish your own individual actions from the team's actions",
+        "Include a concrete lesson or changed behavior"
+      ],
+      "examples": [
+        {
+          "input": "Choosing between relational vs NoSQL storage for financial records",
+          "expected": "Advocated for PostgreSQL foreign keys and ACID transactions; reached consensus through a benchmark prototype",
+          "explanation": "Clear individual contribution, sound technical rationale, collaborative resolution."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-behav-outcome",
+          "question": "Did the team have to adopt my suggestion for this to be a valid story?",
+          "answer": "No. A story where you disagreed and committed to an alternative after debate is equally valid."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-behav-reflection",
+          "trigger": "story_presented",
+          "question": "What would you do differently if faced with a similar disagreement today?",
+          "criterion": "Articulates concrete proactive communication and prototype-driven alignment."
+        }
+      ],
+      "privateReference": {
+        "approach": "Evaluate SAR structure: specific situation, distinct personal actions, measurable or truthful result, actionable reflection.",
+        "checks": [
+          "personal_action_distinct == True",
+          "reflection_stated == True"
+        ],
+        "expectedComplexity": "N/A"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "original",
+        "note": "Standard Behavioural round fixture FX-BEHAV-DISAGREE",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "FX-SQL-ORDERS",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F01"],
+      "difficulty": "foundation",
+      "statement": "Given customers (id, name) and orders (id, customer_id, amount, status), write a SQL query calculating total spent on 'completed' orders per customer. Return customer name and total_spent. If a customer has no completed orders, return 0. Filter to customers named 'A', 'B', 'C'. Order by customer name ascending. Seeded dataset returns: A: 100, B: 200, C: 0.",
+      "constraints": [
+        "Must use LEFT JOIN and COALESCE to handle customers with no orders",
+        "Filter orders on status = 'completed'",
+        "Returns exactly rows: ('A', 100), ('B', 200), ('C', 0)"
+      ],
+      "examples": [
+        {
+          "input": "customers: [(1, 'A'), (2, 'B'), (3, 'C')]; orders: [(101, 1, 100, 'completed'), (102, 2, 200, 'completed')]",
+          "expected": "[('A', 100), ('B', 200), ('C', 0)]",
+          "explanation": "A spent 100, B spent 200, C has no completed orders so 0."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-sql-null",
+          "question": "How should customers with no orders appear in the output?",
+          "answer": "Include them with total_spent = 0 using COALESCE(SUM(amount), 0)."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-sql-rank",
+          "trigger": "correct_query",
+          "question": "How would you rank customers by total spending within each tier using a window function?",
+          "criterion": "Uses DENSE_RANK() OVER (PARTITION BY ... ORDER BY total_spent DESC)."
+        }
+      ],
+      "privateReference": {
+        "approach": "SELECT c.name, COALESCE(SUM(o.amount), 0) AS total_spent FROM customers c LEFT JOIN orders o ON c.id = o.customer_id AND o.status = 'completed' WHERE c.name IN ('A', 'B', 'C') GROUP BY c.name ORDER BY c.name ASC;",
+        "checks": [
+          "A100",
+          "B200",
+          "C0"
+        ],
+        "expectedComplexity": "O(N + M) with index on customer_id"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "original",
+        "note": "Standard SQL fixture FX-SQL-ORDERS (AC21)",
+        "confidence": "confirmed"
+      }
+    }
+  ],
+  "packs": [
+    {
+      "id": "PACK-FOUNDATION-01",
+      "version": 1,
+      "stage": "foundation",
+      "status": "validated",
+      "title": "Foundation Diagnostic: Hashing & First Repeat",
+      "instructions": "Implement the first_repeat function in Python. Write clean, idiomatic code adhering to the O(n) time/space requirement.",
+      "durationMinutes": 20,
+      "debriefMinutes": 10,
+      "inputFormat": "function",
+      "resourcePolicy": {
+        "docs": true,
+        "ai": false,
+        "hints": true,
+        "notes": true
+      },
+      "promptIds": ["FX-HASH-A"],
+      "rubricId": "rubric-foundation-v1",
+      "rubricVersion": 1,
+      "prerequisites": [],
+      "source": {
+        "kind": "original",
+        "note": "Standard foundation diagnostic pack",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "PACK-TECHNICAL-A-01",
+      "version": 1,
+      "stage": "technical_a",
+      "status": "validated",
+      "title": "Technical Interview: Binary Search Boundary",
+      "instructions": "Solve first_at_least. Clarify constraints, explain your invariant, code the solution, and adapt to the follow-up.",
+      "durationMinutes": 30,
+      "debriefMinutes": 10,
+      "inputFormat": "function",
+      "resourcePolicy": {
+        "docs": false,
+        "ai": false,
+        "hints": false,
+        "notes": true
+      },
+      "promptIds": ["FX-SEARCH-A"],
+      "rubricId": "rubric-technical-v1",
+      "rubricVersion": 1,
+      "prerequisites": ["FX-HASH-A"],
+      "source": {
+        "kind": "original",
+        "note": "Standard technical A interview pack",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "PACK-OA-01",
+      "version": 1,
+      "stage": "oa",
+      "status": "validated",
+      "title": "Online Assessment Simulation: Foundation Set",
+      "instructions": "Complete both questions within 45 minutes under strict OA conditions. No hints or AI assistance are permitted.",
+      "durationMinutes": 45,
+      "debriefMinutes": 15,
+      "inputFormat": "function",
+      "resourcePolicy": {
+        "docs": false,
+        "ai": false,
+        "hints": false,
+        "notes": false
+      },
+      "promptIds": ["FX-HASH-A", "FX-SEARCH-A"],
+      "rubricId": "rubric-oa-v1",
+      "rubricVersion": 1,
+      "prerequisites": [],
+      "source": {
+        "kind": "original",
+        "note": "Standard OA simulation pack",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "PACK-TECHNICAL-B-01",
+      "version": 1,
+      "stage": "technical_b",
+      "status": "validated",
+      "title": "Technical Interview B: Binary Tree LCA",
+      "instructions": "Solve Lowest Common Ancestor. Clarify node constraints, traverse efficiently, and adapt to the parent pointer follow-up.",
+      "durationMinutes": 45,
+      "debriefMinutes": 15,
+      "inputFormat": "function",
+      "resourcePolicy": {
+        "docs": false,
+        "ai": false,
+        "hints": false,
+        "notes": true
+      },
+      "promptIds": ["FX-TREE-LCA"],
+      "rubricId": "rubric-technical-v1",
+      "rubricVersion": 1,
+      "prerequisites": ["FX-SEARCH-A"],
+      "source": {
+        "kind": "original",
+        "note": "Standard Technical B interview pack",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "PACK-ENGINEERING-01",
+      "version": 1,
+      "stage": "engineering",
+      "status": "validated",
+      "title": "Engineering Practical: Token Bucket Rate Limiter",
+      "instructions": "Implement a robust, thread-safe in-memory Token Bucket rate limiter. Demonstrate boundary testing and explain distributed adaptation.",
+      "durationMinutes": 60,
+      "debriefMinutes": 20,
+      "inputFormat": "function",
+      "resourcePolicy": {
+        "docs": true,
+        "ai": false,
+        "hints": false,
+        "notes": true
+      },
+      "promptIds": ["FX-ENG-RATELIMIT"],
+      "rubricId": "rubric-engineering-v1",
+      "rubricVersion": 1,
+      "prerequisites": [],
+      "source": {
+        "kind": "original",
+        "note": "Standard Engineering practical pack",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "PACK-PROJECT-01",
+      "version": 1,
+      "stage": "project",
+      "status": "validated",
+      "title": "System Project Defense: Planly Architecture",
+      "instructions": "Defend the core architecture, concurrency control, and data model of Planly. Explain a reproduced failure and reference your artifact commit.",
+      "durationMinutes": 45,
+      "debriefMinutes": 15,
+      "inputFormat": "repository",
+      "resourcePolicy": {
+        "docs": true,
+        "ai": false,
+        "hints": false,
+        "notes": true
+      },
+      "promptIds": ["FX-PROJ-PLANLY"],
+      "rubricId": "rubric-project-v1",
+      "rubricVersion": 1,
+      "prerequisites": [],
+      "source": {
+        "kind": "original",
+        "note": "Standard System Project pack (AC21)",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "PACK-BEHAVIOURAL-01",
+      "version": 1,
+      "stage": "behavioural",
+      "status": "validated",
+      "title": "Behavioural Interview: Technical Disagreement & Ownership",
+      "instructions": "Share a truthful engineering story using Situation, Action, Result, and Reflection (SAR). Highlight your own individual contribution and lesson.",
+      "durationMinutes": 30,
+      "debriefMinutes": 10,
+      "inputFormat": "spoken_or_text",
+      "resourcePolicy": {
+        "docs": false,
+        "ai": false,
+        "hints": false,
+        "notes": true
+      },
+      "promptIds": ["FX-BEHAV-DISAGREE"],
+      "rubricId": "rubric-behavioural-v1",
+      "rubricVersion": 1,
+      "prerequisites": [],
+      "source": {
+        "kind": "original",
+        "note": "Standard Behavioural round pack (AC21)",
+        "confidence": "confirmed"
+      }
+    },
+    {
+      "id": "PACK-SQL-01",
+      "version": 1,
+      "stage": "foundation",
+      "status": "validated",
+      "title": "SQL Core: Customer Orders Aggregation (AC21)",
+      "instructions": "Write a SQL query aggregating completed customer orders with COALESCE/LEFT JOIN. Must produce expected fixture results A: 100, B: 200, C: 0.",
+      "durationMinutes": 30,
+      "debriefMinutes": 10,
+      "inputFormat": "function",
+      "resourcePolicy": {
+        "docs": true,
+        "ai": false,
+        "hints": true,
+        "notes": true
+      },
+      "promptIds": ["FX-SQL-ORDERS"],
+      "rubricId": "rubric-foundation-v1",
+      "rubricVersion": 1,
+      "prerequisites": [],
+      "source": {
+        "kind": "original",
+        "note": "Standard SQL fixture pack (AC21)",
+        "confidence": "confirmed"
+      }
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "bundleId": "bundle-v1-oa",
+  "version": 1,
+  "description": "Online Assessment (OA) session pack and timed prompts for Planly",
+  "prompts": [
+    {
+      "id": "PROMPT-OA-01",
+      "version": 1,
+      "status": "validated",
+      "familyIds": ["F04", "F03"],
+      "difficulty": "medium",
+      "statement": "You are given an integer array piles where piles[i] is the number of items in the ith pile, and an integer h representing the total hours available. In each hour, you choose a single pile and consume up to k items. If the pile has fewer than k items, you eat all of them and do not eat any more items during that hour. Return the minimum integer k such that you can consume all items within h hours.",
+      "constraints": [
+        "1 <= piles.length <= 100,000",
+        "piles.length <= h <= 1,000,000,000",
+        "1 <= piles[i] <= 1,000,000,000",
+        "Expected O(n * log(max(piles))) time and O(1) auxiliary space"
+      ],
+      "examples": [
+        {
+          "input": "piles = [3, 6, 7, 11], h = 8",
+          "expected": "4",
+          "explanation": "At rate k = 4, hours required: ceil(3/4)+ceil(6/4)+ceil(7/4)+ceil(11/4) = 1 + 2 + 2 + 3 = 8 <= 8."
+        },
+        {
+          "input": "piles = [30, 11, 23, 4, 20], h = 5",
+          "expected": "30",
+          "explanation": "Since h == piles.length, k must equal max(piles)."
+        },
+        {
+          "input": "piles = [30, 11, 23, 4, 20], h = 6",
+          "expected": "23",
+          "explanation": "At rate 23, hours = 2 + 1 + 1 + 1 + 1 = 6 <= 6."
+        }
+      ],
+      "clarificationBranches": [
+        {
+          "id": "clarify-h-lower-bound",
+          "question": "Can h ever be strictly less than piles.length?",
+          "answer": "No, by problem constraint piles.length <= h, so a valid integer answer k is guaranteed to exist."
+        }
+      ],
+      "followups": [
+        {
+          "id": "fup-overflow-handling",
+          "trigger": "correct_binary_search",
+          "question": "How do you guarantee that calculating the required hours does not cause 32-bit integer overflow in languages like C++ or Java?",
+          "criterion": "Uses 64-bit integer accumulators for total hour summation."
+        }
+      ],
+      "privateReference": {
+        "approach": "Binary search on the answer range [1, max(piles)]. For each candidate speed k, calculate total hours using ceil(pile / k). If total hours <= h, k is feasible; search lower half. Otherwise search upper half.",
+        "checks": [
+          "Handles h equal to piles.length",
+          "Handles large pile values without 32-bit integer overflow",
+          "Terminates with exact minimal feasible speed"
+        ],
+        "expectedComplexity": "O(n * log(max(piles))) time, O(1) space"
+      },
+      "repairLinks": [],
+      "reservedForRetest": false,
+      "source": {
+        "kind": "official",
+        "note": "Canonical OA rate-feasibility benchmark",
+        "confidence": "confirmed"
+      }
+    }
+  ],
+  "packs": [
+    {
+      "id": "PACK-OA-01",
+      "version": 1,
+      "stage": "oa",
+      "status": "validated",
+      "title": "Online Assessment (OA) Simulation: Monotone Search",
+      "instructions": "Timed 70-minute OA simulation. Complete the solution and ensure optimal time complexity under large numerical bounds.",
+      "durationMinutes": 70,
+      "debriefMinutes": 20,
+      "inputFormat": "function",
+      "resourcePolicy": {
+        "docs": true,
+        "ai": false,
+        "hints": false,
+        "notes": true
+      },
+      "promptIds": ["PROMPT-OA-01"],
+      "rubricId": "rubric-oa-v1",
+      "rubricVersion": 1,
+      "prerequisites": ["PACK-FOUNDATION-01"],
+      "source": {
+        "kind": "official",
+        "note": "OA simulation standard pack",
+        "confidence": "confirmed"
+      }
+    }
+  ]
+}
